@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export const darkMode = ["class"];
-export const content = [
-  "./src/**/*.{ts,tsx}",
-];
+export const content = ["./src/**/*.{ts,tsx}"];
 export const prefix = "";
+
 export const theme = {
   container: {
     center: true,
@@ -13,6 +12,12 @@ export const theme = {
     },
   },
   extend: {
+    screens: {
+      phone: "420px",
+      tablet: "640px",
+      laptop: "1024px",
+      desktop: "1280px",
+    },
     colors: {
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",

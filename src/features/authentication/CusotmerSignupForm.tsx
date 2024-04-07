@@ -14,13 +14,14 @@ export type CustomerSignupType = {
 };
 
 export default function CustomerSignupForm() {
-  const { register, handleSubmit, formState, reset } = useForm<CustomerSignupType>({
-    defaultValues: {
-      fullName: "Samir Neupane",
-      email: "test@gmail.com",
-      password: "samir0011",
-    },
-  });
+  const { register, handleSubmit, formState, reset } =
+    useForm<CustomerSignupType>({
+      defaultValues: {
+        fullName: "Samir Neupane",
+        email: "test@gmail.com",
+        password: "samir0011",
+      },
+    });
   const { errors } = formState;
   const navigate = useNavigate();
 
@@ -89,7 +90,11 @@ export default function CustomerSignupForm() {
         </fieldset>
 
         <Button className="w-36 ml-auto mt-6" disabled={isLoading}>
-          {isLoading ? <span className="loader"></span> : "Create an account"}
+          {isLoading ? (
+            <span className="loader w-5 h-5"></span>
+          ) : (
+            "Create an account"
+          )}
         </Button>
       </form>
     </div>

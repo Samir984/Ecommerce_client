@@ -13,11 +13,11 @@ export default function AccountMode() {
   console.log(accountMode);
   return (
     <div className="flex flex-col laptop:px-28 px-8 ">
-      <div className="py-6 ">
-        <Logo />
+      <div className="py-6">
+        <Logo className="scale-[1.4] ml-5"/>
       </div>
 
-      <h1 className="text-[60px] leading-[50px] font-extrabold mt-16">
+      <h1 className="text-[60px] leading-[50px] font-extrabold mt-12">
         How do you want to sign up in Innovex
       </h1>
 

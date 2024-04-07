@@ -8,6 +8,7 @@ import PageNotFound from "./pages/PageNotFound";
 import AccountModeProvider from "./context/AccountContext";
 import CustomerSignupForm from "./features/authentication/CusotmerSignupForm";
 import VendorSignupForm from "./features/authentication/VendorSignupForm";
+import SigninForm from "./features/authentication/SigninForm";
 
 // import  store  from "./store";
 // import { Provider } from "react-redux";
@@ -19,15 +20,16 @@ function App() {
       <AccountModeProvider>
         <Routes>
           <Route path="/" element={<Layout />}></Route>
-          {/* auth route*/}
+
+          {/*-------- auth route---------*/}
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/auth" element={<Auth />}>
             <Route path="signup" element={<CustomerSignupForm />} />
             <Route path="become-vendor" element={<VendorSignupForm />} />
-            <Route path="signin" element={<Auth />} />
+            <Route path="signin" element={<SigninForm />} />
           </Route>
 
-          {/* page not found route */}
+          {/*-----------------page not found route-------------- */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </AccountModeProvider>

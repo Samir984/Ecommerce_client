@@ -1,7 +1,7 @@
-import { useAccountMode } from "@/context/AccountContext";
+import { useAccountState } from "@/context/AccountContext";
 
 export default function Heading() {
-  const { accountMode } = useAccountMode();
+  const { accountMode } = useAccountState();
 
   return (
     <div className="">

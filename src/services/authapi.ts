@@ -1,18 +1,20 @@
 import { CustomerSignupType } from "@/features/authentication/CusotmerSignupForm";
 import { URL } from "./config";
 import { UserSigninType } from "@/features/authentication/SigninForm";
+import { setCookie } from "@/lib/utils";
 
 export const customerSignup = async function (signup: CustomerSignupType) {
   const endpoint = `${URL}users/signup`;
 
+  // const customerSignupFormData = convertObjectToFormData(signup);
+  // console.log(JSON.stringify(customerSignupFormData));
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(signup),
     });
+
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -43,6 +45,7 @@ export const UserSignin = async function (signin: UserSigninType) {
       throw new Error(responseData.message);
     }
     console.log(responseData);
+    setCookie("jwtToken", responseData.data.jwtToken, 1);
     return responseData;
   } catch (error) {
     console.error("Error at UserSignin :", error);

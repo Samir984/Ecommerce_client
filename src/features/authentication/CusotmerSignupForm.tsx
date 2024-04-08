@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAccountState } from "@/context/AccountContext";
 import { customerSignup } from "@/services/authapi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -10,26 +11,32 @@ export type CustomerSignupType = {
   fullName: string;
   email: string;
   password: string;
-  avatar: FileList;
+  avatar?: FileList;
 };
 
 export default function CustomerSignupForm() {
   const { register, handleSubmit, formState, reset } =
     useForm<CustomerSignupType>({
       defaultValues: {
-        fullName: "Samir Neupane",
-        email: "test@gmail.com",
-        password: "samir0011",
+        fullName: "buyer_1",
+        email: "buyer_1@gmail.com",
+        password: "buyer__1",
       },
     });
   const { errors } = formState;
+
   const navigate = useNavigate();
+  const { dispatch } = useAccountState();
 
   const { mutate: signup, isLoading } = useMutation(customerSignup, {
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log(res);
+      dispatch({ type: "customerSignup", payload: res.data });
       toast.success("Customer account created successfully");
+      setTimeout(() => {
+        navigate("/auth/signin");
+      }, 400);
       reset();
-      navigate("/auth/signin");
     },
     onError: (err: Error) => {
       toast.error(err.message);
@@ -37,6 +44,7 @@ export default function CustomerSignupForm() {
   });
 
   function onSubmit(data: CustomerSignupType) {
+    console.log(data);
     signup(data);
   }
 
@@ -85,7 +93,7 @@ export default function CustomerSignupForm() {
             className=""
             error={errors.avatar?.message}
             accept=".png,.jpg"
-            {...register("avatar", { required: "Avatar is required" })}
+            {...register("avatar")}
           />
         </fieldset>
 

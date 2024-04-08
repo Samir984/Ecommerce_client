@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAccountMode } from "@/context/AccountContext";
+import { useAccountState } from "@/context/AccountContext";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ type SwitchAuthFormType = {
 };
 
 export default function SwitchAuthForm({ children }: SwitchAuthFormType) {
-  const { accountMode } = useAccountMode();
+  const { accountMode } = useAccountState();
   const route = accountMode === "SELLER" ? "become-vendor" : "signup";
   return (
     <div className="bg-white shadow-lg rounded-lg">

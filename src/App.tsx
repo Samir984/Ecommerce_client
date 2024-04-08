@@ -5,19 +5,19 @@ import { Toaster } from "react-hot-toast";
 import Auth from "./pages/auth/Auth";
 
 import PageNotFound from "./pages/PageNotFound";
-import AccountModeProvider from "./context/AccountContext";
 import CustomerSignupForm from "./features/authentication/CusotmerSignupForm";
 import VendorSignupForm from "./features/authentication/VendorSignupForm";
 import SigninForm from "./features/authentication/SigninForm";
+import AccountStateProvider from "./context/AccountContext";
 
-// import  store  from "./store";
+// import store from "./store";
 // import { Provider } from "react-redux";
 
 function App() {
   return (
     // <Provider store={store}>
     <BrowserRouter>
-      <AccountModeProvider>
+      <AccountStateProvider>
         <Routes>
           <Route path="/" element={<Layout />}></Route>
 
@@ -32,10 +32,10 @@ function App() {
           {/*-----------------page not found route-------------- */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </AccountModeProvider>
+      </AccountStateProvider>
       <Toaster
-        position="top-center"
-        gutter={12}
+        position="bottom-left"
+        gutter={24}
         containerStyle={{ margin: "8px" }}
         toastOptions={{
           success: {

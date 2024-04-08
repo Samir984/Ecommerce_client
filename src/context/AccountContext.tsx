@@ -1,35 +1,107 @@
-import { ReactNode, useContext, useState, createContext } from "react";
+import React, {
+  ReactNode,
+  useContext,
+  createContext,
+  useReducer,
+  useEffect,
+} from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-type AccountMode = {
+type AccountState = {
   accountMode: string;
-  setAccountMode: (mode: string) => void;
+  loggedIn: boolean;
+  email: string;
+  fullName: string;
+  dispatch: React.Dispatch<ActionType>;
 };
 
-const AccountModeContext = createContext<AccountMode | undefined>(undefined);
+const AccountStateContext = createContext<AccountState | undefined>(undefined);
 
-type AccountModeProviderProps = {
+type AccountStateType = {
+  accountMode: string;
+  loggedIn: boolean;
+  avatar: {
+    url: string;
+    public_id: string;
+  };
+  email: string;
+  fullName: string;
+  role: string;
+  _id: string;
+};
+
+type ActionType =
+  | { type: "accountMode"; payload: string }
+  | { type: "customerSignup"; payload: Partial<AccountStateType> }
+  | { type: "signin"; payload: Partial<AccountStateType> }
+  | { type: "signout" };
+
+type AccountStateProviderProps = {
   children: ReactNode;
 };
 
-export default function AccountModeProvider({
+// eslint-disable-next-line react-refresh/only-export-components
+export const initialState: AccountStateType = {
+  accountMode: "",
+  loggedIn: false,
+  avatar: {
+    url: "",
+    public_id: "",
+  },
+  email: "",
+  fullName: "",
+  role: "",
+  _id: "",
+};
+
+function reducer(
+  state: AccountStateType,
+  action: ActionType
+): AccountStateType {
+  switch (action.type) {
+    case "accountMode":
+      return { ...state, accountMode: action.payload };
+    case "customerSignup":
+      return { ...state, ...action.payload };
+    case "signin":
+      return { ...state, loggedIn: true };
+    case "signout":
+      return { ...initialState };
+    default:
+      throw new Error("Unexpected action");
+  }
+}
+
+export default function AccountStateProvider({
   children,
-}: AccountModeProviderProps) {
-  const [accountMode, setAccountMode] = useState("");
-  const value = { accountMode, setAccountMode };
-  console.log("AccontModeProvider:", accountMode);
+}: AccountStateProviderProps) {
+  const [storeAccountState, setStoreAccountState] = useLocalStorage(
+    "AccountState",
+    initialState
+  );
+  const [state, dispatch] = useReducer(reducer, storeAccountState);
+
+  const { accountMode, email, fullName, loggedIn } = state;
+
+  useEffect(() => {
+    setStoreAccountState(state);
+  }, [setStoreAccountState, state]);
+
   return (
-    <AccountModeContext.Provider value={value}>
+    <AccountStateContext.Provider
+      value={{ dispatch, accountMode, email, fullName, loggedIn }}
+    >
       {children}
-    </AccountModeContext.Provider>
+    </AccountStateContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useAccountMode() {
-  const context = useContext(AccountModeContext);
+export function useAccountState() {
+  const context = useContext(AccountStateContext);
   if (!context) {
     throw new Error(
-      "useAccountMode must be used within an AccountModeProvider"
+      "useAccountState must be used within an AccountStateProvider"
     );
   }
   return context;

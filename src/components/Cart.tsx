@@ -4,7 +4,7 @@ export default function Cart() {
   return (
     <div className="relative ">
       <Notification message={2}/>
-      <BsCart3 color="white" size={30} />
+      <BsCart3 color="black" size={30} />
     </div>
   );
 }

@@ -1,18 +1,17 @@
-import { CustomerSignupType } from "@/features/authentication/CusotmerSignupForm";
 import { URL } from "./config";
 import { UserSigninType } from "@/features/authentication/SigninForm";
-import { setCookie } from "@/lib/utils";
+import { UserSignupType } from "@/features/authentication/SignupForm";
+import { convertToFormData, setCookie } from "@/lib/utils";
 
-export const customerSignup = async function (signup: CustomerSignupType) {
+export const userSignup = async function (signup: UserSignupType) {
+  console.log(signup);
   const endpoint = `${URL}users/signup`;
+  const formData = convertToFormData(signup);
 
-  // const customerSignupFormData = convertObjectToFormData(signup);
-  // console.log(JSON.stringify(customerSignupFormData));
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(signup),
+      body: formData,
     });
 
     const responseData = await response.json();
@@ -23,7 +22,7 @@ export const customerSignup = async function (signup: CustomerSignupType) {
     console.log(responseData);
     return responseData;
   } catch (error) {
-    console.error("Error at customerSignup :", error);
+    console.error("Error at userSignup :", error);
     throw error;
   }
 };

@@ -5,8 +5,7 @@ import { useMutation } from "react-query";
 import { UserSignin } from "@/services/authapi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { initialState, useAccountState } from "@/context/AccountContext";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useAccountState } from "@/context/AccountContext";
 
 export type UserSigninType = {
   email: string;
@@ -14,17 +13,15 @@ export type UserSigninType = {
 };
 
 export default function SigninForm() {
-  const [localAccountState] = useLocalStorage("AccountState", initialState);
-  console.log(localAccountState);
+  const naviagate = useNavigate();
+  const { dispatch, email } = useAccountState();
+
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
-      email: localAccountState?.email,
+      email: email,
     },
   });
   const { errors } = formState;
-
-  const naviagate = useNavigate();
-  const { dispatch } = useAccountState();
 
   const { mutate: signin, isLoading } = useMutation(UserSignin, {
     onSuccess: (res) => {

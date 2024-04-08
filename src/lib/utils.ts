@@ -1,4 +1,4 @@
-import { CustomerSignupType } from "@/features/authentication/CusotmerSignupForm";
+import { UserSignupType } from "@/features/authentication/CusotmerSignupForm";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -39,17 +39,31 @@ export function getCookie(name: string) {
   return null;
 }
 
-export const convertObjectToFormData = (data: CustomerSignupType): FormData => {
-  console.log(data);
-  const fd = new FormData();
-  fd.append("fullName", data.fullName);
-  fd.append("email", data.email);
-  fd.append("password", data.password);
+export function convertToFormData(signup: UserSignupType): FormData {
+  const formData = new FormData();
+  // Iterate over the signup object and append key-value pairs to the FormData
+  Object.entries(signup).forEach(([key, value]) => {
+    if (key === "avatar" && value instanceof FileList) {
+      // If the key is 'avatar' and the value is a FileList (for file input), append each file
+      for (let i = 0; i < value.length; i++) {
+        formData.append(key, value[i]);
+      }
+    } else {
+      // Otherwise, append regular key-value pair
+      formData.append(key, value as string);
+    }
+  });
+  return formData;
+}
 
-  // Assuming avatar is a FileList
-  if (data.avatar && data.avatar.length > 0) {
-    fd.append("avatar", data.avatar[0]);
+export function getInitials(fullName: string): string {
+  const names = fullName.split(" ");
+  if (names.length > 1) {
+    return (
+      names[0].charAt(0).toUpperCase() +
+      names[names.length - 1].charAt(0).toUpperCase()
+    );
+  } else {
+    return fullName.charAt(0).toUpperCase();
   }
-  console.log(fd.entries());
-  return fd;
-};
+}

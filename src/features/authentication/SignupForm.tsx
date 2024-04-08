@@ -1,37 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAccountState } from "@/context/AccountContext";
-import { customerSignup } from "@/services/authapi";
+import { userSignup } from "@/services/authapi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-export type CustomerSignupType = {
+export type UserSignupType = {
   fullName: string;
   email: string;
   password: string;
   avatar?: FileList;
+  role:"SELLER"|"BUYER"|"ADMIN"|""
 };
 
-export default function CustomerSignupForm() {
-  const { register, handleSubmit, formState, reset } =
-    useForm<CustomerSignupType>({
-      defaultValues: {
-        fullName: "buyer_1",
-        email: "buyer_1@gmail.com",
-        password: "buyer__1",
-      },
-    });
+export default function SignupForm() {
+  const { register, handleSubmit, formState, reset } = useForm<UserSignupType>({
+    defaultValues: {
+      fullName: "buyer_1",
+      email: "buyer_1@gmail.com",
+      password: "buyer__1",
+    },
+  });
   const { errors } = formState;
 
   const navigate = useNavigate();
-  const { dispatch } = useAccountState();
+  const { dispatch,accountMode } = useAccountState();
 
-  const { mutate: signup, isLoading } = useMutation(customerSignup, {
+  const { mutate: signup, isLoading } = useMutation(userSignup, {
     onSuccess: (res) => {
       console.log(res);
-      dispatch({ type: "customerSignup", payload: res.data });
+      dispatch({ type: "signup", payload: res.data });
       toast.success("Customer account created successfully");
       setTimeout(() => {
         navigate("/auth/signin");
@@ -43,7 +43,8 @@ export default function CustomerSignupForm() {
     },
   });
 
-  function onSubmit(data: CustomerSignupType) {
+  function onSubmit(data: UserSignupType) {
+    data.role=accountMode
     console.log(data);
     signup(data);
   }

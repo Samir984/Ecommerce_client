@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Auth from "./pages/auth/Auth";
 
 import PageNotFound from "./pages/PageNotFound";
-import CustomerSignupForm from "./features/authentication/CusotmerSignupForm";
+import SignupForm from "./features/authentication/SignupForm";
 import VendorSignupForm from "./features/authentication/VendorSignupForm";
 import SigninForm from "./features/authentication/SigninForm";
 import AccountStateProvider from "./context/AccountContext";
@@ -24,8 +24,8 @@ function App() {
           {/*-------- auth route---------*/}
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/auth" element={<Auth />}>
-            <Route path="signup" element={<CustomerSignupForm />} />
-            <Route path="become-vendor" element={<VendorSignupForm />} />
+            <Route path="signup" element={<SignupForm />} />
+            <Route path="become-vendor" element={<SignupForm />} />
             <Route path="signin" element={<SigninForm />} />
           </Route>
 

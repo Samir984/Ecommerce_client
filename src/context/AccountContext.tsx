@@ -8,17 +8,7 @@ import React, {
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type AccountState = {
-  accountMode: string;
-  loggedIn: boolean;
-  email: string;
-  fullName: string;
-  dispatch: React.Dispatch<ActionType>;
-};
-
-const AccountStateContext = createContext<AccountState | undefined>(undefined);
-
-type AccountStateType = {
-  accountMode: string;
+  accountMode: "SELLER" | "BUYER" | "ADMIN" | "";
   loggedIn: boolean;
   avatar: {
     url: string;
@@ -26,13 +16,29 @@ type AccountStateType = {
   };
   email: string;
   fullName: string;
-  role: string;
+  role?: string;
   _id: string;
+  dispatch: React.Dispatch<ActionType>;
+};
+
+const AccountStateContext = createContext<AccountState | undefined>(undefined);
+
+type AccountStateType = {
+  _id: string;
+  accountMode: "SELLER" | "BUYER" | "ADMIN" | "";
+  loggedIn: boolean;
+  avatar: {
+    url: string;
+    public_id: string;
+  };
+  email: string;
+  fullName: string;
+  role?: string;
 };
 
 type ActionType =
-  | { type: "accountMode"; payload: string }
-  | { type: "customerSignup"; payload: Partial<AccountStateType> }
+  | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
+  | { type: "signup"; payload: Partial<AccountStateType> }
   | { type: "signin"; payload: Partial<AccountStateType> }
   | { type: "signout" };
 
@@ -61,8 +67,8 @@ function reducer(
   switch (action.type) {
     case "accountMode":
       return { ...state, accountMode: action.payload };
-    case "customerSignup":
-      return { ...state, ...action.payload };
+    case "signup":
+      return { ...state, ...action.payload, loggedIn: false };
     case "signin":
       return { ...state, loggedIn: true };
     case "signout":
@@ -81,7 +87,15 @@ export default function AccountStateProvider({
   );
   const [state, dispatch] = useReducer(reducer, storeAccountState);
 
-  const { accountMode, email, fullName, loggedIn } = state;
+  console.log("Account Context rerender");
+  const {
+    _id,
+    avatar: { public_id, url },
+    accountMode,
+    email,
+    fullName,
+    loggedIn,
+  } = state;
 
   useEffect(() => {
     setStoreAccountState(state);
@@ -89,7 +103,15 @@ export default function AccountStateProvider({
 
   return (
     <AccountStateContext.Provider
-      value={{ dispatch, accountMode, email, fullName, loggedIn }}
+      value={{
+        dispatch,
+        accountMode,
+        email,
+        fullName,
+        avatar: { public_id, url },
+        loggedIn,
+        _id,
+      }}
     >
       {children}
     </AccountStateContext.Provider>

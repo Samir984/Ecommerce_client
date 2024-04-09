@@ -70,7 +70,7 @@ function reducer(
     case "signup":
       return { ...state, ...action.payload, loggedIn: false };
     case "signin":
-      return { ...state, loggedIn: true };
+      return { ...state, ...action.payload, loggedIn: true };
     case "signout":
       return { ...initialState };
     default:

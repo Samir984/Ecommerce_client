@@ -1,4 +1,5 @@
-import { UserSignupType } from "@/features/authentication/CusotmerSignupForm";
+
+import { UserSignupType } from "@/features/authentication/SignupForm";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 

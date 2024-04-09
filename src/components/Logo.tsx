@@ -9,7 +9,7 @@ export default function Logo({ className }: LogoType) {
   return (
     <Link to="/">
       <div
-        className={`inline-flex items-center p-1 px-2 gap-[2px]  ${className}`}
+        className={`inline-flex items-center  gap-[2px]  ${className}`}
       >
         <span className="font-mono text-sky-700 font-medium text-3xl transform rotate-6">
           I

@@ -1,14 +1,19 @@
 import Layout from "./components/Layout";
-import GettingStarted from "./pages/auth/GettingStarted";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
-import Auth from "./pages/auth/Auth";
+import GettingStarted from "./pages/authpage/GettingStarted";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Auth from "./pages/authpage/Auth";
 
 import PageNotFound from "./pages/PageNotFound";
 import SignupForm from "./features/authentication/SignupForm";
-import VendorSignupForm from "./features/authentication/VendorSignupForm";
+
 import SigninForm from "./features/authentication/SigninForm";
 import AccountStateProvider from "./context/AccountContext";
+import Vendor from "./pages/vendorPage/Vendor";
+import Store from "./features/store/Store";
+import ListProduct from "./features/store/ListProduct";
+import ViewOrder from "./features/store/ViewOrder";
+import ToasterCompoent from "./lib/Toaster";
+import CreateStoreForm from "./features/store/CreateStoreForm";
 
 // import store from "./store";
 // import { Provider } from "react-redux";
@@ -19,7 +24,18 @@ function App() {
     <BrowserRouter>
       <AccountStateProvider>
         <Routes>
-          <Route path="/" element={<Layout />}></Route>
+          {/* ---------User Ui view --------- */}
+          <Route path="/" element={<Layout />}>
+            <Route path="vendor" element={<Vendor />}>
+              <Route path="store" element={<Store />} />
+              <Route
+                path="create-store"
+                element={<CreateStoreForm/>}
+              />
+              <Route path="list-product" element={<ListProduct />} />
+              <Route path="order" element={<ViewOrder />} />
+            </Route>
+          </Route>
 
           {/*-------- auth route---------*/}
           <Route path="/getting-started" element={<GettingStarted />} />
@@ -33,26 +49,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </AccountStateProvider>
-      <Toaster
-        position="bottom-left"
-        gutter={24}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: "var(--color-grey-0)",
-            color: "var(--color-grey-700)",
-          },
-        }}
-      />
+      <ToasterCompoent />
     </BrowserRouter>
     // </Provider>
   );

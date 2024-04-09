@@ -1,11 +1,11 @@
 import Wrapper from "@/components/Wrapper";
-import AccountState from "@/features/authentication/AccountMod";
+import AccountMode from "@/features/authentication/AccountMode";
 
 
 export default function GettingStarted() {
   return (
     <Wrapper>
-      <AccountState />
+      <AccountMode />
     </Wrapper>
   );
 }

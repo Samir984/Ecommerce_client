@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAccountState } from "@/context/AccountContext";
-import { userSignup } from "@/services/authapi";
+import { userSignup } from "@/services/authApi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";

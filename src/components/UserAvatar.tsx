@@ -1,16 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAccountState } from "@/context/AccountContext";
+import { getInitials } from "@/lib/utils";
 
-type UserAvatarType = {
-  userAvatar: string;
-  fallBack: string;
-};
-
-export default function UserAvatar({ userAvatar, fallBack }: UserAvatarType) {
-  console.log(fallBack);
+export default function UserAvatar() {
+  const { avatar, fullName } = useAccountState();
   return (
     <Avatar>
-      <AvatarImage src={userAvatar} />
-      <AvatarFallback>{fallBack}</AvatarFallback>
+      <AvatarImage src={avatar.url} />
+      <AvatarFallback>{getInitials(fullName)}</AvatarFallback>
     </Avatar>
   );
 }

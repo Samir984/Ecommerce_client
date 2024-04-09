@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "react-query";
-import { UserSignin } from "@/services/authapi";
+import { UserSignin } from "@/services/authApi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAccountState } from "@/context/AccountContext";
@@ -14,7 +14,7 @@ export type UserSigninType = {
 
 export default function SigninForm() {
   const naviagate = useNavigate();
-  const { dispatch, email } = useAccountState();
+  const { dispatch, email, accountMode } = useAccountState();
 
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
@@ -29,7 +29,8 @@ export default function SigninForm() {
       reset();
       console.log(res);
       dispatch({ type: "signin", payload: res.data });
-      naviagate("/");
+      const nextRoute = accountMode === "SELLER" ? "/vendor/create-store" : "/";
+      naviagate(nextRoute);
     },
     onError: (err: Error) => {
       toast.error(err.message);

@@ -124,3 +124,8 @@
     transform: rotate(360deg);
   }
 }
+
+li .active {
+  color: rgb(245, 28, 28);
+  background-color: #f1f5f9;
+}

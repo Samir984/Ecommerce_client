@@ -38,14 +38,14 @@ export function getCookie(name: string) {
   return null;
 }
 
-export function convertToFormData<T extends { [s: string]: string }>(
+export function convertToFormData<T extends { [s: string]: string | never }>(
   data: T
 ): FormData {
   const formData = new FormData();
   // Iterate over the signup object and append key-value pairs to the FormData
   Object.entries(data).forEach(([key, value]) => {
-    console.log(key, typeof value);
-    if (key === "avatar" || key === "productImg") {
+ 
+    if (key === "avatar" || key === "productImg" ) {
       // If the key is 'avatar' and the value is a FileList (for file input), append each file
 
       formData.append(key, value[0]);

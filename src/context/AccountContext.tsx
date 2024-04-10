@@ -33,6 +33,7 @@ type ActionType =
   | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
   | { type: "signup"; payload: Partial<ReducerStateType> }
   | { type: "signin"; payload: Partial<ReducerStateType> }
+  | { type: "storeCreated" }
   | { type: "signout" };
 
 type AccountStateProviderProps = {
@@ -65,6 +66,8 @@ function reducer(
       return { ...state, ...action.payload, loggedIn: false };
     case "signin":
       return { ...state, ...action.payload, loggedIn: true };
+    case "storeCreated":
+      return { ...state, storeExits: true };
     case "signout":
       return { ...initialState };
     default:

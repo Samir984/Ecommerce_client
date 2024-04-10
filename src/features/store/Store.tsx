@@ -1,3 +1,5 @@
+import Card from "@/components/Card";
+import Cart from "@/components/Cart";
 import StoreNotFound from "@/components/StoreNotFound";
 import UserAvatar from "@/components/UserAvatar";
 import { useAccountState } from "@/context/AccountContext";
@@ -26,7 +28,6 @@ export default function Store() {
             <div className="text-center">
               <h1 className="text-xl font-bold">{store.data.storeName}</h1>
               <span className="text-gray-600">
-                {" "}
                 Listed Products: {store.data.totalListedProducts}
               </span>
             </div>
@@ -36,7 +37,19 @@ export default function Store() {
             {isLoading ? (
               <div className="fetchLoader   mx-auto  mt-[20%]  "></div>
             ) : (
-              "no data"
+              <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center">
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+              </div>
             )}
           </div>
         </div>

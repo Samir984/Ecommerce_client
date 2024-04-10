@@ -15,7 +15,8 @@ export type CreateStoreType = {
 };
 
 export default function CreateStoreForm() {
-  console.log("CreateStoreForm Feature")
+  const { dispatch } = useAccountState();
+  console.log("CreateStoreForm Feature");
   const { _id } = useAccountState();
   const navigate = useNavigate();
 
@@ -25,8 +26,11 @@ export default function CreateStoreForm() {
   const { mutate: create, isLoading } = useMutation(createStore, {
     onSuccess: (res) => {
       toast.success("store created successFully");
-      console.log(res);
-      navigate("/vendor/store");
+      dispatch({ type: "storeCreated" });
+      console.log(res.data);
+      setTimeout(() => {
+        navigate("/vendor/store");
+      }, 400);
     },
     onError: (err: Error) => {
       toast.error(err.message);

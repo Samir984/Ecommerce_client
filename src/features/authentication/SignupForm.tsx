@@ -16,6 +16,7 @@ export type UserSignupType = {
 };
 
 export default function SignupForm() {
+  console.log("SignupForm feature");
   const { register, handleSubmit, formState, reset } = useForm<UserSignupType>({
     defaultValues: {
       fullName: "buyer_1",
@@ -28,7 +29,8 @@ export default function SignupForm() {
   const navigate = useNavigate();
   const { dispatch,accountMode } = useAccountState();
 
-  const { mutate: signup, isLoading } = useMutation(userSignup, {
+  const { mutate: signup, isLoading } = useMutation({
+    mutationFn:userSignup,
     onSuccess: (res) => {
       console.log(res);
       dispatch({ type: "signup", payload: res.data });

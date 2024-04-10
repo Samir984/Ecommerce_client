@@ -6,7 +6,7 @@ import { convertToFormData, setCookie } from "@/lib/utils";
 export const userSignup = async function (signup: UserSignupType) {
   console.log(signup);
   const endpoint = `${URL}users/signup`;
-  const formData = convertToFormData(signup);
+  const formData = convertToFormData<UserSigninType>(signup);
 
   try {
     const response = await fetch(endpoint, {
@@ -27,7 +27,7 @@ export const userSignup = async function (signup: UserSignupType) {
   }
 };
 
-export const UserSignin = async function (signin: UserSigninType) {
+export const userSignin = async function (signin: UserSigninType) {
   const endpoint = `${URL}users/signin`;
   try {
     const response = await fetch(endpoint, {

@@ -1,6 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 
 export default function Search() {
+  console.log("Search component");
   return (
     <div className="flex items-center w-44 tablet:w-64 laptop:w-[500px] relative ">
       <input

@@ -15,6 +15,7 @@ export type CreateStoreType = {
 };
 
 export default function CreateStoreForm() {
+  console.log("CreateStoreForm Feature")
   const { _id } = useAccountState();
   const navigate = useNavigate();
 

@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "react-query";
-import { UserSignin } from "@/services/authApi";
+import { userSignin } from "@/services/authApi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAccountState } from "@/context/AccountContext";
@@ -13,8 +13,10 @@ export type UserSigninType = {
 };
 
 export default function SigninForm() {
+  console.log("SigninForm feature");
   const naviagate = useNavigate();
-  const { dispatch, email, accountMode } = useAccountState();
+  const { dispatch, email, accountMode, storeExits } = useAccountState();
+  console.log("SigninForm->   sellerState:", storeExits);
 
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
@@ -23,13 +25,21 @@ export default function SigninForm() {
   });
   const { errors } = formState;
 
-  const { mutate: signin, isLoading } = useMutation(UserSignin, {
+  const { mutate: signin, isLoading } = useMutation({
+    mutationFn: userSignin,
     onSuccess: (res) => {
       toast.success("Customer account created successfully");
       reset();
       console.log(res);
       dispatch({ type: "signin", payload: res.data });
-      const nextRoute = accountMode === "SELLER" ? "/vendor/create-store" : "/";
+      const nextRoute =
+        accountMode === "BUYER"
+          ? "/"
+          : accountMode === "SELLER" && res.data.storeExits
+          ? "/vendor/store"
+          : "/vendor/create-store";
+
+      console.log(nextRoute, res.s, accountMode);
       naviagate(nextRoute);
     },
     onError: (err: Error) => {

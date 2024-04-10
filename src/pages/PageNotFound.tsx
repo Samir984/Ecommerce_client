@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
+  console.log("PageNotFound Page")
   const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">

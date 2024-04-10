@@ -10,6 +10,7 @@ type NavListType = {
 function NavItem({ to, icon, label }: NavListType) {
   const Icon = icon;
 
+  console.log("NavItem Compoenet");
   return (
     <li className=" ">
       <NavLink

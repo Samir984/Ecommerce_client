@@ -8,6 +8,7 @@ type SwitchAuthFormType = {
 };
 
 export default function SwitchAuthForm({ children }: SwitchAuthFormType) {
+  console.log("switchAithForm Component");
   const { accountMode } = useAccountState();
   const route = accountMode === "SELLER" ? "become-vendor" : "signup";
   return (

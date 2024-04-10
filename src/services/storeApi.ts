@@ -6,6 +6,7 @@ export const createStore = async function (data: CreateStoreType) {
   const endpoint = `${URL}users/stores/create`;
   console.log(JSON.stringify(data), endpoint);
   const token = getCookie("jwtToken");
+
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -30,10 +31,9 @@ export const createStore = async function (data: CreateStoreType) {
   }
 };
 
-
 export const fetchStoreData = async () => {
   const token = getCookie("jwtToken");
-  const endpoint = `${URL}path_to_fetch_store_data`;
+  const endpoint = `${URL}users/stores/getstore`;
   try {
     const response = await fetch(endpoint, {
       method: "GET",

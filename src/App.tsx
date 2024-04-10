@@ -1,6 +1,6 @@
 import Layout from "./components/Layout";
 import GettingStarted from "./pages/authpage/GettingStarted";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Auth from "./pages/authpage/Auth";
 
 import PageNotFound from "./pages/PageNotFound";
@@ -10,15 +10,16 @@ import SigninForm from "./features/authentication/SigninForm";
 import AccountStateProvider from "./context/AccountContext";
 import Vendor from "./pages/vendorPage/Vendor";
 import Store from "./features/store/Store";
-import ListProduct from "./features/store/ListProduct";
 import ViewOrder from "./features/store/ViewOrder";
 import ToasterCompoent from "./lib/Toaster";
 import CreateStoreForm from "./features/store/CreateStoreForm";
+import ListProductForm from "./features/store/ListProductForm";
 
 // import store from "./store";
 // import { Provider } from "react-redux";
 
 function App() {
+  console.log("App");
   return (
     // <Provider store={store}>
     <BrowserRouter>
@@ -28,11 +29,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="vendor" element={<Vendor />}>
               <Route path="store" element={<Store />} />
-              <Route
-                path="create-store"
-                element={<CreateStoreForm/>}
-              />
-              <Route path="list-product" element={<ListProduct />} />
+              <Route path="create-store" element={<CreateStoreForm />} />
+              <Route path="list-product" element={<ListProductForm />} />
               <Route path="order" element={<ViewOrder />} />
             </Route>
           </Route>

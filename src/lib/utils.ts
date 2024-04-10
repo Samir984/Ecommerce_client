@@ -1,5 +1,3 @@
-
-import { UserSignupType } from "@/features/authentication/SignupForm";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -40,15 +38,17 @@ export function getCookie(name: string) {
   return null;
 }
 
-export function convertToFormData(signup: UserSignupType): FormData {
+export function convertToFormData<T extends { [s: string]: string }>(
+  data: T
+): FormData {
   const formData = new FormData();
   // Iterate over the signup object and append key-value pairs to the FormData
-  Object.entries(signup).forEach(([key, value]) => {
-    if (key === "avatar" && value instanceof FileList) {
+  Object.entries(data).forEach(([key, value]) => {
+    console.log(key, typeof value);
+    if (key === "avatar" || key === "productImg") {
       // If the key is 'avatar' and the value is a FileList (for file input), append each file
-      for (let i = 0; i < value.length; i++) {
-        formData.append(key, value[i]);
-      }
+
+      formData.append(key, value[0]);
     } else {
       // Otherwise, append regular key-value pair
       formData.append(key, value as string);

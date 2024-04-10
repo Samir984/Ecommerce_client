@@ -6,6 +6,8 @@ type LogoType = {
 };
 
 export default function Logo({ className }: LogoType) {
+
+  console.log("Logo component");
   return (
     <Link to="/">
       <div

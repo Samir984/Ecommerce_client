@@ -5,6 +5,7 @@ type WrapperType = {
 };
 
 export default function Wrapper({ children }: WrapperType) {
+  console.log("Wrapper Component");
   return (
     <div className="flex  min-h-screen ">
       <div className="left-content bg-white flex-1 laptop:flex-grow">

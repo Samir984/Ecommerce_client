@@ -7,39 +7,32 @@ import React, {
 } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-type AccountState = {
+type ReducerStateType = {
+  _id: string;
   accountMode: "SELLER" | "BUYER" | "ADMIN" | "";
   loggedIn: boolean;
   avatar: {
     url: string;
     public_id: string;
   };
+  storeExits: boolean;
   email: string;
   fullName: string;
   role?: string;
-  _id: string;
+};
+
+type AccountStateType = ReducerStateType & {
   dispatch: React.Dispatch<ActionType>;
 };
 
-const AccountStateContext = createContext<AccountState | undefined>(undefined);
-
-type AccountStateType = {
-  _id: string;
-  accountMode: "SELLER" | "BUYER" | "ADMIN" | "";
-  loggedIn: boolean;
-  avatar: {
-    url: string;
-    public_id: string;
-  };
-  email: string;
-  fullName: string;
-  role?: string;
-};
+const AccountStateContext = createContext<AccountStateType | undefined>(
+  undefined
+);
 
 type ActionType =
   | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
-  | { type: "signup"; payload: Partial<AccountStateType> }
-  | { type: "signin"; payload: Partial<AccountStateType> }
+  | { type: "signup"; payload: Partial<ReducerStateType> }
+  | { type: "signin"; payload: Partial<ReducerStateType> }
   | { type: "signout" };
 
 type AccountStateProviderProps = {
@@ -47,13 +40,14 @@ type AccountStateProviderProps = {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const initialState: AccountStateType = {
+export const initialState: ReducerStateType = {
   accountMode: "",
   loggedIn: false,
   avatar: {
     url: "",
     public_id: "",
   },
+  storeExits: false,
   email: "",
   fullName: "",
   role: "",
@@ -61,9 +55,9 @@ export const initialState: AccountStateType = {
 };
 
 function reducer(
-  state: AccountStateType,
+  state: ReducerStateType,
   action: ActionType
-): AccountStateType {
+): ReducerStateType {
   switch (action.type) {
     case "accountMode":
       return { ...state, accountMode: action.payload };
@@ -87,7 +81,7 @@ export default function AccountStateProvider({
   );
   const [state, dispatch] = useReducer(reducer, storeAccountState);
 
-  console.log("Account Context rerender");
+  console.log("AccountStateProvider Context ");
   const {
     _id,
     avatar: { public_id, url },
@@ -95,6 +89,7 @@ export default function AccountStateProvider({
     email,
     fullName,
     loggedIn,
+    storeExits,
   } = state;
 
   useEffect(() => {
@@ -109,6 +104,7 @@ export default function AccountStateProvider({
         email,
         fullName,
         avatar: { public_id, url },
+        storeExits,
         loggedIn,
         _id,
       }}

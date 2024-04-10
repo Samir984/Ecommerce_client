@@ -23,7 +23,7 @@ export default function ListProductForm() {
   console.log("ListProduct Feature");
   const { storeExits } = useAccountState();
 
-  const { register, handleSubmit, formState, reset } =
+  const { register, handleSubmit, formState } =
     useForm<ProductFormType>();
 
   // const navigate = useNavigate();

@@ -4,9 +4,9 @@ import Header from "./Header";
 export default function Layout() {
   console.log("Layout component");
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col max-h-screen ">
       <Header />
-      <main className="flex-1 bg-slate-100 py-10">
+      <main className="flex-1">
         <Outlet />
       </main>
     </div>

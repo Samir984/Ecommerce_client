@@ -8,7 +8,7 @@ export default function Header() {
   const { accountMode } = useAccountState();
   console.log("header Compoenet");
   return (
-    <div className="shadow-md py-4 px-2 flex  items-center justify-between gap-10">
+    <div className="shadow-lg py-4  px-2 tablet:px-6 flex  items-center justify-between gap-10 sticky top-0 z-30 bg-white">
       <Logo />
       {accountMode !== "SELLER" && <Search />}
 

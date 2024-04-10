@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import Cart from "@/components/Cart";
+
 import StoreNotFound from "@/components/StoreNotFound";
 import UserAvatar from "@/components/UserAvatar";
 import { useAccountState } from "@/context/AccountContext";
@@ -37,7 +37,7 @@ export default function Store() {
             {isLoading ? (
               <div className="fetchLoader   mx-auto  mt-[20%]  "></div>
             ) : (
-              <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center">
+              <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center mt-12">
                 <Card />
                 <Card />
                 <Card />
@@ -47,8 +47,8 @@ export default function Store() {
                 <Card />
                 <Card />
                 <Card />
-                <Card />
-                <Card />
+                {/* <Card /> */}
+                {/* <Card /> */}
               </div>
             )}
           </div>

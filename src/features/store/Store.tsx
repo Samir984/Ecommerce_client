@@ -1,26 +1,15 @@
-import Card from "@/components/Card";
-
 import StoreNotFound from "@/components/StoreNotFound";
 import UserAvatar from "@/components/UserAvatar";
-import { getProducts } from "@/services/productApi";
 
-import { fetchStoreData } from "@/services/storeApi";
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useStoreData } from "./useStoreData";
+import StoreProducts from "./StoreProducts";
 
 export default function Store() {
   console.log("Store Feature");
   const { store_id } = useParams();
+  const [isLoadingStore, store] = useStoreData(store_id as string);
 
-  const { isLoading: isLoadingStore, data: store } = useQuery({
-    queryKey: ["store"],
-    queryFn: () => fetchStoreData(store_id as string),
-  });
-
-  const { isLoading: isLoadingProducts, data: products } = useQuery({
-    queryKey: ["products", store_id],
-    queryFn: () => getProducts(1, store_id as string, 6),
-  });
   console.log(store);
   return (
     <div className="py-4 h-full">
@@ -39,21 +28,7 @@ export default function Store() {
           )}
 
           <div className="flex-grow">
-            {isLoadingProducts ? (
-              <div className="fetchLoader   mx-auto  mt-[20%]  "></div>
-            ) : (
-              <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center mt-12">
-                {products.data.map((product) => (
-                  <Card
-                    key={product._id}
-                    _id={product._id}
-                    title={product.productName}
-                    url={product.productImg.url}
-                    price={product.price}
-                  />
-                ))}
-              </div>
-            )}
+            <StoreProducts store_id={store_id} />
           </div>
         </div>
       )}

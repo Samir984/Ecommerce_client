@@ -6,11 +6,11 @@ type CardPropsType = {
 };
 export default function Card({ title, price, url }: CardPropsType) {
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-xl flex flex-col">
+    <div className="max-w-xs rounded overflow-hidden shadow-md flex flex-col hover:shadow-xl">
       <div className="h-70">
         <img
           src={url}
-          className="w-full  object-cover transition-transform  hover:scale-[1.01]"
+          className="w-full  object-cover transition-transform  hover:scale-[1.02] "
         />
       </div>
       <div className="flex-1 px-2 py-3">

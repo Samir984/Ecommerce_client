@@ -39,7 +39,7 @@ export const getProducts = async function (
 ) {
   const endpoint = `${URL}users/products?store_id=${store_id}&page=${page}&limit=${limit}`;
   const token = getCookie("jwtToken");
-
+  console.log("\n\n\n\n Enter get product \n\n\n", page);
   try {
     const response = await fetch(endpoint, {
       method: "GET",

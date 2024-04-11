@@ -15,7 +15,7 @@ type ReducerStateType = {
     url: string;
     public_id: string;
   };
-  storeExits: boolean;
+  store_id: string|null;
   email: string;
   fullName: string;
   role?: string;
@@ -33,7 +33,7 @@ type ActionType =
   | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
   | { type: "signup"; payload: Partial<ReducerStateType> }
   | { type: "signin"; payload: Partial<ReducerStateType> }
-  | { type: "storeCreated" }
+  | { type: "storeCreated",payload:string }
   | { type: "signout" };
 
 type AccountStateProviderProps = {
@@ -48,7 +48,7 @@ export const initialState: ReducerStateType = {
     url: "",
     public_id: "",
   },
-  storeExits: false,
+  store_id: null,
   email: "",
   fullName: "",
   role: "",
@@ -67,7 +67,7 @@ function reducer(
     case "signin":
       return { ...state, ...action.payload, loggedIn: true };
     case "storeCreated":
-      return { ...state, storeExits: true };
+      return { ...state, store_id: action.payload };
     case "signout":
       return { ...initialState };
     default:
@@ -92,7 +92,7 @@ export default function AccountStateProvider({
     email,
     fullName,
     loggedIn,
-    storeExits,
+    store_id,
   } = state;
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function AccountStateProvider({
         email,
         fullName,
         avatar: { public_id, url },
-        storeExits,
+        store_id,
         loggedIn,
         _id,
       }}

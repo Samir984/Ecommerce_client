@@ -9,22 +9,22 @@ import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 
 export type ProductFormType = {
+  [key: string]: string | FileList;
   productName: string;
   productDescription: string;
-  totalQuantity: number;
+  totalQuantity: string;
   productImg: FileList;
   brand: string;
   category: string;
   subCategory: string;
-  price: number;
+  price: string;
 };
 
 export default function ListProductForm() {
   console.log("ListProduct Feature");
-  const { storeExits } = useAccountState();
+  const { store_id } = useAccountState();
 
-  const { register, handleSubmit, formState } =
-    useForm<ProductFormType>();
+  const { register, handleSubmit, formState } = useForm<ProductFormType>();
 
   // const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ export default function ListProductForm() {
 
   return (
     <div className="laptop:px-12 tablet:px-3  px-1 pt-6 pb-16">
-      {storeExits ? (
+      {store_id ? (
         <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-2">
             <Input

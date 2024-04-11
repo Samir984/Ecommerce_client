@@ -28,7 +28,7 @@ function App() {
           {/* ---------User Ui view --------- */}
           <Route path="/" element={<Layout />}>
             <Route path="vendor" element={<Vendor />}>
-              <Route path="store" element={<Store />} />
+              <Route path="store/:store_id" element={<Store />} />
               <Route path="create-store" element={<CreateStoreForm />} />
               <Route path="list-product" element={<ListProductForm />} />
               <Route path="order" element={<ViewOrder />} />

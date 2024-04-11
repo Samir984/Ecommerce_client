@@ -26,11 +26,14 @@ export default function CreateStoreForm() {
   const { mutate: create, isLoading } = useMutation(createStore, {
     onSuccess: (res) => {
       toast.success("store created successFully");
-      dispatch({ type: "storeCreated" });
-      console.log(res.data);
+      dispatch({ type: "storeCreated", payload: res.data._id });
+      console.log(
+        "data create store form--------------------------------------------------------------------------",
+        res.data._id
+      );
       setTimeout(() => {
-        navigate("/vendor/store");
-      }, 400);
+        navigate(`/vendor/store/${res.data._id}`);
+      }, 300);
     },
     onError: (err: Error) => {
       toast.error(err.message);

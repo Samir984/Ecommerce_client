@@ -31,9 +31,9 @@ export const createStore = async function (data: CreateStoreType) {
   }
 };
 
-export const fetchStoreData = async () => {
+export const fetchStoreData = async (store_id:string) => {
   const token = getCookie("jwtToken");
-  const endpoint = `${URL}users/stores/getstore`;
+  const endpoint = `${URL}users/stores/getstore/${store_id}`;
   try {
     const response = await fetch(endpoint, {
       method: "GET",

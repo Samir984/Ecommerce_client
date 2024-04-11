@@ -15,7 +15,7 @@ function NavItem({ to, icon, label }: NavListType) {
     <li className=" ">
       <NavLink
         to={to}
-        className="flex items-center gap-1 tablet:gap-4 flex-col tablet:flex-row py-2 tablet:justify-start justify-center"
+        className="flex items-center gap-1 tablet:gap-4 flex-col tablet:flex-row py-2 tablet:justify-start justify-center p-"
       >
         <Icon size={28} className="" />
         <span className="tablet:text-xl text-sm line-clamp-1">{label}</span>

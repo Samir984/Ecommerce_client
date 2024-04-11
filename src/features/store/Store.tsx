@@ -2,29 +2,34 @@ import Card from "@/components/Card";
 
 import StoreNotFound from "@/components/StoreNotFound";
 import UserAvatar from "@/components/UserAvatar";
-import { useAccountState } from "@/context/AccountContext";
+import { getProducts } from "@/services/productApi";
+
 import { fetchStoreData } from "@/services/storeApi";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
 export default function Store() {
   console.log("Store Feature");
-  const { storeExits } = useAccountState();
+  const { store_id } = useParams();
 
-  const { isLoading, data: store } = useQuery({
+  const { isLoading: isLoadingStore, data: store } = useQuery({
     queryKey: ["store"],
-    queryFn: fetchStoreData,
+    queryFn: () => fetchStoreData(store_id as string),
   });
-  console.log(isLoading, store);
 
+  const { isLoading: isLoadingProducts, data: products } = useQuery({
+    queryKey: ["products", store_id],
+    queryFn: () => getProducts(1, store_id as string, 6),
+  });
   console.log(store);
   return (
     <div className="py-4 h-full">
-      {!storeExits ? (
+      {!store_id ? (
         <StoreNotFound />
       ) : (
         <div className="flex flex-col h-full">
           <UserAvatar className="w-14 h-14 mx-auto " />
-          {!isLoading && (
+          {!isLoadingStore && (
             <div className="text-center">
               <h1 className="text-xl font-bold">{store.data.storeName}</h1>
               <span className="text-gray-600">
@@ -34,21 +39,19 @@ export default function Store() {
           )}
 
           <div className="flex-grow">
-            {isLoading ? (
+            {isLoadingProducts ? (
               <div className="fetchLoader   mx-auto  mt-[20%]  "></div>
             ) : (
               <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center mt-12">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                {/* <Card /> */}
-                {/* <Card /> */}
+                {products.data.map((product) => (
+                  <Card
+                    key={product._id}
+                    _id={product._id}
+                    title={product.productName}
+                    url={product.productImg.url}
+                    price={product.price}
+                  />
+                ))}
               </div>
             )}
           </div>

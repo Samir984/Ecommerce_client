@@ -38,7 +38,7 @@ export function getCookie(name: string) {
   return null;
 }
 
-export function convertToFormData<T extends { [s: string]: string | never }>(
+export function convertToFormData<T extends { [s: string]: string |FileList }>(
   data: T
 ): FormData {
   const formData = new FormData();

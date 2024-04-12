@@ -29,7 +29,7 @@ export default function ListProductForm() {
 
   // const navigate = useNavigate();
 
-  const { mutate: listProduct, isLoading:isListingProduct } = useMutation({
+  const { mutate: listProduct, isLoading: isListingProduct } = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
       toast.success("Product listed successfully");
@@ -47,91 +47,81 @@ export default function ListProductForm() {
   return (
     <div className="laptop:px-12 tablet:px-3  px-1 pt-6 pb-16">
       {store_id ? (
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="productName"
-              type="text"
-              placeholder="Product Name"
-              labelName="Product Name"
-              error={formState.errors.productName?.message}
-              {...register("productName", {
-                required: "Product Name is required",
-              })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Textarea
-              id="productDescription"
-              placeholder="Product Description"
-              error={formState.errors.productDescription?.message}
-              {...register("productDescription", {
-                required: "Product Description is required",
-              })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="totalQuantity"
-              type="number"
-              placeholder="Total Quantity"
-              error={formState.errors.totalQuantity?.message}
-              {...register("totalQuantity", {
-                required: "Total Quantity is required",
-                min: { value: 1, message: "Quantity can't be 0" },
-              })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="brand"
-              type="text"
-              placeholder="Brand"
-              error={formState.errors.brand?.message}
-              {...register("brand", { required: "Brand is required" })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="category"
-              type="text"
-              placeholder="Category"
-              error={formState.errors.category?.message}
-              {...register("category", { required: "Category is required" })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="subCategory"
-              type="text"
-              placeholder="Subcategory"
-              error={formState.errors.subCategory?.message}
-              {...register("subCategory", {
-                required: "Subcategory is required",
-              })}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Input
-              id="price"
-              type="number"
-              placeholder="Price"
-              error={formState.errors.price?.message}
-              {...register("price", { required: "Price is required" })}
-            />
-          </div>
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            id="productName"
+            type="text"
+            placeholder="Product Name"
+            labelName="Product Name"
+            error={formState.errors.productName?.message}
+            {...register("productName", {
+              required: "Product Name is required",
+            })}
+          />
 
-          <div className="flex flex-col gap-2">
-            <Input
-              id="productImg"
-              labelName="Product Image"
-              type="file"
-              error={formState.errors.productImg?.message}
-              {...register("productImg", {
-                required: "Product Img is required",
-              })}
-            />
-          </div>
+          <Textarea
+            id="productDescription"
+            placeholder="Product Description"
+            error={formState.errors.productDescription?.message}
+            {...register("productDescription", {
+              required: "Product Description is required",
+            })}
+          />
+
+          <Input
+            id="totalQuantity"
+            type="number"
+            placeholder="Total Quantity"
+            error={formState.errors.totalQuantity?.message}
+            {...register("totalQuantity", {
+              required: "Total Quantity is required",
+              min: { value: 1, message: "Quantity can't be 0" },
+            })}
+          />
+
+          <Input
+            id="brand"
+            type="text"
+            placeholder="Brand"
+            error={formState.errors.brand?.message}
+            {...register("brand", { required: "Brand is required" })}
+          />
+
+          <Input
+            id="category"
+            type="text"
+            placeholder="Category"
+            error={formState.errors.category?.message}
+            {...register("category", { required: "Category is required" })}
+          />
+
+          <Input
+            id="subCategory"
+            type="text"
+            placeholder="Subcategory"
+            error={formState.errors.subCategory?.message}
+            {...register("subCategory", {
+              required: "Subcategory is required",
+            })}
+          />
+
+          <Input
+            id="price"
+            type="number"
+            placeholder="Price"
+            error={formState.errors.price?.message}
+            {...register("price", { required: "Price is required" })}
+          />
+
+          <Input
+            id="productImg"
+            labelName="Product Image"
+            type="file"
+            error={formState.errors.productImg?.message}
+            {...register("productImg", {
+              required: "Product Img is required",
+            })}
+          />
 
           <Button className="w-36 ml-auto mt-6" disabled={isListingProduct}>
             {isListingProduct ? (

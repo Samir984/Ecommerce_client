@@ -81,3 +81,29 @@ export const getProduct = async function (product_id: string) {
     throw error;
   }
 };
+
+export const deleteProductListing = async (product_id: string) => {
+  const token = getCookie("jwtToken");
+
+  try {
+    const response = await fetch(
+      `${URL}users/products/${product_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error("Failed to delete product");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    throw error;
+  }
+};

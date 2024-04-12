@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
- 
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -114,6 +113,10 @@
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.rotate {
   animation: rotation 1s linear infinite;
 }
 

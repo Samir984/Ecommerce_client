@@ -36,6 +36,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
               title={product.productName}
               url={product.productImg.url}
               price={product.price}
+              store_id={store_id}
             />
           ))}
         </div>

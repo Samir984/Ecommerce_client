@@ -12,7 +12,7 @@ export default function Store() {
 
   console.log(store);
   return (
-    <div className="py-4 h-full">
+    <div className="py-4 ">
       {!store_id ? (
         <StoreNotFound />
       ) : (
@@ -27,7 +27,7 @@ export default function Store() {
             </div>
           )}
 
-          <div className="flex-grow">
+          <div className="flex-grow min-h-[800px]">
             <StoreProducts store_id={store_id} />
           </div>
         </div>

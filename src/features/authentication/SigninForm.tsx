@@ -41,7 +41,7 @@ export default function SigninForm() {
           ? "/"
           : accountMode === "SELLER" && res.data.store_id === null
           ? "/vendor/create-store"
-          : `/vendor/store/${store_id}`;
+          : `/vendor/store/${res.data.store_id}`;
 
       console.log(nextRoute, accountMode);
       naviagate(nextRoute);

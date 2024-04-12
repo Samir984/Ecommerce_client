@@ -11,21 +11,22 @@ type StoreProductsType = {
 };
 
 export default function StoreProducts({ store_id }: StoreProductsType) {
+  console.log("storeProdcut feature");
   const [storePage, setStorePage] = useLocalStorage("page", 1);
   const [page, setPage] = useState(storePage);
   function handleNextPage(page: number) {
     setPage(page);
     setStorePage(page);
   }
-
   const { isLoading: isLoadingProducts, data: products } = useQuery({
-    queryKey: ["products", store_id, page],
-    queryFn: () => getProducts(page, store_id as string, 7),
+    queryKey: ["products", page],
+    queryFn: () => getProducts(page, store_id, 5),
   });
+
   return (
-    <div>
+    <div className="">
       {isLoadingProducts ? (
-        <div className="fetchLoader   mx-auto  mt-[20%]  "></div>
+        <div className="fetchLoader mx-auto  mt-[20%]  "></div>
       ) : (
         <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center mt-12">
           {products.data.map((product: any) => (
@@ -39,7 +40,11 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
           ))}
         </div>
       )}
-      <Pagination page={page} handleNextPage={handleNextPage} />
+      <Pagination
+        page={page}
+        handleNextPage={handleNextPage}
+        lastPage={products?.lastPage || 0}
+      />
     </div>
   );
 }

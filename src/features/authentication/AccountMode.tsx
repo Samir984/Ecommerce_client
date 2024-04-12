@@ -13,7 +13,7 @@ export default function AccountMode() {
   console.log("AccountMode feature");
 
   return (
-    <div className="flex flex-col laptop:px-28 px-8 ">
+    <div className="flex flex-col laptop:px-28  px-8 mt-16 ">
       <div className="py-6">
         <Logo className="scale-[1.4] ml-5" />
       </div>

@@ -38,14 +38,13 @@ export function getCookie(name: string) {
   return null;
 }
 
-export function convertToFormData<T extends { [s: string]: string |FileList }>(
+export function convertToFormData<T extends { [s: string]: string | FileList }>(
   data: T
 ): FormData {
   const formData = new FormData();
   // Iterate over the signup object and append key-value pairs to the FormData
   Object.entries(data).forEach(([key, value]) => {
- 
-    if (key === "avatar" || key === "productImg" ) {
+    if (key === "avatar" || key === "productImg") {
       // If the key is 'avatar' and the value is a FileList (for file input), append each file
 
       formData.append(key, value[0]);
@@ -66,5 +65,30 @@ export function getInitials(fullName: string): string {
     );
   } else {
     return fullName.charAt(0).toUpperCase();
+  }
+}
+
+export async function imageUrlToFile(imageUrl: string, filename: string) {
+  try {
+    // Fetch the image from the URL
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error("Failed to fetch image");
+    }
+
+    // Get the image data as a Blob
+    const blob = await response.blob();
+
+    // Create a File object from the Blob
+    const file = new File([blob], filename);
+
+    // Create a FileList containing the File object
+    const fileList = new DataTransfer();
+    fileList.items.add(file);
+
+    return fileList.files;
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
   }
 }

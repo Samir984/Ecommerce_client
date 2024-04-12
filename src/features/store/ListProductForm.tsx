@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccountState } from "@/context/AccountContext";
-import { ListProduct } from "@/services/productApi";
+import { addProduct } from "@/services/productApi";
+
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
@@ -28,8 +29,8 @@ export default function ListProductForm() {
 
   // const navigate = useNavigate();
 
-  const { mutate: listProduct, isLoading } = useMutation({
-    mutationFn: ListProduct,
+  const { mutate: listProduct, isLoading:isListingProduct } = useMutation({
+    mutationFn: addProduct,
     onSuccess: () => {
       toast.success("Product listed successfully");
       // reset();
@@ -132,8 +133,8 @@ export default function ListProductForm() {
             />
           </div>
 
-          <Button className="w-36 ml-auto mt-6" disabled={isLoading}>
-            {isLoading ? (
+          <Button className="w-36 ml-auto mt-6" disabled={isListingProduct}>
+            {isListingProduct ? (
               <span className="loader w-5 h-5"></span>
             ) : (
               "List Product"

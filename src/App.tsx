@@ -14,6 +14,7 @@ import ViewOrder from "./features/store/ViewOrder";
 import ToasterCompoent from "./lib/Toaster";
 import CreateStoreForm from "./features/store/CreateStoreForm";
 import ListProductForm from "./features/store/ListProductForm";
+// import EditProduct from "./features/store/EditProduct";
 
 // import store from "./store";
 // import { Provider } from "react-redux";
@@ -31,6 +32,10 @@ function App() {
               <Route path="store/:store_id" element={<Store />} />
               <Route path="create-store" element={<CreateStoreForm />} />
               <Route path="list-product" element={<ListProductForm />} />
+              {/* <Route
+                path="edit-product/:product_id"
+                element={<EditProduct />}
+              /> */}
               <Route path="order" element={<ViewOrder />} />
             </Route>
           </Route>

@@ -11,14 +11,40 @@ export default function EditProduct() {
   const { isLoading, data: product } = useQuery({
     queryKey: ["product", product_id],
     queryFn: () => getProduct(product_id as string),
+    select: (data) => {
+      const {
+        productName,
+        productDescription,
+        totalQuantity,
+        productImg: oldImg,
+        brand,
+        category,
+        subCategory,
+        store_id,
+        price,
+      } = data.data;
+      return {
+        productName,
+        productDescription,
+        totalQuantity,
+        oldImg,
+        brand,
+        category,
+        store_id,
+        subCategory,
+        price,
+      };
+    },
+    refetchOnWindowFocus: false,
   });
 
+  console.log(product, "\n\n\n]n");
   return (
     <div className="">
       {isLoading ? (
         <div className="fetchLoader mx-auto  mt-[20%]  "></div>
       ) : (
-        <ListProductForm mode="Edit" productToEdit={product?.data} />
+        <ListProductForm mode="Edit" defaultData={product} />
       )}
     </div>
   );

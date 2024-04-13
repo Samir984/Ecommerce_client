@@ -8,7 +8,7 @@ import StoreProducts from "./StoreProducts";
 export default function Store() {
   console.log("Store Feature");
   const { store_id } = useParams();
-  const [isLoadingStore, store] = useStoreData(store_id as string);
+  const {isLoadingStore, store} = useStoreData(store_id as string);
 
   console.log(store);
   return (

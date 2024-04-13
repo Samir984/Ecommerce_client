@@ -86,16 +86,13 @@ export const deleteProductListing = async (product_id: string) => {
   const token = getCookie("jwtToken");
 
   try {
-    const response = await fetch(
-      `${URL}users/products/${product_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${URL}users/products/${product_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const data = await response.json();
     if (!response.ok) {
@@ -104,6 +101,39 @@ export const deleteProductListing = async (product_id: string) => {
     return data;
   } catch (error) {
     console.error("Error deleting product:", error);
+    throw error;
+  }
+};
+
+export const editListedProduct = async function (
+  product_id: string,
+  EditedProductListing: ProductFormType
+) {
+  console.log(EditedProductListing);
+  const endpoint = `${URL}users/products/${product_id}`;
+  const token = getCookie("jwtToken");
+
+  const formData = convertToFormData(EditedProductListing); //
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error at createProductFunction:", error);
     throw error;
   }
 };

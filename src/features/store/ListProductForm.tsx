@@ -3,37 +3,52 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccountState } from "@/context/AccountContext";
-import { addProduct } from "@/services/productApi";
-
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { useListProduct } from "./useListProduct";
 import { useMutation } from "react-query";
+import { editListedProduct } from "@/services/productApi";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 export type ProductFormType = {
   [key: string]: string | FileList;
   productName: string;
   productDescription: string;
   totalQuantity: string;
-  productImg: FileList;
+  productImg: string | FileList;
   brand: string;
+  oldImg: string;
   category: string;
   subCategory: string;
   price: string;
 };
 
-export default function ListProductForm() {
+// const navigate = useNavigate();
+type ListProductFormPropsType = {
+  mode: "Edit" | "List";
+  defaultData?: Partial<ProductFormType>;
+};
+
+export default function ListProductForm({
+  mode,
+  defaultData,
+}: ListProductFormPropsType) {
   console.log("ListProduct Feature");
+  const { product_id } = useParams();
+
+  const { register, handleSubmit, formState } = useForm<ProductFormType>({
+    defaultValues: mode === "Edit" ? defaultData : {},
+  });
+
   const { store_id } = useAccountState();
+  const { listProduct, isListingProduct } = useListProduct();
 
-  const { register, handleSubmit, formState } = useForm<ProductFormType>();
-
-  // const navigate = useNavigate();
-
-  const { mutate: listProduct, isLoading: isListingProduct } = useMutation({
-    mutationFn: addProduct,
+  // Mutation function for editing a product
+  const { mutate: editProduct, isLoading: isEditingProduct } = useMutation({
+    mutationFn: (data: { product_id: string; newData: ProductFormType }) =>
+      editListedProduct(data.product_id, data.newData),
     onSuccess: () => {
-      toast.success("Product listed successfully");
-      // reset();
+      toast.success("Product edited successfully");
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -41,7 +56,12 @@ export default function ListProductForm() {
   });
 
   const onSubmit = (data: ProductFormType) => {
-    listProduct(data);
+    console.log(data);
+    if (mode === "List") return listProduct(data);
+    if (!data.productImg) {
+      data.productImg = data.oldImg;
+    }
+    return editProduct({ product_id: product_id as string, newData: data });
   };
 
   return (
@@ -123,11 +143,14 @@ export default function ListProductForm() {
             })}
           />
 
-          <Button className="w-36 ml-auto mt-6" disabled={isListingProduct}>
-            {isListingProduct ? (
+          <Button
+            className="w-36 ml-auto mt-6"
+            disabled={isListingProduct || isEditingProduct}
+          >
+            {isListingProduct || isEditingProduct ? (
               <span className="loader w-5 h-5"></span>
             ) : (
-              "List Product"
+              `${mode} Product`
             )}
           </Button>
         </form>

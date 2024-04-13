@@ -8,5 +8,5 @@ export function useStoreData(store_id: string) {
     
   });
   console.log("useStoreData running");
-  return [isLoadingStore, store];
+  return {isLoadingStore, store};
 }

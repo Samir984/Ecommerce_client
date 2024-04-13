@@ -5,10 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAccountState } from "@/context/AccountContext";
 import { useForm } from "react-hook-form";
 import { useListProduct } from "./useListProduct";
-import { useMutation } from "react-query";
-import { editListedProduct } from "@/services/productApi";
-import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import { useEditProduct } from "./useEdItProduct";
+
+import FileSelectView from "@/components/FileSelectView";
 
 export type ProductFormType = {
   [key: string]: string | FileList;
@@ -17,7 +17,6 @@ export type ProductFormType = {
   totalQuantity: string;
   productImg: string | FileList;
   brand: string;
-  oldImg: string;
   category: string;
   subCategory: string;
   price: string;
@@ -26,7 +25,8 @@ export type ProductFormType = {
 // const navigate = useNavigate();
 type ListProductFormPropsType = {
   mode: "Edit" | "List";
-  defaultData?: Partial<ProductFormType>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultData?: Partial<ProductFormType> | any;
 };
 
 export default function ListProductForm({
@@ -34,32 +34,31 @@ export default function ListProductForm({
   defaultData,
 }: ListProductFormPropsType) {
   console.log("ListProduct Feature");
+
   const { product_id } = useParams();
-
-  const { register, handleSubmit, formState } = useForm<ProductFormType>({
-    defaultValues: mode === "Edit" ? defaultData : {},
-  });
-
   const { store_id } = useAccountState();
-  const { listProduct, isListingProduct } = useListProduct();
 
-  // Mutation function for editing a product
-  const { mutate: editProduct, isLoading: isEditingProduct } = useMutation({
-    mutationFn: (data: { product_id: string; newData: ProductFormType }) =>
-      editListedProduct(data.product_id, data.newData),
-    onSuccess: () => {
-      toast.success("Product edited successfully");
-    },
-    onError: (error: Error) => {
-      toast.error(error.message);
-    },
-  });
+  // react form hook
+  const { register, handleSubmit, formState, watch } = useForm<ProductFormType>(
+    {
+      defaultValues: mode === "Edit" ? defaultData : {},
+    }
+  );
+  const ImgChange = watch("productImg");
+  const url = defaultData?.oldImg ? defaultData.oldImg.url : undefined;
+
+  console.log(url);
+  // mutaion custome hooks
+  const { listProduct, isListingProduct } = useListProduct();
+  const { editProduct, isEditingProduct } = useEditProduct();
 
   const onSubmit = (data: ProductFormType) => {
     console.log(data);
     if (mode === "List") return listProduct(data);
-    if (!data.productImg) {
+
+    if (data.productImg.length === 0 && data.oldImg) {
       data.productImg = data.oldImg;
+      delete data.oldImg;
     }
     return editProduct({ product_id: product_id as string, newData: data });
   };
@@ -68,6 +67,24 @@ export default function ListProductForm({
     <div className="laptop:px-12 tablet:px-3  px-1 pt-6 pb-16">
       {store_id ? (
         <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
+          {(ImgChange?.length === 1 || url) && (
+            <FileSelectView selectedImg={ImgChange || url} />
+          )}
+          <Input
+            id="productImg"
+            className=""
+            labelName="Product Image"
+            type="file"
+            error={
+              mode === "List" ? formState.errors.productImg?.message : undefined
+            }
+            {...register("productImg", {
+              required: {
+                value: mode === "List" ? true : false,
+                message: "Product image field in required",
+              },
+            })}
+          />
           <Input
             id="productName"
             type="text"
@@ -133,19 +150,13 @@ export default function ListProductForm({
             {...register("price", { required: "Price is required" })}
           />
 
-          <Input
-            id="productImg"
-            labelName="Product Image"
-            type="file"
-            error={formState.errors.productImg?.message}
-            {...register("productImg", {
-              required: "Product Img is required",
-            })}
-          />
-
           <Button
-            className="w-36 ml-auto mt-6"
-            disabled={isListingProduct || isEditingProduct}
+            className="w-36 ml-auto mt-6 disabled:bg-slate-600"
+            disabled={
+              isListingProduct ||
+              isEditingProduct ||
+              !Object.entries(formState.dirtyFields).length
+            }
           >
             {isListingProduct || isEditingProduct ? (
               <span className="loader w-5 h-5"></span>

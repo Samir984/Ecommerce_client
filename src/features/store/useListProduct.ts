@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 
 export function useListProduct() {
+  console.log("useListhook render");
+
   const { mutate: listProduct, isLoading: isListingProduct } = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
@@ -13,6 +15,5 @@ export function useListProduct() {
       toast.error(error.message);
     },
   });
-
   return { listProduct, isListingProduct };
 }

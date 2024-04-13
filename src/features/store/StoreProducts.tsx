@@ -34,7 +34,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
               key={product._id}
               _id={product._id}
               title={product.productName}
-              url={product.productImg.url}
+              url={product.productImg?.url}
               price={product.price}
               store_id={store_id}
             />

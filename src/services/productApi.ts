@@ -1,6 +1,6 @@
-import { ProductFormType } from "@/features/store/ListProductForm";
 import { convertToFormData, getCookie } from "@/lib/utils";
 import { URL } from "./config";
+import { ProductFormType } from "@/features/product/ListProductForm";
 
 export const addProduct = async function (productData: ProductFormType) {
   console.log(productData);

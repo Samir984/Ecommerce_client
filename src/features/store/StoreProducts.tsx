@@ -20,7 +20,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
   }
   const { isLoading: isLoadingProducts, data: products } = useQuery({
     queryKey: ["products", page],
-    queryFn: () => getProducts(page, store_id, 5),
+    queryFn: () => getProducts(page, store_id, 6),
   });
 
   return (

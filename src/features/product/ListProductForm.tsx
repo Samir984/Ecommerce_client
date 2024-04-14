@@ -159,7 +159,7 @@ export default function ListProductForm({
             }
           >
             {isListingProduct || isEditingProduct ? (
-              <span className="loader w-5 h-5"></span>
+              <span className="loaderWhite w-5 h-5"></span>
             ) : (
               `${mode} Product`
             )}

@@ -1,3 +1,4 @@
+import FileSelectView from "@/components/FileSelectView";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAccountState } from "@/context/AccountContext";
@@ -12,25 +13,27 @@ export type UserSignupType = {
   email: string;
   password: string;
   avatar?: FileList;
-  role:"SELLER"|"BUYER"|"ADMIN"|""
+  role: "SELLER" | "BUYER" | "ADMIN" | "";
 };
 
 export default function SignupForm() {
   console.log("SignupForm feature");
-  const { register, handleSubmit, formState, reset } = useForm<UserSignupType>({
-    defaultValues: {
-      fullName: "buyer_1",
-      email: "buyer_1@gmail.com",
-      password: "buyer__1",
-    },
-  });
+  const { register, handleSubmit, formState, reset, watch } =
+    useForm<UserSignupType>({
+      defaultValues: {
+        fullName: "buyer_1",
+        email: "buyer_1@gmail.com",
+        password: "buyer__1",
+      },
+    });
+  const avatarWatcher = watch("avatar");
   const { errors } = formState;
 
   const navigate = useNavigate();
-  const { dispatch,accountMode } = useAccountState();
+  const { dispatch, accountMode } = useAccountState();
 
   const { mutate: signup, isLoading } = useMutation({
-    mutationFn:userSignup,
+    mutationFn: userSignup,
     onSuccess: (res) => {
       console.log(res);
       dispatch({ type: "signup", payload: res.data });
@@ -46,7 +49,7 @@ export default function SignupForm() {
   });
 
   function onSubmit(data: UserSignupType) {
-    data.role=accountMode
+    data.role = accountMode;
     console.log(data);
     signup(data);
   }
@@ -87,9 +90,14 @@ export default function SignupForm() {
             },
           })}
         />
-        <fieldset className="border-2 border-black">
+        <fieldset className="border-2 border-black flex items-center gap-4 py-1 ">
           <legend>Select a user avatar</legend>
-
+          {avatarWatcher?.length === 1 && (
+            <FileSelectView
+              selectedImg={avatarWatcher}
+              className=" w-10 h-10  mx-0 ml-2 border-2 border-black "
+            />
+          )}
           <Input
             type="file"
             id="avatar"
@@ -102,7 +110,7 @@ export default function SignupForm() {
 
         <Button className="w-36 ml-auto mt-6" disabled={isLoading}>
           {isLoading ? (
-            <span className="loader w-5 h-5"></span>
+            <span className="loaderWhite w-5 h-5"></span>
           ) : (
             "Create an account"
           )}

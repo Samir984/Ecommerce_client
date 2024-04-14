@@ -42,7 +42,7 @@ export default function EditProduct() {
   return (
     <div className="">
       {isLoading ? (
-        <div className="fetchLoader mx-auto  mt-[20%]  "></div>
+        <div className="fetchloaderWhite mx-auto  mt-[20%]  "></div>
       ) : (
         <ListProductForm mode="Edit" defaultData={product} />
       )}

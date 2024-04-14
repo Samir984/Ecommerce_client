@@ -7,7 +7,7 @@ export default function Vendor() {
   return (
     <div className="p-2 mx-auto laptop:w-[90%]">
       <div className="flex gap-2 ">
-        <div className="bg-white  tablet:w-44 py-8 px-1 rounded-lg  ">
+        <div className="bg-white  tablet:w-44 py-8 px-1 rounded-lg ">
           <VendorNav />
         </div>
         <div className="p-2  flex-1  ">

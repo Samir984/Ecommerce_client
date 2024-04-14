@@ -1,7 +1,13 @@
 import { URL } from "./config";
 import { UserSigninType } from "@/features/authentication/SigninForm";
 import { UserSignupType } from "@/features/authentication/SignupForm";
-import { convertToFormData, setCookie } from "@/lib/utils";
+import { updateAvatarPropsType } from "@/features/profile/Profile";
+import {
+  clearCookie,
+  convertToFormData,
+  getCookie,
+  setCookie,
+} from "@/lib/utils";
 
 export const userSignup = async function (signup: UserSignupType) {
   console.log(signup);
@@ -35,6 +41,7 @@ export const userSignin = async function (signin: UserSigninType) {
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify(signin),
     });
     console.log(response);
@@ -50,4 +57,37 @@ export const userSignin = async function (signin: UserSigninType) {
     console.error("Error at UserSignin :", error);
     throw error;
   }
+};
+
+export const updateAvatar = async function (img: updateAvatarPropsType) {
+  console.log(img);
+  const endpoint = `${URL}users/updateavatar`;
+  const token = getCookie("jwtToken");
+  const formData = convertToFormData(img);
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: formData,
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error at update Avatar :", error);
+    throw error;
+  }
+};
+
+export const signoutUser = function () {
+  localStorage.clear();
+  clearCookie("jwtToken");
 };

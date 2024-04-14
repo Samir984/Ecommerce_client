@@ -10,11 +10,12 @@ import SigninForm from "./features/authentication/SigninForm";
 import AccountStateProvider from "./context/AccountContext";
 import Vendor from "./pages/vendorPage/Vendor";
 import Store from "./features/store/Store";
-import ViewOrder from "./features/store/ViewOrder";
+import ViewOrder from "./features/order/ViewOrder";
 import ToasterCompoent from "./lib/Toaster";
 import CreateStoreForm from "./features/store/CreateStoreForm";
-import ListProductForm from "./features/store/ListProductForm";
-import EditProduct from "./features/store/EditProduct";
+import ListProductForm from "./features/product/ListProductForm";
+import EditProduct from "./features/product/EditProduct";
+import Profile from "./features/profile/Profile";
 // import EditProduct from "./features/store/EditProduct";
 
 // import store from "./store";
@@ -32,10 +33,17 @@ function App() {
             <Route path="vendor" element={<Vendor />}>
               <Route path="store/:store_id" element={<Store />} />
               <Route path="create-store" element={<CreateStoreForm />} />
-              <Route path="list-product" element={<ListProductForm mode="List" />} />
+              <Route
+                path="list-product"
+                element={<ListProductForm mode="List" />}
+              />
               <Route
                 path="edit-product/:product_id"
                 element={<EditProduct />}
+              />
+              <Route
+                path="profile"
+                element={<Profile />}
               />
               <Route path="order" element={<ViewOrder />} />
             </Route>

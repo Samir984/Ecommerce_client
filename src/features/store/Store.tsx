@@ -8,7 +8,7 @@ import StoreProducts from "./StoreProducts";
 export default function Store() {
   console.log("Store Feature");
   const { store_id } = useParams();
-  const {isLoadingStore, store} = useStoreData(store_id as string);
+  const { isLoadingStore, store } = useStoreData(store_id as string);
 
   console.log(store);
   return (
@@ -17,7 +17,7 @@ export default function Store() {
         <StoreNotFound />
       ) : (
         <div className="flex flex-col h-full">
-          <UserAvatar className="w-14 h-14 mx-auto " />
+          <UserAvatar className="tablet:w-24 tablet:h-24 mx-auto w-20 h-20" />
           {!isLoadingStore && (
             <div className="text-center">
               <h1 className="text-xl font-bold">{store.data.storeName}</h1>

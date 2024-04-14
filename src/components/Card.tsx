@@ -38,7 +38,7 @@ export default function Card({
       <div className="">
         <img
           src={url}
-          className="w-full  object-cover transition-transform  hover:scale-[1.02] "
+          className="w-full h-full object-cover transition-transform  hover:scale-[1.02] "
         />
       </div>
       <div className="flex-1 px-2 py-3">
@@ -58,7 +58,9 @@ export default function Card({
 
               <MdOutlineDelete
                 size={24}
-                className={`hover:text-red-600 ${isDeleting&& "rotate text-red-500"}`}
+                className={`hover:text-red-600 ${
+                  isDeleting && "rotate text-red-500 cursor-not-allowed"
+                }`}
                 onClick={() => deleteProduct(_id)}
               />
             </div>

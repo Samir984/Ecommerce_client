@@ -23,6 +23,12 @@ export function setCookie(name: string, value: string, days: number) {
     name + "=" + (value || "") + expires + "; path=/" + secureFlag;
 }
 
+
+export function clearCookie(name: string) {
+  // Set the expiration date to a past time
+  document.cookie = name + "=; Max-Age=-99999999; path=/";
+}
+
 export function getCookie(name: string) {
   const nameEQ = name + "=";
   const ca = document.cookie.split(";");

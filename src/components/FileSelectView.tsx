@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 
 type FileSelectViewPropsType = {
   selectedImg: FileList | string;
+  className?: string;
 };
 
 export default function FileSelectView({
-  selectedImg,
+  selectedImg,className
 }: FileSelectViewPropsType) {
-  console.log("FileSelectedView")
+  console.log("FileSelectedView");
   const [selectedFile, setSelectedFile] = useState<string | ArrayBuffer | null>(
     null
   );
@@ -33,7 +34,7 @@ export default function FileSelectView({
   }, [selectedImg]);
 
   return (
-    <div className={`${selectedFile && "mx-auto max-w-96"}`}>
+    <div className={`${selectedFile && "mx-auto max-w-96"}${className}`}>
       {selectedFile && typeof selectedFile === "string" && (
         <img src={selectedFile} alt="Product Img" />
       )}

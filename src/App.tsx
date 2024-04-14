@@ -16,6 +16,7 @@ import CreateStoreForm from "./features/store/CreateStoreForm";
 import ListProductForm from "./features/product/ListProductForm";
 import EditProduct from "./features/product/EditProduct";
 import Profile from "./features/profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 // import EditProduct from "./features/store/EditProduct";
 
 // import store from "./store";
@@ -30,7 +31,14 @@ function App() {
         <Routes>
           {/* ---------User Ui view --------- */}
           <Route path="/" element={<Layout />}>
-            <Route path="vendor" element={<Vendor />}>
+            <Route
+              path="vendor"
+              element={
+                <ProtectedRoute>
+                  <Vendor />
+                </ProtectedRoute>
+              }
+            >
               <Route path="store/:store_id" element={<Store />} />
               <Route path="create-store" element={<CreateStoreForm />} />
               <Route
@@ -41,10 +49,7 @@ function App() {
                 path="edit-product/:product_id"
                 element={<EditProduct />}
               />
-              <Route
-                path="profile"
-                element={<Profile />}
-              />
+              <Route path="profile" element={<Profile />} />
               <Route path="order" element={<ViewOrder />} />
             </Route>
           </Route>

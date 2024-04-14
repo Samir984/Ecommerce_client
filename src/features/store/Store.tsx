@@ -10,10 +10,10 @@ export default function Store() {
   const { store_id } = useParams();
   const { isLoadingStore, store } = useStoreData(store_id as string);
 
-  console.log(store);
+  console.log(typeof store_id);
   return (
     <div className="py-4 ">
-      {store_id ? (
+      {store_id === "null" || !store_id ? (
         <StoreNotFound />
       ) : (
         <div className="flex flex-col h-full">

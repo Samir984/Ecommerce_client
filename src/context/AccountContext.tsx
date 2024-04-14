@@ -15,7 +15,7 @@ type ReducerStateType = {
     url: string;
     public_id: string;
   };
-  store_id: string|null;
+  store_id: string | null;
   email: string;
   fullName: string;
   role?: string;
@@ -33,7 +33,7 @@ type ActionType =
   | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
   | { type: "signup"; payload: Partial<ReducerStateType> }
   | { type: "signin"; payload: Partial<ReducerStateType> }
-  | { type: "storeCreated",payload:string }
+  | { type: "storeCreated"; payload: string }
   | { type: "signout" };
 
 type AccountStateProviderProps = {
@@ -42,7 +42,7 @@ type AccountStateProviderProps = {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const initialState: ReducerStateType = {
-  accountMode: "",
+  accountMode: "BUYER",
   loggedIn: false,
   avatar: {
     url: "",

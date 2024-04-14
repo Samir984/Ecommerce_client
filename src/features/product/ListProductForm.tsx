@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAccountState } from "@/context/AccountContext";
 import { useForm } from "react-hook-form";
 import { useListProduct } from "./useListProduct";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEditProduct } from "./useEdItProduct";
 
 import FileSelectView from "@/components/FileSelectView";
@@ -36,6 +36,7 @@ export default function ListProductForm({
   console.log("ListProduct Feature");
 
   const { product_id } = useParams();
+  const navigate = useNavigate();
   const { store_id } = useAccountState();
 
   // react form hook
@@ -49,8 +50,8 @@ export default function ListProductForm({
 
   console.log(url);
   // mutaion custome hooks
-  const { listProduct, isListingProduct } = useListProduct();
-  const { editProduct, isEditingProduct } = useEditProduct();
+  const { listProduct, isListingProduct } = useListProduct(navigate);
+  const { editProduct, isEditingProduct } = useEditProduct(navigate);
 
   const onSubmit = (data: ProductFormType) => {
     console.log(data);

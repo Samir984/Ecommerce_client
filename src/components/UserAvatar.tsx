@@ -3,7 +3,6 @@ import { getInitials } from "@/lib/utils";
 
 type UserAvatarType = {
   className?: string;
-
 };
 
 export default function UserAvatar({ className }: UserAvatarType) {
@@ -15,11 +14,10 @@ export default function UserAvatar({ className }: UserAvatarType) {
 
   return (
     <div
-      className={`w-14 h-14 rounded-full overflow-hidden ${className}`}
-   
+      className={`w-14 h-14 rounded-full overflow-hidden bordor-8 border-black ${className}`}
     >
       {url ? (
-        <img src={url} alt={"User Avatar"} className="w-full h-full" />
+        <img src={url} alt={"User Avatar"} className="w-full h-full " />
       ) : (
         <div
           className={`flex justify-center items-center  bg-blue-500 w-full h-full text-2xl font-medium`}

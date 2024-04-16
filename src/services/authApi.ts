@@ -91,3 +91,23 @@ export const signoutUser = function () {
   localStorage.clear();
   clearCookie("jwtToken");
 };
+
+export const signinWithGoogle = async function () {
+  const endpoint = `${URL}users/signing-with-google`;
+  try {
+    const response = await fetch(endpoint, {
+      method: "GET",
+    });
+    console.log(response);
+
+    const responseData = await response.json();
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error at  signinWithGoogle:", error);
+    throw error;
+  }
+};

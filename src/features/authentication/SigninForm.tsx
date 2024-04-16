@@ -6,6 +6,7 @@ import { userSignin } from "@/services/authApi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAccountState } from "@/context/AccountContext";
+import OAuth from "./OAuth";
 
 export type UserSigninType = {
   email: string;
@@ -95,6 +96,7 @@ export default function SigninForm() {
           )}
         </Button>
       </form>
+      <OAuth />
     </div>
   );
 }

@@ -38,6 +38,7 @@ export default function ListProductForm({
   const { product_id } = useParams();
   const navigate = useNavigate();
   const { store_id } = useAccountState();
+  const route = `/vendor/store/${store_id}`;
 
   // react form hook
   const { register, handleSubmit, formState, watch } = useForm<ProductFormType>(
@@ -50,8 +51,8 @@ export default function ListProductForm({
 
   console.log(url);
   // mutaion custome hooks
-  const { listProduct, isListingProduct } = useListProduct(navigate);
-  const { editProduct, isEditingProduct } = useEditProduct(navigate);
+  const { listProduct, isListingProduct } = useListProduct(navigate, route);
+  const { editProduct, isEditingProduct } = useEditProduct(navigate, route);
 
   const onSubmit = (data: ProductFormType) => {
     console.log(data);

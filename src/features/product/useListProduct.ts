@@ -3,14 +3,14 @@ import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { NavigateFunction } from "react-router-dom";
 
-export function useListProduct(navigate:NavigateFunction) {
+export function useListProduct(navigate:NavigateFunction,route:string) {
   console.log("useListhook render");
 
   const { mutate: listProduct, isLoading: isListingProduct } = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
       toast.success("Product listed successfully");
-      navigate("/vendor/store");
+      navigate(route);
     },
     onError: (error: Error) => {
       toast.error(error.message);

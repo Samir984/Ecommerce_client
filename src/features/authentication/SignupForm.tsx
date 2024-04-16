@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import OAuth from "./OAuth";
 
 export type UserSignupType = {
   fullName: string;
@@ -90,7 +91,7 @@ export default function SignupForm() {
             },
           })}
         />
-        <fieldset className="border-2 border-black flex items-center gap-4 py-1 ">
+        <fieldset className="border-2 border-black flex items-center gap-4 py-1 justify-center ">
           <legend>Select a user avatar</legend>
           {avatarWatcher?.length === 1 && (
             <FileSelectView
@@ -116,6 +117,7 @@ export default function SignupForm() {
           )}
         </Button>
       </form>
+      <OAuth />
     </div>
   );
 }

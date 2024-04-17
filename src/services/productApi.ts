@@ -2,6 +2,11 @@ import { convertToFormData, getCookie } from "@/lib/utils";
 import { URL } from "./config";
 import { ProductFormType } from "@/features/product/ListProductForm";
 
+type HeadersType = {
+  Authorization: string;
+  "Content-Type"?: string;
+};
+
 export const addProduct = async function (productData: ProductFormType) {
   console.log(productData);
   const endpoint = `${URL}users/products/listproduct`;
@@ -112,16 +117,28 @@ export const editListedProduct = async function (
   console.log(EditedProductListing);
   const endpoint = `${URL}users/products/${product_id}`;
   const token = getCookie("jwtToken");
+  const contentFileList = EditedProductListing.oldImg ? true : false;
 
-  const formData = convertToFormData(EditedProductListing); //
+  let dataFormat = null;
+  let headers: HeadersType = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  if (contentFileList) {
+    dataFormat = convertToFormData(EditedProductListing);
+  } else {
+    dataFormat = JSON.stringify(EditedProductListing);
+    headers = {
+      ...headers, // Spread existing headers
+      "Content-Type": "application/json", // Add Content-Type
+    };
+  }
 
   try {
     const response = await fetch(endpoint, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
+      headers,
+      body: dataFormat,
     });
 
     const responseData = await response.json();

@@ -38,7 +38,7 @@ export default function EditProduct() {
     refetchOnWindowFocus: false,
   });
 
-  console.log(product, "\n\n\n]n");
+  console.log(product, "\n\n\n\n");
   return (
     <div className="">
       {isLoading ? (

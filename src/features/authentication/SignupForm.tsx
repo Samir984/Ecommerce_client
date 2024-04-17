@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import OAuth from "./OAuth";
+// import OAuth from "./OAuth";
 
 export type UserSignupType = {
   fullName: string;
@@ -117,7 +117,7 @@ export default function SignupForm() {
           )}
         </Button>
       </form>
-      <OAuth />
+      {/* <OAuth /> */}
     </div>
   );
 }

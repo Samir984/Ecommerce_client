@@ -49,20 +49,20 @@ export default function ListProductForm({
   const ImgChange = watch("productImg");
   const url = defaultData?.oldImg ? defaultData.oldImg.url : undefined;
 
-  console.log(url);
   // mutaion custome hooks
   const { listProduct, isListingProduct } = useListProduct(navigate, route);
   const { editProduct, isEditingProduct } = useEditProduct(navigate, route);
 
   const onSubmit = (data: ProductFormType) => {
-    console.log(data);
-    if (mode === "List") return listProduct(data);
+    console.log(data, "\n\n\n");
 
+    if (mode === "List") return listProduct(data);
     if (data.productImg.length === 0 && data.oldImg) {
       data.productImg = data.oldImg;
       delete data.oldImg;
     }
-    return editProduct({ product_id: product_id as string, newData: data });
+    if (data.productImg !== "undefined")
+      return editProduct({ product_id: product_id as string, newData: data });
   };
 
   return (

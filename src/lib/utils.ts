@@ -23,7 +23,6 @@ export function setCookie(name: string, value: string, days: number) {
     name + "=" + (value || "") + expires + "; path=/" + secureFlag;
 }
 
-
 export function clearCookie(name: string) {
   // Set the expiration date to a past time
   document.cookie = name + "=; Max-Age=-99999999; path=/";
@@ -45,7 +44,8 @@ export function getCookie(name: string) {
 }
 
 export function convertToFormData<T extends { [s: string]: string | FileList }>(
-  data: T
+  data: T,
+
 ): FormData {
   const formData = new FormData();
   // Iterate over the signup object and append key-value pairs to the FormData

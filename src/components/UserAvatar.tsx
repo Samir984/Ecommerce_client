@@ -20,7 +20,7 @@ export default function UserAvatar({ className }: UserAvatarType) {
         <img src={url} alt={"User Avatar"} className="w-full h-full " />
       ) : (
         <div
-          className={`flex justify-center items-center  bg-blue-500 w-full h-full text-2xl font-medium`}
+          className={`flex justify-center items-center  bg-blue-500 w-full h-full text-lg tablet:text-2xl  font-medium`}
         >
           {getInitials(fullName)}
         </div>

@@ -17,6 +17,8 @@ import ListProductForm from "./features/product/ListProductForm";
 import EditProduct from "./features/product/EditProduct";
 import Profile from "./features/profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+
 // import EditProduct from "./features/store/EditProduct";
 
 // import store from "./store";
@@ -31,6 +33,9 @@ function App() {
         <Routes>
           {/* ---------User Ui view --------- */}
           <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+
+            {/* ------------ vendor route -------------- */}
             <Route
               path="vendor"
               element={
@@ -52,6 +57,7 @@ function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="order" element={<ViewOrder />} />
             </Route>
+            <Route path="profile" element={<Profile />} />
           </Route>
 
           {/*-------- auth route---------*/}

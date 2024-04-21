@@ -12,7 +12,7 @@ export default function Account() {
     <>
       {loggedIn ? (
         <div className="group">
-          <UserAvatar className="w-12 h-12 cursor-pointer" />
+          <UserAvatar className="tablet:w-12 tablet:h-12 w-9 h-9 cursor-pointer" />
           <DropDownBox />
         </div>
       ) : (

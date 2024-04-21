@@ -154,3 +154,18 @@ export const editListedProduct = async function (
     throw error;
   }
 };
+
+export const getSubCategories = async function () {
+  const endpoint = `${URL}users/products/subcategories/`;
+  console.log(endpoint);
+
+  try {
+    const response = await fetch(endpoint);
+    const responseData = await response.json();
+    if (!response.ok) throw new Error(responseData.message);
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching prodcut:", error);
+    throw error;
+  }
+};

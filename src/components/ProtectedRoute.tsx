@@ -7,7 +7,7 @@ type ProtectedRouteProps = {
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  console.log("Protected Route", children);
+  console.log("Protected Route");
   const navigate = useNavigate();
   const { loggedIn } = useAccountState();
 

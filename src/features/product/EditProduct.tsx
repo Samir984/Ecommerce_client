@@ -12,6 +12,7 @@ export default function EditProduct() {
     queryKey: ["product", product_id],
     queryFn: () => getProduct(product_id as string),
     select: (data) => {
+      console.log(data);
       const {
         productName,
         productDescription,
@@ -38,7 +39,6 @@ export default function EditProduct() {
     refetchOnWindowFocus: false,
   });
 
-  console.log(product, "\n\n\n\n");
   return (
     <div className="">
       {isLoading ? (

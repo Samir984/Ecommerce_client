@@ -39,7 +39,7 @@ export default function Profile() {
   return (
     <div className="flex flex-col px-2 py-4 items-center">
       <h2 className="text-3xl font-medium text-center mb-2">{fullName}</h2>
-      <div className="w-28 h-28 relative  overflow-hidden hover:opacity-90 ">
+      <div className="w-20 h-20 tablet:w-28 tablet:h-28 relative  overflow-hidden hover:opacity-90 ">
         <Input
           type="file"
           className="absolute h-full w-full opacity-0 z-20"

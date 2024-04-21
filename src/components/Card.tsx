@@ -34,15 +34,15 @@ export default function Card({
   });
 
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-md flex flex-col hover:shadow-xl min-h-full bg-[#f7f7f7]">
+    <div className="max-w-xs rounded overflow-hidden shadow-md flex flex-col hover:shadow-xl max-h-full bg-[#f7f7f7]">
       <div className="">
         <img
           src={url}
           className="w-full h-full object-cover transition-transform  hover:scale-[1.02] "
         />
       </div>
-      <div className="flex-1 px-2 py-3">
-        <div className="font-medium text-base laptop:text-lg  mb-2">
+      <div className="flex-1 px-2 py-3 flex flex-col justify-center">
+        <div className="font-medium text-base laptop:text-lg  mb-2 line-clamp-3">
           {title}
         </div>
         <div className="flex justify-between items-center mb-2">

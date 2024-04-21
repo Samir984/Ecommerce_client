@@ -54,6 +54,8 @@ export default function ListProductForm({
   const { editProduct, isEditingProduct } = useEditProduct(navigate, route);
 
   const onSubmit = (data: ProductFormType) => {
+    data.category = data.category.toLowerCase();
+    data.subCategory = data.subCategory.toLowerCase();
     console.log(data, "\n\n\n");
 
     if (mode === "List") return listProduct(data);
@@ -61,8 +63,7 @@ export default function ListProductForm({
       data.productImg = data.oldImg;
       delete data.oldImg;
     }
-    if (data.productImg !== "undefined")
-      return editProduct({ product_id: product_id as string, newData: data });
+    return editProduct({ product_id: product_id as string, newData: data });
   };
 
   return (
@@ -122,8 +123,7 @@ export default function ListProductForm({
             id="brand"
             type="text"
             placeholder="Brand"
-            error={formState.errors.brand?.message}
-            {...register("brand", { required: "Brand is required" })}
+            {...register("brand")}
           />
 
           <Input

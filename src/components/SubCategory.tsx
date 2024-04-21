@@ -5,6 +5,7 @@ type SubCategory = {
   _id: string;
   url: string;
 };
+
 export default function SubCategory() {
   const { isLoading, data: subCategories } = useQuery({
     queryKey: ["subcategories"],
@@ -14,7 +15,7 @@ export default function SubCategory() {
   console.log(subCategories, isLoading);
 
   return (
-    <div className="flex overflow-y-scroll  gap-3  py-4 tablet:px-2 ">
+    <div className="flex overflow-y-scroll hidescroll_bar gap-3  py-4 tablet:px-2 tablet:min-h-48 min-h-32">
       {isLoading
         ? "loading"
         : subCategories.data.map((subCategory: SubCategory) => {

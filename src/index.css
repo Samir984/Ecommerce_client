@@ -193,3 +193,7 @@ li .active {
       100% calc(100% + 2px);
   }
 }
+
+.hidescroll_bar::-webkit-scrollbar {
+  display: none;
+}

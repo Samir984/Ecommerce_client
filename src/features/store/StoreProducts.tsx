@@ -24,6 +24,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
     queryKey: ["products", page],
     queryFn: () => getProducts(page, store_id, 6),
   });
+  console.log(products);
 
   return (
     <div className="">
@@ -31,7 +32,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
         <div className="fetchLoader mx-auto  mt-[20%]  "></div>
       ) : (
         <>
-          {products && products.data.length > 0 ? (
+          {products?.data.length > 0 ? (
             <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 laptop:gap-6 justify-items-center mt-12">
               {products.data.map((product: any) => (
                 <Card

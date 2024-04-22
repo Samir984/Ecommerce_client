@@ -73,7 +73,7 @@ export default function CreateStoreForm() {
 
         <Button disabled={isLoading} className="items-center w-28  ml-auto">
           {isLoading ? (
-            <span className="loaderWhite w-5 h-5 "></span>
+            <span className="loader loaderWhite w-5 h-5 "></span>
           ) : (
             "create store"
           )}

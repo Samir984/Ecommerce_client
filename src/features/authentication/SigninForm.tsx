@@ -90,7 +90,7 @@ export default function SigninForm() {
 
         <Button className="w-36 ml-auto mt-6" disabled={isLoading}>
           {isLoading ? (
-            <span className="loaderWhite w-5 h-5"></span>
+            <span className="loader loaderWhite  w-5 h-5"></span>
           ) : (
             "sign in"
           )}

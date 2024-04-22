@@ -17,6 +17,7 @@ export type ProductFormType = {
   totalQuantity: string;
   productImg: string | FileList;
   brand: string;
+  keyword: string;
   category: string;
   subCategory: string;
   price: string;
@@ -98,6 +99,14 @@ export default function ListProductForm({
               required: "Product Name is required",
             })}
           />
+          <Textarea
+            id="keyword"
+            placeholder="keyword"
+            error={formState.errors.keyword?.message}
+            {...register("keyword", {
+              required: "keyword  is required",
+            })}
+          />
 
           <Textarea
             id="productDescription"
@@ -161,7 +170,7 @@ export default function ListProductForm({
             }
           >
             {isListingProduct || isEditingProduct ? (
-              <span className="loaderWhite w-5 h-5"></span>
+              <span className="loader loaderWhite w-5 h-5"></span>
             ) : (
               `${mode} Product`
             )}

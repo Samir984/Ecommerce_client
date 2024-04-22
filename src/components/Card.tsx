@@ -12,7 +12,7 @@ type CardPropsType = {
   price: number;
   url: string;
   _id: string;
-  store_id: string;
+  store_id?: string;
 };
 export default function Card({
   title,

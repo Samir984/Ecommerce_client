@@ -18,6 +18,7 @@ export default function EditProduct() {
         productDescription,
         totalQuantity,
         productImg: oldImg,
+        keyword,
         brand,
         category,
         subCategory,
@@ -29,6 +30,7 @@ export default function EditProduct() {
         productDescription,
         totalQuantity,
         oldImg,
+        keyword,
         brand,
         category,
         store_id,
@@ -42,7 +44,7 @@ export default function EditProduct() {
   return (
     <div className="">
       {isLoading ? (
-        <div className="fetchloaderWhite mx-auto  mt-[20%]  "></div>
+        <div className="loader fetchloaderWhite mx-auto  mt-[20%]  "></div>
       ) : (
         <ListProductForm mode="Edit" defaultData={product} />
       )}

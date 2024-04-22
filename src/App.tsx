@@ -18,6 +18,7 @@ import EditProduct from "./features/product/EditProduct";
 import Profile from "./features/profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
+import ResultsPage from "./pages/ResultsPage";
 
 // import EditProduct from "./features/store/EditProduct";
 
@@ -34,6 +35,7 @@ function App() {
           {/* ---------User Ui view --------- */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="results" element={<ResultsPage />} />
 
             {/* ------------ vendor route -------------- */}
             <Route

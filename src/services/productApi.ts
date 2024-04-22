@@ -42,7 +42,8 @@ export const getProducts = async function (
   store_id: string,
   limit: number
 ) {
-  const endpoint = `${URL}users/products?store_id=${store_id}&page=${page}&limit=${limit}`;
+  console.log("get product runnung");
+  const endpoint = `${URL}users/stores/products?store_id=${store_id}&page=${page}&limit=${limit}`;
   const token = getCookie("jwtToken");
   console.log("\n Enter get products \n", page);
   try {
@@ -57,6 +58,7 @@ export const getProducts = async function (
     if (!response.ok) {
       throw new Error(responseData.message);
     }
+
     return responseData;
   } catch (error) {
     console.error("Error fetching prodcut page:", error);
@@ -157,6 +159,21 @@ export const editListedProduct = async function (
 
 export const getSubCategories = async function () {
   const endpoint = `${URL}users/products/subcategories/`;
+  console.log(endpoint);
+
+  try {
+    const response = await fetch(endpoint);
+    const responseData = await response.json();
+    if (!response.ok) throw new Error(responseData.message);
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching prodcut:", error);
+    throw error;
+  }
+};
+
+export const getProductsAsQuery = async function (query: string) {
+  const endpoint = `${URL}users/products${query}`;
   console.log(endpoint);
 
   try {

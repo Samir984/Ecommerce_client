@@ -46,7 +46,7 @@ export default function Profile() {
           onChange={handelFileInput}
         />
         {isLoading ? (
-          <span className="loaderBlack absolute  opacity-90 bottom-0 right-0  w-5 h-5 p-1"></span>
+          <span className="loader loaderBlack absolute  opacity-90 bottom-0 right-0  w-5 h-5 p-1"></span>
         ) : (
           <LuUploadCloud
             size={30}

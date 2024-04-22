@@ -117,20 +117,10 @@
 
 .loaderWhite {
   border: 3px solid #fff;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
 }
 
 .loaderBlack {
   border: 3px solid #000;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
 }
 .rotate {
   animation: rotation 1s linear infinite;
@@ -150,7 +140,7 @@ li .active {
   background-color: #f1f5f9;
 }
 
-.fetchloaderWhite {
+.fetchLoader{
   width: 40px;
   aspect-ratio: 1;
   --c: linear-gradient(#000 0 0);
@@ -194,6 +184,9 @@ li .active {
   }
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 .hidescroll_bar::-webkit-scrollbar {
   display: none;
 }

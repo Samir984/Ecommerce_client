@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineEdit } from "react-icons/md";
 import { MdOutlineDelete } from "react-icons/md";
-import { BsCart3 } from "react-icons/bs";
+
 import { useAccountState } from "@/context/AccountContext";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteProductListing } from "@/services/productApi";
@@ -22,6 +22,7 @@ export default function Card({
   _id,
 }: CardPropsType) {
   const account = useAccountState();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -34,7 +35,13 @@ export default function Card({
   });
 
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-md flex flex-col hover:shadow-xl max-h-full bg-[#f7f7f7]">
+    <div
+      className="max-w-xs rounded overflow-hidden shadow-md cursor-pointer flex flex-col hover:shadow-xl max-h-full bg-[#f7f7f7]"
+      onClick={() => {
+        if (account.accountMode !== "BUYER") return;
+        navigate(`/product/${_id}`);
+      }}
+    >
       <div className="">
         <img
           src={url}
@@ -50,7 +57,7 @@ export default function Card({
           <span className="text-green-500 font-bold text-lg">Rs {price}</span>
         </div>
         <div className="">
-          {account.store_id === store_id ? (
+          {account.store_id === store_id && (
             <div className="flex gap-6 items-center justify-end">
               <Link to={`/vendor/edit-product/${_id}`}>
                 <MdOutlineEdit size={24} className="hover:text-green-600 " />
@@ -64,8 +71,6 @@ export default function Card({
                 onClick={() => deleteProduct(_id)}
               />
             </div>
-          ) : (
-            <BsCart3 size={24} className="ml-auto" />
           )}
         </div>
       </div>

@@ -68,15 +68,12 @@ export const getProducts = async function (
 
 export const getProduct = async function (product_id: string) {
   const endpoint = `${URL}users/products/${product_id}`;
-  console.log(endpoint);
-  const token = getCookie("jwtToken");
 
   try {
     const response = await fetch(endpoint, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
     const responseData = await response.json();

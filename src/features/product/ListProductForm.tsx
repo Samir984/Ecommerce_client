@@ -14,7 +14,7 @@ export type ProductFormType = {
   [key: string]: string | FileList;
   productName: string;
   productDescription: string;
-  totalQuantity: string;
+  stock: string;
   productImg: string | FileList;
   brand: string;
   keyword: string;
@@ -118,11 +118,11 @@ export default function ListProductForm({
           />
 
           <Input
-            id="totalQuantity"
+            id="stock"
             type="number"
             placeholder="Total Quantity"
-            error={formState.errors.totalQuantity?.message}
-            {...register("totalQuantity", {
+            error={formState.errors.stock?.message}
+            {...register("stock", {
               required: "Total Quantity is required",
               min: { value: 1, message: "Quantity can't be 0" },
             })}

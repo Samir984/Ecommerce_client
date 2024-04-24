@@ -16,7 +16,7 @@ export default function Profile() {
   const { fullName, dispatch } = useAccountState();
   const [isLoading, setLoading] = useState(false);
 
-  async function handelFileInput(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handelFileInput(e:React.ChangeEvent<HTMLInputElement> ) {
     console.log("click", e.target.files);
     try {
       if (e.target.files && e.target.files.length) {

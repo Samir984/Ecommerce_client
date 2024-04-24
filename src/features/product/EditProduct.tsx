@@ -16,7 +16,7 @@ export default function EditProduct() {
       const {
         productName,
         productDescription,
-        totalQuantity,
+        stocks,
         productImg: oldImg,
         keyword,
         brand,
@@ -28,7 +28,7 @@ export default function EditProduct() {
       return {
         productName,
         productDescription,
-        totalQuantity,
+        stocks,
         oldImg,
         keyword,
         brand,

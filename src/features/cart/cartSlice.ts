@@ -8,7 +8,7 @@ type CartItemType = {
   quantity: number;
   url: string;
   price: number;
-  store_id: string;
+  store_id?: string;
 };
 
 type CartStateType = {
@@ -28,7 +28,14 @@ const cartSlice = createSlice({
     addItem(state, action: PayloadAction<CartItemType>) {
       const newItem = action.payload;
       state.items = [...state.items, newItem];
-      state.totalPrice += state.totalPrice + newItem.quantity;
+      state.totalPrice += state.totalPrice + newItem.price;
+      console.log(action, state);
+    },
+    deleteItem(state, action: PayloadAction<string>) {
+      const productIdToDelete = action.payload;
+      state.items = state.items.filter(
+        (item) => item.product_id !== productIdToDelete
+      );
     },
     increaseItems(state, action: PayloadAction<string>) {
       const prodcut_id = action.payload;
@@ -53,7 +60,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, increaseItems, decreaseItems, clearCart } =
+export const { addItem, increaseItems, decreaseItems, clearCart ,deleteItem} =
   cartSlice.actions;
 
 export default cartSlice.reducer;

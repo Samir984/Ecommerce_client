@@ -2,14 +2,17 @@ import { Button } from "@/components/ui/button";
 import { getProduct } from "@/services/productApi";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import UpdateItemsQuantity from "../cart/UpdateItemsQuantity";
+
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../features/store";
+
 import { addItem, getCartItem } from "../cart/cartSlice";
+import UpdateItemsQuantity from "../cart/UpdateItemsQuantity";
+import { useAccountState } from "@/context/AccountContext";
 
 type ProductType = {
   status: string;
   data: {
+    _id: string;
     productName: string;
     productDescription: string;
     stock: number;
@@ -28,6 +31,7 @@ type ProductType = {
 
 export default function Product() {
   const { product_id } = useParams();
+  const { notification, dispatch: reducerDispatch } = useAccountState();
   const dispatch = useDispatch();
 
   // Get cart items from Redux store state
@@ -46,7 +50,14 @@ export default function Product() {
     stock,
     productImg: { url } = { url: "" },
     price,
-  } = product?.data || {};
+    _id,
+  } = product?.data || {
+    productName: "",
+    stock: 0,
+    productImg: { url: "" },
+    price: 0,
+    _id: "",
+  };
 
   console.log(quantity);
   return (
@@ -56,8 +67,8 @@ export default function Product() {
           <div className="fetchLoader"></div>
         </div>
       ) : (
-        <div className="flex flex-col tablet:flex-row items-center gap-4">
-          <div className="w-72">
+        <div className="flex flex-col tablet:flex-row items-center gap-4 laptop:gap-6">
+          <div className="w-72 laptop:w-80">
             <img src={url} alt={productName} className="w-full " />
           </div>
           <div className="flex-1">
@@ -70,23 +81,27 @@ export default function Product() {
                   onClick={() => {
                     dispatch(
                       addItem({
+                        product_id: _id,
                         productName,
                         stock,
-                        url,
-                        product_id,
                         quantity: 1,
+                        url,
                         price,
                       })
                     );
+                    reducerDispatch({
+                      type: "updateNotification",
+                      payload: notification + 1,
+                    });
                   }}
                 >
                   Add to Cart
                 </Button>
               ) : (
                 <UpdateItemsQuantity
-                  lastCount={stock}
+                  maxCount={stock}
                   count={quantity}
-                  _id={product_id}
+                  _id={product_id as string}
                 />
               )}
             </div>

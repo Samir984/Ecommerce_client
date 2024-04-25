@@ -15,6 +15,7 @@ type ReducerStateType = {
     url: string;
     public_id: string;
   };
+  notification: number;
   store_id: string | null;
   email: string;
   fullName: string;
@@ -32,6 +33,7 @@ const AccountStateContext = createContext<AccountStateType | undefined>(
 type ActionType =
   | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
   | { type: "signup"; payload: Partial<ReducerStateType> }
+  | { type: "updateNotification"; payload: number }
   | { type: "signin"; payload: Partial<ReducerStateType> }
   | { type: "storeCreated"; payload: string }
   | { type: "signout" };
@@ -44,6 +46,7 @@ type AccountStateProviderProps = {
 export const initialState: ReducerStateType = {
   accountMode: "BUYER",
   loggedIn: false,
+  notification: 0,
   avatar: {
     url: "",
     public_id: "",
@@ -62,6 +65,8 @@ function reducer(
   switch (action.type) {
     case "accountMode":
       return { ...state, accountMode: action.payload };
+    case "updateNotification":
+      return { ...state, notification: action.payload };
     case "signup":
       return { ...state, ...action.payload, loggedIn: false };
     case "signin":
@@ -91,6 +96,7 @@ export default function AccountStateProvider({
     accountMode,
     email,
     fullName,
+    notification,
     loggedIn,
     store_id,
   } = state;
@@ -106,6 +112,7 @@ export default function AccountStateProvider({
         accountMode,
         email,
         fullName,
+        notification,
         avatar: { public_id, url },
         store_id,
         loggedIn,

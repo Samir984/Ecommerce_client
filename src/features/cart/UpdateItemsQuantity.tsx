@@ -1,37 +1,54 @@
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
-import { decreaseItems, increaseItems } from "./cartSlice";
+import { decreaseItems, deleteItem, increaseItems } from "./cartSlice";
+import { useAccountState } from "@/context/AccountContext";
 type updateItemQuantityPropsType = {
-  lastCount: number;
+  maxCount: number;
   count: number;
   _id: string;
 };
 
 export default function UpdateItemsQuantity({
-  lastCount,
+  maxCount,
   count,
   _id,
 }: updateItemQuantityPropsType) {
   const dispatch = useDispatch();
-  console.log(count, lastCount);
+  const { notification, dispatch: reducerDispatch } = useAccountState();
+
+  console.log(count, maxCount);
   return (
-    <div className="flex items-center gap-2 md:gap-3">
+    <div className="flex gap-8">
+      <div className="flex gap-3 items-center">
+        <Button
+          disabled={count === maxCount}
+          onClick={() => {
+            dispatch(increaseItems(_id));
+          }}
+        >
+          +
+        </Button>
+        <span className="text-sm font-medium">{count}</span>
+        <Button
+          onClick={() => {
+            dispatch(decreaseItems(_id));
+          }}
+          disabled={count === 1}
+        >
+          -
+        </Button>
+      </div>
       <Button
-        disabled={count === lastCount}
+        variant={"destructive"}
         onClick={() => {
-          dispatch(increaseItems(_id));
+          dispatch(deleteItem(_id));
+          reducerDispatch({
+            type: "updateNotification",
+            payload: notification - 1,
+          });
         }}
       >
-        +
-      </Button>
-      <span className="text-sm font-medium">{count}</span>
-      <Button
-        onClick={() => {
-          dispatch(decreaseItems(_id));
-        }}
-        disabled={count === 1}
-      >
-        -
+        Delete
       </Button>
     </div>
   );

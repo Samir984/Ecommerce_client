@@ -1,9 +1,13 @@
 import { BsCart3 } from "react-icons/bs";
 import Notification from "./Notification";
-import { useAccountState } from "@/context/AccountContext";
+
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/features/store";
 export default function Cart() {
-  const { notification } = useAccountState();
+  const notification = useSelector(
+    (state: RootState) => state.cart.items.length
+  );
   const navigate = useNavigate();
 
   return (

@@ -21,21 +21,35 @@ const initialState: CartStateType = {
   totalPrice: 0,
 };
 
+const storeCartStateInLocalStorate = (state: CartStateType) => {
+  localStorage.setItem("cartState", JSON.stringify(state));
+};
+
+const loadStateFromLocalStorage = (): CartStateType => {
+  const storedState = localStorage.getItem("cartState");
+  return storedState ? JSON.parse(storedState) : initialState;
+};
+
+const persistedState = loadStateFromLocalStorage();
+
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: persistedState,
   reducers: {
     addItem(state, action: PayloadAction<CartItemType>) {
       const newItem = action.payload;
       state.items = [...state.items, newItem];
       state.totalPrice += state.totalPrice + newItem.price;
       console.log(action, state);
+      console.log(state);
+      storeCartStateInLocalStorate(state);
     },
     deleteItem(state, action: PayloadAction<string>) {
       const productIdToDelete = action.payload;
       state.items = state.items.filter(
         (item) => item.product_id !== productIdToDelete
       );
+      storeCartStateInLocalStorate(state);
     },
     increaseItems(state, action: PayloadAction<string>) {
       const prodcut_id = action.payload;
@@ -44,6 +58,7 @@ const cartSlice = createSlice({
         item.quantity++;
         state.totalPrice += item.price;
       }
+      storeCartStateInLocalStorate(state);
     },
     decreaseItems(state, action: PayloadAction<string>) {
       const prodcut_id = action.payload;
@@ -56,11 +71,12 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = [];
       state.totalPrice = 0;
+      storeCartStateInLocalStorate(state);
     },
   },
 });
 
-export const { addItem, increaseItems, decreaseItems, clearCart ,deleteItem} =
+export const { addItem, increaseItems, decreaseItems, clearCart, deleteItem } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

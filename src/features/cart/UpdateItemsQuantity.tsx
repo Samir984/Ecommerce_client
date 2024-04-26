@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { decreaseItems, deleteItem, increaseItems } from "./cartSlice";
-import { useAccountState } from "@/context/AccountContext";
 type updateItemQuantityPropsType = {
   maxCount: number;
   count: number;
@@ -14,7 +13,6 @@ export default function UpdateItemsQuantity({
   _id,
 }: updateItemQuantityPropsType) {
   const dispatch = useDispatch();
-  const { notification, dispatch: reducerDispatch } = useAccountState();
 
   console.log(count, maxCount);
   return (
@@ -42,10 +40,6 @@ export default function UpdateItemsQuantity({
         variant={"destructive"}
         onClick={() => {
           dispatch(deleteItem(_id));
-          reducerDispatch({
-            type: "updateNotification",
-            payload: notification - 1,
-          });
         }}
       >
         Delete

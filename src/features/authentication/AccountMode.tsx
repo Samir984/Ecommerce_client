@@ -60,16 +60,9 @@ export default function AccountMode() {
         to={`${
           accountMode === "BUYER" ? "/auth/signup" : "/auth/become-vendor"
         }`}
-        className={`mt-12 ${
-          accountMode !== "" ? "pointer-events-auto" : "pointer-events-none"
-        }`}
+        className={`mt-12 `}
       >
-        <Button
-          variant={`${accountMode !== "" ? "default" : "secondary"}`}
-          className={`${
-            accountMode !== "" ? "pointer-cursor" : "cursor-default opacity-50"
-          }  `}
-        >
+        <Button variant={"default"}>
           <span>Create account</span>
         </Button>
       </Link>

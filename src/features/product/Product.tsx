@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addItem, getCartItem } from "../cart/cartSlice";
 import UpdateItemsQuantity from "../cart/UpdateItemsQuantity";
-import { useAccountState } from "@/context/AccountContext";
 
 type ProductType = {
   status: string;
@@ -31,7 +30,6 @@ type ProductType = {
 
 export default function Product() {
   const { product_id } = useParams();
-  const { notification, dispatch: reducerDispatch } = useAccountState();
   const dispatch = useDispatch();
 
   // Get cart items from Redux store state
@@ -89,10 +87,6 @@ export default function Product() {
                         price,
                       })
                     );
-                    reducerDispatch({
-                      type: "updateNotification",
-                      payload: notification + 1,
-                    });
                   }}
                 >
                   Add to Cart

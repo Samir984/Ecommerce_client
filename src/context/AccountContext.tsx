@@ -9,7 +9,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type ReducerStateType = {
   _id: string;
-  accountMode: "SELLER" | "BUYER" | "ADMIN" | "";
+  accountMode: "SELLER" | "BUYER" | "ADMIN";
   loggedIn: boolean;
   avatar: {
     url: string;
@@ -31,7 +31,7 @@ const AccountStateContext = createContext<AccountStateType | undefined>(
 );
 
 type ActionType =
-  | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" | "" }
+  | { type: "accountMode"; payload: "SELLER" | "BUYER" | "ADMIN" }
   | { type: "signup"; payload: Partial<ReducerStateType> }
   | { type: "updateNotification"; payload: number }
   | { type: "signin"; payload: Partial<ReducerStateType> }

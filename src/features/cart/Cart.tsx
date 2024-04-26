@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import UpdateItemsQuantity from "./UpdateItemsQuantity";
 
 export default function Cart() {
-  const { items } = useSelector((state: RootState) => state.cart);
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  console.log(totalItems);
   console.log(items);
   return (
     <div className="px-2 py-4">
@@ -22,8 +25,8 @@ export default function Cart() {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col tablet:flex-row p-2 justify-center">
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col tablet:flex-row p-2 gap-3 justify-center">
+          <div className="flex flex-col gap-3">
             {items.map((item) => (
               <div
                 className="flex gap-3 bg-white p-2 shadow-lg"
@@ -32,7 +35,7 @@ export default function Cart() {
                 <div className="w-32">
                   <img src={item.url} alt={item.productName} />
                 </div>
-                <div className="flex-1 flex justify-start">
+                <div className="flex-1 flex justify-start items-center">
                   <div className="">
                     <p className="line-clamp-2">{item.productName}</p>
                     <p className="text-orange-600">
@@ -50,18 +53,23 @@ export default function Cart() {
               </div>
             ))}
           </div>
-          <div className="flex min-w-[170px] tablet:min-w-[240px]  ">
+          <div className="flex min-w-[220px] laptop:min-w-[280px]  ">
             <div className="w-full bg shadow-lg h-fit">
               <p className="bg-orange-400 p-2 text-center">Summary</p>
               <div className="flex justify-between py-2 px-4">
                 <span>Quantity:</span>
-                <span>4</span>
+                <span>{totalItems}</span>
               </div>
               <div className="flex justify-between py-2 px-4">
                 <span>Total Price:</span>
-                <span>4</span>
+                <span className="text-blue-600">${totalPrice}</span>
               </div>
-              <Link to={"/checkout"} className="inline-block bg-blue-600 w-full text-center text-white p-3">Checkout</Link>
+              <Link
+                to={"/checkout"}
+                className="inline-block bg-blue-600 w-full text-center text-white p-3"
+              >
+                Checkout
+              </Link>
             </div>
           </div>
         </div>

@@ -83,3 +83,5 @@ export default cartSlice.reducer;
 
 export const getCartItem = (product_id: string) => (state: RootState) =>
   state.cart.items.find((item) => item.product_id === product_id);
+
+export const getAllCartItems = (state: RootState) => state.cart.items;

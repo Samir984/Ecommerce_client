@@ -1,13 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Link } from "react-router-dom";
 
 import UpdateItemsQuantity from "./UpdateItemsQuantity";
+import { Button } from "@/components/ui/button";
+import { clearCart } from "./cartSlice";
+import { useAccountState } from "@/context/AccountContext";
 
 export default function Cart() {
+  const { loggedIn } = useAccountState();
   const { items, totalPrice } = useSelector((state: RootState) => state.cart);
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-
+  const dispatch = useDispatch();
+       
   console.log(totalItems);
   console.log(items);
   return (
@@ -29,7 +34,7 @@ export default function Cart() {
           <div className="flex flex-col gap-3">
             {items.map((item) => (
               <div
-                className="flex gap-3 bg-white p-2 shadow-lg"
+                className="flex gap-3 bg-white p-2 shadow-lg laptop:min-w-[600px]"
                 key={item.product_id}
               >
                 <div className="w-32">
@@ -52,6 +57,13 @@ export default function Cart() {
                 </div>
               </div>
             ))}
+            <Button
+              variant={"outline"}
+              className="w-fit mt-4 hover:bg-red-400 hover:text-white"
+              onClick={() => dispatch(clearCart())}
+            >
+              Clear Cart
+            </Button>
           </div>
           <div className="flex min-w-[220px] laptop:min-w-[280px]  ">
             <div className="w-full bg shadow-lg h-fit">
@@ -64,11 +76,31 @@ export default function Cart() {
                 <span>Total Price:</span>
                 <span className="text-blue-600">${totalPrice}</span>
               </div>
-              <Link
-                to={"/checkout"}
-                className="inline-block bg-blue-600 w-full text-center text-white p-3"
-              >
-                Checkout
+
+              <Link to={loggedIn ? "/checkout/shipping" : "/getting-started"}>
+                <Button
+                  className={`w-full rounded-none ${
+                    !loggedIn && "hover:bg-red-500"
+                  }`}
+                  onMouseEnter={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                  ) => {
+                    if (!loggedIn) {
+                      const target = e.target as HTMLButtonElement;
+                      target.innerText = "Please login first";
+                    }
+                  }}
+                  onMouseLeave={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                  ) => {
+                    if (!loggedIn) {
+                      const target = e.target as HTMLButtonElement;
+                      target.innerText = "Checkout";
+                    }
+                  }}
+                >
+                  Checkout
+                </Button>
               </Link>
             </div>
           </div>

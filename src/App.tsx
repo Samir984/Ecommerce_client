@@ -25,7 +25,11 @@ import Product from "./features/product/Product";
 import { Provider } from "react-redux";
 import { store } from "./features/store";
 import Cart from "./features/cart/Cart";
-import Checkout from "./features/checkout/Checkout";
+import Checkout from "./features/order/Checkout";
+import ShippingForm from "./features/order/ShippingForm";
+import Success from "./features/order/Success";
+import Payment from "./features/order/Payment";
+import CheckoutProvider from "./context/CheckoutContext";
 
 function App() {
   console.log("App");
@@ -33,7 +37,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -55,7 +59,21 @@ function App() {
                   <Route path="results" element={<ResultsPage />} />
                   <Route path="product/:product_id" element={<Product />} />
                   <Route path="cart" element={<Cart />} />
-                  <Route path="checkout" element={<Checkout />} />
+
+                  <Route
+                    path="checkout"
+                    element={
+                      <ProtectedRoute>
+                        <CheckoutProvider>
+                          <Checkout />
+                        </CheckoutProvider>
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route path="shipping" element={<ShippingForm />} />
+                    <Route path="payment" element={<Payment />} />
+                    <Route path="success" element={<Success />} />
+                  </Route>
                   <Route path="profile" element={<Profile />} />
 
                   {/* ------------ vendor route -------------- */}

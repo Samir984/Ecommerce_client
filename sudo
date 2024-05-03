@@ -1,0 +1,424 @@
+code .
+npm run dev
+cd ../Ecommerce_client/
+npm start
+cd Desktop/Programming/Web-development/Fullstack/Ecommerce/Ecommerce_server/
+clear
+logout
+killall nautilus
+open .
+open file
+ls
+cd ..
+cd home/samir/Downloads/
+cd ../../
+cd ./confi
+sudo smartctl -a /dev/sda
+sudo smartctl -a /dev/sdX
+sudo apt update
+sudo apt install smartmontools
+smartctl
+cat syslog
+cat sslog
+cd var/log
+cd var.log
+cd /
+cd.
+sudo fsck /dev/sda2
+lsblk
+sudo fsck /dev/sdaX
+sudo swapon -a
+sudo swapon
+sudo swapoff -a
+swapon --show
+free -h
+killall gvfsd
+sudo fsck /dev/sdY
+sudo fsck /dev/sdX
+ls /home/samir
+reboot
+ckear
+dconf reset -f /
+sudo fsck /dev/sdXY
+xdg-open .
+find ./  -type f -name "h*"
+
+find ./  -type f -name "passportjs*"
+
+find ./  -type f -name "passport*"
+
+find  -type f -name "passport*"
+
+open /
+find /path/to/search -type f -name "passport*"
+
+find  "Desktop"
+find -n "Desktop"
+find -f "Desktop"
+find -f "Destop"
+find Desktop
+sudo apt upgrade
+sudo apt update
+sudo apt autoremove
+sudo apt autoremove testdisk
+su
+sudo
+git log
+cd Ecommerce_client/
+git commit -m "presist carrState in localStorage"
+git add .
+mkdir Videos
+cd .
+xdg-user-dirs-update --set VIDEOS ~/Videos
+mkdir ~/Videos
+
+cd Videos
+sudo apt remove testdisk
+sudo testdisk
+sudo apt update
+sudo apt install testdisk
+cd ../Ecommerce_server/
+find video
+rm video
+rmdir video
+git push  origin main -f
+git commit -m "test"
+git reset 6137d6187737dd2784b7ed433a48d8db490097b2
+git reset 9bff7ceeb0cc69daca2bf8d15c25482504a9a88d
+npm run build
+cleawr
+git reset 9f19e7976549e00f2d4a4840a31a07d63320bd3c
+git commit -m "refactor cart schema"
+open myWord
+touch myWord
+si
+git commit -m "feat: implemented cart feature"
+git commit -m "feat: implemented cart reducer"
+exit
+sudo reboot
+sudo sysctl --system
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+sudo swapon /swapfile
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon --show
+sudo swapoff -a
+
+sudo mongosh
+mongosh "mongodb+srv://cluster1.qxvzwvk.mongodb.net/" --apiVersion 1 --username sasuki984
+sudo mongosh
+mongosh "mongodb+srv://cluster1.qxvzwvk.mongodb.net/" --apiVersion 1 --username sasuki98
+
+history
+npm install react-redux
+npm install @reduxjs/toolkit
+npm i
+sudo mongosh
+mongosh "mongodb+srv://cluster1.qxvzwvk.mongodb.net/" --apiVersion 1 --username sasuki984
+npm s
+git commit -m "implemented result page"
+git commit -m "add banner section"
+cd Desktop/Programming/Web-development/Fullstack/Ecommerce/Ecommerce_ser
+npx shadcn-ui@latest add carousel
+git commit -m "add getsubcategories section"
+git commit -m "add getAllCategories controller"
+cd Desktop/Programming/Web-development/Fullstack/Ecommerce/Ecommerce_client
+sudo systemctl start  mongod
+sudo systemctl stop  mongod
+c;ear
+kill -9 45194
+sudo lsof -i :5066
+cler
+sudo systemctl sttop  mongod
+sudo lsof -i :5000
+cd ../frontend/
+cat package.json
+cd backend/
+cd ecommerce-tshirt/
+cd fullstack-web-dev-course-mern-main/
+rm fullstack-web-dev-course-mern-main.zip
+unzip fullstack-web-dev-course-mern-main.zip
+ccd /
+git commit -m "fix; edit peoduct file not updating"
+npm uninstall passport-google-oauth
+npm uninstall  passport
+npm tart
+git commit -m "add OAuth componenet"
+git commit -m "add passport library"
+npm uninstall  password
+npm uninstalled password
+npm install passport
+npm install passport-google-oauth
+npm i password
+git commit -m "ad protected route component "
+git commit -m "fix: ts error "
+git reset 0f58fd3ba38740a013881e5811047947be393f04
+git commit -m "fix "
+git commit -m "feature:implemented signout "
+git commit -m "feature:implement profile page "
+npx shadcn-ui@latest add dropdown-menu
+sudo su
+clea
+cd Desktop/Programming/Web-development/Fullstack/Ecommerce/Ecommsa
+git commit -m "add FileSelectedView compoenet"
+git commit -m "fix: img updation fail on edit form"
+git commit -m "refactor: edit prodcut logic"
+code
+git commit -m "feat:add delete  product feature"
+git commit -m "feat:add edit product feature"
+npm uninstall @tanstack/react-query-devtools
+npm i @tanstack/react-query
+cd vite-project/
+cleat
+cd test
+npm create vite@latest
+npx create-vite-latest
+cd test/
+open ,
+git pull origin main -f
+git commit -m "feat:add getProdcutById conttoller"
+cd Ecommerce_server/
+cd Desktop/Programming/Web-development/Fullstack/Ecommerce/Ecommerce_client/
+git commit -m "feat:use localstorage to presist page value during mount and unmount"
+git commit -m "feat:implemented  products  pagination "
+git commit -m "fix: Correct offset calculation for pagination"
+git commit -m "feat: Implemented fetching product data for store page"
+git commit -m "feat: implented getProdcut controller"
+npx shadcn-ui@latest add pagination
+sudo lsof -i :3036
+git commit -m "refacotr: route and controller refactor"
+kill 9564
+sudo systemctl status mongod
+sudo systemctl stop mongosh
+sudo systemctl stop mongosh.service
+kill 10535
+ps aux | grep mongosh
+netstat -an | grep 27017
+git clone https://github.com/jonasschmedtmann/complete-node-bootcamp.git
+git commit -m "some style and ui fixes"
+git pull origin main
+git commit -m "add card compoenet"
+git lof
+git push origin -f
+git commit -m "changes: user model some field added"
+lear
+git commit -m "feat: implemented product listed page and it's feature"
+Ecommerce_client/
+npx shadcn-ui@latest add textarea
+cd 0
+git commit -m "feat: implemented create store page"
+git reset 0cc5e4660d7f87b5179f246e06a5db0b727f7180
+git commit -m "feat:get-store  contoroller agg"
+npm starat
+npmm i
+cd Hamro_care-main/
+rm Hamro_care-main.zip
+unzip Hamro_care-main.zip
+git commit -m "feat:implemneting vemdor view "
+git add ..
+code ./Desktop//Programming//Web-development/Fullstack/Ecommerce/Ecommerce_server/
+git commit -m "feat:implement  seller auth "
+open  file
+touch file
+cd home/samir
+cat file
+npx shadcn-ui@latest add avatar
+git commit -m "Refactor: replave useState with useReducer to manage AccountContext"
+kill -9 50772
+npm st
+sudo systemctl restart mongod
+sudo mongosh -port
+sudo sytemctl mongosh
+mongosh -port
+mongosh -host
+man mongosh
+sudo mongosh -help
+sudo mongosh -t
+sudo mongodb
+git commit -m "add vercel.json"
+git commit -m "feat:implement customersignup and signin feature"
+kill -9 15579
+kill -0 15579
+mongosh -h
+sudo mongosh -kill
+sudo mongosh -f
+rm history.txt
+open history.txt
+history > history.txt
+open .bash_history
+ls -all
+cd ./
+npm install react-hook-form
+npx shadcn-ui@latest add input
+unzip Inter.zip
+cd Downloads/
+git commit -m "add getting-stated page"
+git reset 9bd20d5b83689d337a7aab24d160293378508f25
+git reset 03840ff618141ee1d1a35bd72dee56d3776f0fab
+npx shadcn-ui@latest add tabs
+
+ping 192.168.0.1
+ip route | grep default
+p route | grep default
+ping 192.168.1.254
+ping 192.168.0.22
+ping 192,168.0.22
+ifconfig
+ping 192.168.0.254
+ping 192.168.0.255
+npm install react-hot-toast
+npm uninstall react-toastify
+npm i react-toastify
+git push origin
+npm install @reduxjs/toolkit react-redux
+git commit -m "iadd getting-stated page"
+npm i @tanstack/react-query-devtools
+npm i react-icons
+rm -rf MERN-E-Commerce-Store-main.zip
+unzip MERN-E-Commerce-Store-main.zip
+unzip ultimate-react-course-main.zip
+
+git push --set-upstream origin main
+git remote
+git commit -m "..."
+npm  update
+sudo mysql
+uptime -p
+sleep -p
+sudo atp update
+time -p
+time -pp
+timedatectl
+cleawwr
+vsudo timedatectl set-time "YYYY-MM-DD HH:MM:SS"
+power -p
+install Continue.continue
+ext install Continue.continue
+open roadDamageDetection2020-main
+unzip roadDamageDetection2020-main.zip
+unzip moaijobs.com-2024-03-16T04_22_22.373Z.png\
+
+unzip moaijobs.com-2024-03-16T04_22_22.373Z.png
+ping 255.255.255.255 -b
+ping 255.255.255.255
+arp -a
+arp
+ping 192.168.1.255 -b
+ping 192.168.1.255
+sudo wireshark
+sudo usermod -a -G wireshark root
+sudo usermod -a -G wireshark samir
+sudo dpkg-reconfigure wireshark-common
+sudo addgroup wireshark
+groups wireshark
+groups root
+groups samir
+sudo usermod -a -G wireshark
+groups
+usermod
+print root
+print
+root print
+netstat -n
+sudo apt uppgrade
+arp -n
+ping localhost
+ping 202.70.90.4
+
+sudo apt-get install nmap
+sudo netstat -tulpn
+clearw
+nslookup
+ping 192.168.1.252
+traceroute  1.1.1.1
+ping 116.66.195.238
+
+ifconfig -a
+ifconfig -all
+man ifconfig
+cleaw
+nmcli device show
+cat /sys/class/net/eth0/address
+wireshark
+sudo apt install wireshark
+sudo atp install wireshark
+traceroute  116.66.193.169
+traceroute  202.70.90.4
+traceroute 8.8.8.8
+sudo apt install traceroute
+tracert
+sudo apt install tracert
+nslookup youtube.com
+nslookup pornhub.com
+ping 32.34.2.2
+nslookup 8.8.8.8
+nslookup google.com
+ping 2404:6800:4009:800::200e
+
+nslookup facebook.com
+ping www.facebook.com
+ping 142.251.42.46
+nslookup "https://www.youtube.com/watch?v=rurs7cdT5cc&list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx&index=20"
+ping 1.1.1.1
+ping 8.8.8.8
+cat sa
+cat ss
+open ss
+open sa
+rm app.txt
+./bash.sh
+open bash.sh
+chmod 770 bash.sh
+touch bash.sh
+rmdir  bash.sh/
+open bash.sh/
+open bash
+rm file
+echo e >file
+echo i am kinf >> file
+echo i am done > file
+chmod 777 bash.sh/
+mkdir bash.sh
+cd bash/
+mkdir bash
+cd Desktop/
+which bash
+fish
+cat /etc/shells
+rm server.cpp
+open package.json
+open package
+node server.js
+node server.cpp
+open server.cpp
+cat tt
+open tt
+touch tt
+node sever.js
+open sever.js
+touch sever.js
+mv package.json  ./test/
+mkdir test
+rm -rf New\ Folder/
+rm New\ Folder/
+npm init
+rm -rf test/
+rm assign.txt
+mv ../bash.sh ./
+cd temp
+open app.txt
+la
+ls -ldh app.txt
+ls -ld app.txt
+open app
+open
+open null
+ls -ld null
+cat null
+find null
+find ss
+find stdin
+cd dev
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+git commit -m "some change"

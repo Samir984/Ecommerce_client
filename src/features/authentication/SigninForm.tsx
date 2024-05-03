@@ -22,6 +22,9 @@ export default function SigninForm() {
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
       email: email,
+      // //test purpose
+      // email: "buyer_1@gmail.com",
+      // password: "buyer__1",
     },
   });
   const { errors } = formState;

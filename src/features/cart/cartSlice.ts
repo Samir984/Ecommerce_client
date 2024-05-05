@@ -8,7 +8,7 @@ type CartItemType = {
   quantity: number;
   url: string;
   price: number;
-  store_id?: string;
+  store_id: string;
 };
 
 type CartStateType = {

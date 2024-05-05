@@ -1,10 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { useCheckOut } from "@/context/CheckoutContext";
+import { createOrder } from "@/services/orderapi";
+
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
 
 export default function Payment() {
   const { onStepChange, handleOrderStateForm, order } = useCheckOut();
   const [paymentMethod, setPaymentMethod] = useState(() => order.paymentMethod);
+
+  const { mutate: makeOrder, isLoading } = useMutation({
+    mutationFn: createOrder,
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success("Order Placed Successfully");
+      onStepChange(3);
+    },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
+  });
 
   const handlePayment = function () {
     console.log("s");
@@ -12,7 +28,7 @@ export default function Payment() {
       console.log("esewa");
       // comming soon
     } else {
-      onStepChange(3);
+      makeOrder(order);
     }
   };
   const handlePaymentMethod = function (method: "esewa" | "cashOnDelivery") {
@@ -81,10 +97,17 @@ export default function Payment() {
           )}
           <Button
             variant={"destructive"}
-            className="w-fit mt-4"
+            className="w-32 mt-4"
             onClick={handlePayment}
+            disabled={isLoading}
           >
-            {paymentMethod === "esewa" ? "Pay now" : "Confirm order"}
+            {isLoading ? (
+              <span className="loader loaderWhite  w-5 h-5"></span>
+            ) : paymentMethod === "esewa" ? (
+              "Pay now"
+            ) : (
+              "Confirm order"
+            )}
           </Button>
         </div>
       )}

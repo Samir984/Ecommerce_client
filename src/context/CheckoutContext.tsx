@@ -15,6 +15,7 @@ export type OrderStateType = {
     quantity: number;
     url: string;
     price: number;
+    store_id: string;
     product_id: string;
   }[];
 };
@@ -52,6 +53,7 @@ export default function CheckoutProvider({
         quantity: item.quantity,
         url: item.url,
         price: item.price,
+        store_id: item.store_id,
         product_id: item.product_id,
       })),
     };

@@ -48,16 +48,18 @@ export default function Product() {
     stock,
     productImg: { url } = { url: "" },
     price,
+    store_id,
     _id,
   } = product?.data || {
     productName: "",
     stock: 0,
     productImg: { url: "" },
     price: 0,
+    store_id: "",
     _id: "",
   };
 
-  console.log(quantity);
+
   return (
     <div className="p-4">
       {isLoading ? (
@@ -80,6 +82,7 @@ export default function Product() {
                     dispatch(
                       addItem({
                         product_id: _id,
+                        store_id,
                         productName,
                         stock,
                         quantity: 1,

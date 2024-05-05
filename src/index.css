@@ -107,6 +107,14 @@
   animation: rotate_x 3s linear infinite;
 }
 
+.loaderWhite {
+  border: 3px solid #fff;
+}
+
+.loaderBlack {
+  border: 3px solid #000;
+}
+
 .loader {
   border-bottom-color: transparent;
   border-radius: 50%;
@@ -115,13 +123,6 @@
   animation: rotation 1s linear infinite;
 }
 
-.loaderWhite {
-  border: 3px solid #fff;
-}
-
-.loaderBlack {
-  border: 3px solid #000;
-}
 .rotate {
   animation: rotation 1s linear infinite;
 }

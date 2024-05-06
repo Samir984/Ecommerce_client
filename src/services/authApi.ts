@@ -64,7 +64,7 @@ export const updateAvatar = async function (img: updateAvatarPropsType) {
   const endpoint = `${URL}users/updateavatar`;
   const token = getCookie("jwtToken");
   const formData = convertToFormData(img);
-
+  console.log(formData.get("avatar"));
   try {
     const response = await fetch(endpoint, {
       headers: {
@@ -91,9 +91,6 @@ export const signoutUser = function () {
   localStorage.clear();
   clearCookie("jwtToken");
 };
-
-
-
 
 // export const signinWithGoogle = async function () {
 //   const endpoint = `${URL}users/signing-with-google`;

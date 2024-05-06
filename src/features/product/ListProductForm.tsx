@@ -101,7 +101,7 @@ export default function ListProductForm({
           />
           <Textarea
             id="keyword"
-            placeholder="keyword"
+            placeholder="Keyword"
             error={formState.errors.keyword?.message}
             {...register("keyword", {
               required: "keyword  is required",
@@ -120,10 +120,10 @@ export default function ListProductForm({
           <Input
             id="stock"
             type="number"
-            placeholder="Total Quantity"
+            placeholder="Stock"
             error={formState.errors.stock?.message}
             {...register("stock", {
-              required: "Total Quantity is required",
+              required: "Stock is required",
               min: { value: 1, message: "Quantity can't be 0" },
             })}
           />

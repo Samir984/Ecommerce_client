@@ -2,7 +2,7 @@ import banner from "./../asset/banner.png";
 
 export default function HomeBanner() {
   return (
-    <div className="w-full tablet:min-h-[480px] laptop:min-h-[720px] min-h-60 relative bg-black">
+    <div className="w-full  tablet:min-h-[480px] laptop:min-h-[720px] laptop:max-w-[1300px] mx-auto min-h-60 relative bg-black">
       <div
         className="bg-no-repeat bg-cover bg-center absolute w-full h-full opacity-80"
         style={{ backgroundImage: `url(${banner})` }}

@@ -16,12 +16,14 @@ export default function Checkout() {
       </div>
       <div className="w-full text-center">
         <Button
-          className={`  ${currentStep === 1 && "hidden"}`}
+          className={`  ${
+            (currentStep === 1 || currentStep === 3) && "hidden"
+          }`}
           onClick={() => onStepChange(currentStep - 1)}
           disabled={currentStep === 1}
         >
-          <GoArrowLeft />&nbsp;
-          Go Back
+          <GoArrowLeft />
+          &nbsp; Go Back
         </Button>
       </div>
     </div>

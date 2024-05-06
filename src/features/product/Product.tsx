@@ -67,7 +67,7 @@ export default function Product() {
           <div className="fetchLoader"></div>
         </div>
       ) : (
-        <div className="flex flex-col tablet:flex-row items-center gap-4 laptop:gap-6">
+        <div className="flex flex-col tablet:flex-row items-center gap-4 laptop:gap-6 max-w-[1200px] mx-auto mt-8">
           <div className="w-72 laptop:w-80">
             <img src={url} alt={productName} className="w-full " />
           </div>

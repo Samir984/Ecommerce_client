@@ -6,7 +6,9 @@ import { clearCart } from "../cart/cartSlice";
 const Success = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(clearCart());
+    setTimeout(() => {
+      dispatch(clearCart());
+    }, 3000);
   }, [dispatch]);
   return (
     <div className="flex flex-col items-center justify-center min-h-96">

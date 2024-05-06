@@ -12,7 +12,7 @@ export default function Cart() {
   const { items, totalPrice } = useSelector((state: RootState) => state.cart);
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const dispatch = useDispatch();
-       
+
   console.log(totalItems);
   console.log(items);
   return (
@@ -37,14 +37,14 @@ export default function Cart() {
                 className="flex gap-3 bg-white p-2 shadow-lg laptop:min-w-[600px]"
                 key={item.product_id}
               >
-                <div className="w-32">
+                <Link to={`/product/${item.product_id}`} className="w-32">
                   <img src={item.url} alt={item.productName} />
-                </div>
+                </Link>
                 <div className="flex-1 flex justify-start items-center">
                   <div className="">
-                    <p className="line-clamp-2">{item.productName}</p>
+                    <Link  to={`/product/${item.product_id}`} className="line-clamp-2 hover:text-blue-500">{item.productName}</Link>
                     <p className="text-orange-600">
-                      ${item.price * item.quantity}
+                      Rs {item.price * item.quantity}
                     </p>
                     <div className="flex">
                       <UpdateItemsQuantity
@@ -74,7 +74,7 @@ export default function Cart() {
               </div>
               <div className="flex justify-between py-2 px-4">
                 <span>Total Price:</span>
-                <span className="text-blue-600">${totalPrice}</span>
+                <span className="text-blue-600">Rs {totalPrice}</span>
               </div>
 
               <Link to={loggedIn ? "/checkout/shipping" : "/getting-started"}>

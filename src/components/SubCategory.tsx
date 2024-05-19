@@ -21,9 +21,9 @@ export default function SubCategory() {
     <div className="flex overflow-y-scroll hidescroll_bar gap-3  py-4 tablet:px-2 tablet:min-h-48 min-h-32 laptop:max-w-[1300px] mx-auto ">
       {isLoading ? (
         <div className="flex gap-4">
-          {[1, 2, 3, 4, 5, 6, 7,8,9,10,11,12].map(() => {
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((_, i) => {
             return (
-              <div className="flex flex-col gap-2 items-center">
+              <div className="flex flex-col gap-2 items-center" key={i}>
                 <Skeleton className="w-18 h-18 tablet:w-24 tablet:h-24 rounded-full" />
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-[80px]" />

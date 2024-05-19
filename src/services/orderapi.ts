@@ -30,3 +30,30 @@ export const createOrder = async function (order: OrderStateType) {
     throw error;
   }
 };
+
+export const getOrders = async function () {
+  const endpoint = `${URL}users/orders/getorders?page=${1}`;
+  const token = getCookie("jwtToken");
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error at createOrder:", error);
+    throw error;
+  }
+};

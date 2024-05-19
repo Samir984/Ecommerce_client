@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const navigate = useNavigate();
   const { items } = useSelector((state: RootState) => state.cart);
   const { loggedIn, accountMode } = useAccountState();
-  let route = "";
+  let route: undefined | string;
 
   if (!loggedIn) {
     route = "/getting-started";
@@ -21,9 +21,9 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   if (accountMode === "BUYER" && items.length === 0) {
     route = "/";
   }
-
+  console.log(route);
   useEffect(() => {
-    navigate(route);
+    navigate(route as string);
   }, [loggedIn, navigate, route]);
 
   return <>{loggedIn && children}</>;

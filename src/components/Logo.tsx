@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Innovex_Logo from "./../asset/innovex.png";
+import { useAccountState } from "@/context/AccountContext";
 
 type LogoType = {
   className?: string;
@@ -7,8 +8,9 @@ type LogoType = {
 
 export default function Logo({ className }: LogoType) {
   console.log("Logo component");
+  const { accountMode, store_id } = useAccountState();
   return (
-    <Link to="/">
+    <Link to={accountMode === "SELLER" ? `/vendor/store/${store_id}` : "/"}>
       <div
         className={`inline-flex items-center   gap-[2px] text-baee ${className} block w-10 tablet:w-fit`}
       >
@@ -20,7 +22,7 @@ export default function Logo({ className }: LogoType) {
         </span>
         <span className="hidden tablet:block font-mono text-green-900 tablet:text-2xl -rotate-6 font-bold">
           n
-        </span>
+      </span>
         <span className="hidden tablet:block font-mono text-green-500 tablet:text-2xl rotate-6">
           o
         </span>

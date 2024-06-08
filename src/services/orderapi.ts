@@ -4,7 +4,7 @@ import { URL } from "./config";
 
 export const createOrder = async function (order: OrderStateType) {
   console.log(order);
-  const endpoint = `${URL}users/orders/createorder`;
+  const endpoint = `${URL}users/orders/`;
   const token = getCookie("jwtToken");
   console.log(order);
   try {
@@ -31,8 +31,8 @@ export const createOrder = async function (order: OrderStateType) {
   }
 };
 
-export const getOrders = async function () {
-  const endpoint = `${URL}users/orders/getorders?page=${1}`;
+export const getOrders = async function (store_id:string) {
+  const endpoint = `${URL}users/orders?store_id=${store_id}`;
   const token = getCookie("jwtToken");
 
   try {

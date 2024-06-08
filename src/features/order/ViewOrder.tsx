@@ -12,7 +12,7 @@ export default function ViewOrder() {
       {store_id ? (
         <>
           <div className="tablet:text-3xl text-2xl font-bold mb-4">Order</div>
-          <OrderTable />
+          <OrderTable store_id={store_id} />
         </>
       ) : (
         <StoreNotFound />

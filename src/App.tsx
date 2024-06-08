@@ -7,9 +7,7 @@ import PageNotFound from "./pages/PageNotFound";
 import SignupForm from "./features/authentication/SignupForm";
 
 import SigninForm from "./features/authentication/SigninForm";
-import AccountStateProvider, {
-  useAccountState,
-} from "./context/AccountContext";
+import AccountStateProvider from "./context/AccountContext";
 import Vendor from "./pages/vendorPage/Vendor";
 import Store from "./features/store/Store";
 import ViewOrder from "./features/order/ViewOrder";
@@ -36,7 +34,6 @@ import CheckoutProvider from "./context/CheckoutContext";
 function App() {
   console.log("App");
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     const timer = setTimeout(() => {

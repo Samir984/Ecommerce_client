@@ -10,7 +10,7 @@ export default function Vendor() {
         <div className="bg-white  tablet:w-44 py-8 px-1 rounded-lg ">
           <VendorNav />
         </div>
-        <div className="p-2  flex-1  ">
+        <div className="  flex-1  ">
           <Outlet />
         </div>
       </div>

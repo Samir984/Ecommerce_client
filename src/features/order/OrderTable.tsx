@@ -15,8 +15,7 @@ export default function OrderTable({ store_id }: { store_id: string }) {
         <Table
           columns={[
             "Product",
-            "Name",
-            "Number",
+            "User",
             "Quantity",
             "ShippingAddress",
             "PaymentMethod",

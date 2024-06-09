@@ -6,10 +6,12 @@ import { useAccountState } from "@/context/AccountContext";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteProductListing } from "@/services/productApi";
 import toast from "react-hot-toast";
+import { formatNumberWithCommas } from "@/lib/utils";
 
 type CardPropsType = {
   title: string;
   price: number;
+  stock?: number;
   url: string;
   _id: string;
   store_id?: string;
@@ -19,6 +21,7 @@ export default function Card({
   price,
   url,
   store_id,
+  stock,
   _id,
 }: CardPropsType) {
   const account = useAccountState();
@@ -33,7 +36,7 @@ export default function Card({
       queryClient.invalidateQueries("products");
     },
   });
-
+  console.log(stock);
   return (
     <div
       className="max-w-xs rounded overflow-hidden shadow-md cursor-pointer flex flex-col hover:shadow-xl max-h-full bg-[#f7f7f7]"
@@ -49,27 +52,38 @@ export default function Card({
         />
       </div>
       <div className="flex-1 px-2 py-3 flex flex-col justify-center">
-        <div className="font-medium text-base laptop:text-lg  mb-2 line-clamp-3">
+        <div className="font-medium text-base laptop:text-lg  mb-2 line-clamp-3 font-inter">
           {title}
         </div>
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-gray-700 text-xl">Price: </span>
-          <span className="text-green-500 font-bold text-lg">Rs {price}</span>
+        <div className="mb-2">
+          <span className="text-orange-600 font-bold text-lg">
+            Rs. {formatNumberWithCommas(price)}
+          </span>
         </div>
         <div className="">
           {account.store_id === store_id && (
-            <div className="flex gap-6 items-center justify-end">
-              <Link to={`/vendor/edit-product/${_id}`}>
-                <MdOutlineEdit size={24} className="hover:text-green-600 " />
-              </Link>
+            <div className="flex gap-6 items-center justify-between">
+              <div className=" p-1 bg-green-600 rounded-lg text-white  ">
+                Stock: {stock}
+              </div>
+              <div className="flex gap-5">
+                <Link to={`/vendor/edit-product/${_id}`}>
+                  <MdOutlineEdit
+                    size={32}
+                    color="white"
+                    className="hover:text-green-400  rounded-full  bg-green-300 p-1"
+                  />
+                </Link>
 
-              <MdOutlineDelete
-                size={24}
-                className={`hover:text-red-600 ${
-                  isDeleting && "rotate text-red-500 cursor-not-allowed"
-                }`}
-                onClick={() => deleteProduct(_id)}
-              />
+                <MdOutlineDelete
+                  size={32}
+                  color="white"
+                  className={`hover:text-red-600 bg-red-400 rounded-full p-1  ${
+                    isDeleting && "rotate text-red-500 cursor-not-allowed"
+                  }`}
+                  onClick={() => deleteProduct(_id)}
+                />
+              </div>
             </div>
           )}
         </div>

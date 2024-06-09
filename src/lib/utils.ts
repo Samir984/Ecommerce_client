@@ -44,8 +44,7 @@ export function getCookie(name: string) {
 }
 
 export function convertToFormData<T extends { [s: string]: string | FileList }>(
-  data: T,
-
+  data: T
 ): FormData {
   const formData = new FormData();
   // Iterate over the signup object and append key-value pairs to the FormData
@@ -96,5 +95,19 @@ export async function imageUrlToFile(imageUrl: string, filename: string) {
   } catch (error) {
     console.error("Error:", error);
     return null;
+  }
+}
+
+export function formatNumberWithCommas(num: number): string {
+  const numStr = num.toString();
+  const lastThreeDigits = numStr.slice(-3);
+  const otherDigits = numStr.slice(0, -3);
+
+  if (otherDigits !== "") {
+    return (
+      otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + "," + lastThreeDigits
+    );
+  } else {
+    return lastThreeDigits;
   }
 }

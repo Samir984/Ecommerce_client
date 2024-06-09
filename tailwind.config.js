@@ -12,6 +12,9 @@ export const theme = {
     },
   },
   extend: {
+    fontFamily: {
+      inter: ["Inter", "sans-serif"],
+    },
     screens: {
       phone: "420px",
       tablet: "640px",

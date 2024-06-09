@@ -40,6 +40,7 @@ export default function StoreProducts({ store_id }: StoreProductsType) {
                   _id={product._id}
                   title={product.productName}
                   url={product.productImg?.url}
+                  stock={product.stock}
                   price={product.price}
                   store_id={store_id}
                 />

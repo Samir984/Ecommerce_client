@@ -58,18 +58,24 @@ export const getOrders = async function (store_id: string) {
   }
 };
 
-export const editOrder = async function (store_id: string, patchData) {
-  const endpoint = `${URL}users/orders?store_id=${store_id}`;
+export type RowEditDataProps = { status?: string; marked?: string };
+
+export const editOrderRow = async function (
+  order_id: string,
+  patchData: RowEditDataProps
+) {
+  console.log(order_id, patchData);
+  const endpoint = `${URL}users/orders?order_id=${order_id}`;
   const token = getCookie("jwtToken");
 
   try {
     const response = await fetch(endpoint, {
-      method: "GET",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        body: JSON.stringify(patchData),
       },
+      body: JSON.stringify(patchData),
     });
 
     const responseData = await response.json();

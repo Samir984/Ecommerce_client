@@ -4,16 +4,7 @@ import { useQuery } from "react-query";
 import OrderRow from "./OrderRow";
 
 export default function OrderTable({ store_id }: { store_id: string }) {
-  const tableCol = [
-    "Product",
-    "User",
-    "Quantity",
-    "Shipping",
-    "Payment Method ",
-    "Status",
-    "Total",
-    "Date",
-  ];
+  const tableCol = ["Product", "User", "Pay ", "Status", "Date"];
   const colWidth = 100 / (tableCol.length - 1);
 
   const { isLoading, data: orders } = useQuery({

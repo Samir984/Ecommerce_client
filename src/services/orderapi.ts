@@ -31,7 +31,7 @@ export const createOrder = async function (order: OrderStateType) {
   }
 };
 
-export const getOrders = async function (store_id:string) {
+export const getOrders = async function (store_id: string) {
   const endpoint = `${URL}users/orders?store_id=${store_id}`;
   const token = getCookie("jwtToken");
 
@@ -41,6 +41,34 @@ export const getOrders = async function (store_id:string) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error at createOrder:", error);
+    throw error;
+  }
+};
+
+export const editOrder = async function (store_id: string, patchData) {
+  const endpoint = `${URL}users/orders?store_id=${store_id}`;
+  const token = getCookie("jwtToken");
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        body: JSON.stringify(patchData),
       },
     });
 

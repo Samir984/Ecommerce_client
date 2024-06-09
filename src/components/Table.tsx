@@ -1,5 +1,3 @@
-import TableRow from "../features/order/OrderRow";
-
 type TableProps = {
   columns: string[];
   content: any;
@@ -21,6 +19,7 @@ export default function Table({ columns, content }: TableProps) {
         ))}
       </div>
       <div className={`flex flex-col  ${colWidth}`}>{content()}</div>
+      <div className="flex items-center gap-6  p-4"></div>
     </div>
   );
 }

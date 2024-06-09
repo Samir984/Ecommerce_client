@@ -63,7 +63,7 @@ export default function Card({
         <div className="">
           {account.store_id === store_id && (
             <div className="flex gap-6 items-center justify-between">
-              <div className=" p-1 bg-green-600 rounded-lg text-white  ">
+              <div className=" p-1 bg-green-600 rounded-lg text-white font-medium ">
                 Stock: {stock}
               </div>
               <div className="flex gap-5">

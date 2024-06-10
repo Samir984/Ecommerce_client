@@ -1,8 +1,20 @@
+import { SlArrowLeft } from "react-icons/sl";
+import { SlArrowRight } from "react-icons/sl";
+
 type TableProps = {
   columns: string[];
   content: any;
+  lastPage: number;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
-export default function Table({ columns, content }: TableProps) {
+export default function Table({
+  columns,
+  content,
+  lastPage,
+  page,
+  setPage,
+}: TableProps) {
   const colWidth = 100 / (columns.length - 1);
 
   return (
@@ -19,7 +31,23 @@ export default function Table({ columns, content }: TableProps) {
         ))}
       </div>
       <div className={`flex flex-col  ${colWidth}`}>{content()}</div>
-      <div className="flex items-center gap-6  p-4"></div>
+      <div className="flex items-center justify-end gap-6  p-4  bg-gray-100">
+        <button
+          className="px-4 py-2 bg-white disabled:cursor-not-allowed"
+          onClick={() => setPage((prev) => prev - 1)}
+          disabled={page === 1}
+        >
+          <SlArrowLeft />
+        </button>
+        <span>{page}</span>
+        <button
+          className="px-4 py-2 bg-white isabled:cursor-not-allowed"
+          onClick={() => setPage((prev) => prev + 1)}
+          disabled={page === lastPage}
+        >
+          <SlArrowRight />
+        </button>
+      </div>
     </div>
   );
 }

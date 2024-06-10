@@ -31,8 +31,12 @@ export const createOrder = async function (order: OrderStateType) {
   }
 };
 
-export const getOrders = async function (store_id: string) {
-  const endpoint = `${URL}users/orders?store_id=${store_id}`;
+export const getOrders = async function (
+  store_id: string,
+  page = 1,
+  limit = 8
+) {
+  const endpoint = `${URL}users/orders?store_id=${store_id}&page=${page}&limit=${limit}`;
   const token = getCookie("jwtToken");
 
   try {

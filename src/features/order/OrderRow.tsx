@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { RowEditDataProps, editOrderRow } from "@/services/orderapi";
 import toast from "react-hot-toast";
-import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import OrderAlertDialog from "@/components/OrderAlertDialog";
 
 type OrderRowProps = {
@@ -92,7 +91,7 @@ export default function OrderRow({ row, colWidth }: OrderRowProps) {
         style={{ width: `${colWidth}%` }}
       >
         <img
-          src={row.user_id.avatar.url}
+          src={row.user_id.avatar?.url}
           alt="user-avatar"
           className="w-9 h-9 rounded-full object-cover"
         />

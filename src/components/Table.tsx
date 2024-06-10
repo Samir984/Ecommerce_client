@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
 
@@ -6,6 +7,7 @@ type TableProps = {
   content: any;
   lastPage: number;
   page: number;
+  isLoading: boolean;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 export default function Table({
@@ -13,6 +15,7 @@ export default function Table({
   content,
   lastPage,
   page,
+  isLoading,
   setPage,
 }: TableProps) {
   const colWidth = 100 / (columns.length - 1);
@@ -30,7 +33,15 @@ export default function Table({
           </span>
         ))}
       </div>
-      <div className={`flex flex-col  ${colWidth}`}>{content()}</div>
+      <div className={`flex flex-col  ${colWidth}`}>
+        {isLoading ? (
+          <div className="flex justify-center items-center w-full  min-h-32  ">
+            <div className="fetchLoader"></div>
+          </div>
+        ) : (
+          content()
+        )}
+      </div>
       <div className="flex items-center justify-end gap-6  p-4  bg-gray-100">
         <button
           className="px-4 py-2 bg-white disabled:cursor-not-allowed"
@@ -41,7 +52,7 @@ export default function Table({
         </button>
         <span>{page}</span>
         <button
-          className="px-4 py-2 bg-white isabled:cursor-not-allowed"
+          className="px-4 py-2 bg-white  disabled:cursor-not-allowed"
           onClick={() => setPage((prev) => prev + 1)}
           disabled={page === lastPage}
         >

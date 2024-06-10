@@ -7,12 +7,12 @@ export default function Layout() {
   const { accountMode, store_id } = useAccountState();
   const navigate = useNavigate();
   console.log(accountMode);
-  // useEffect(() => {
-  //   if (accountMode === "SELLER") {
-  //     navigate(`/vendor/store/${store_id}`);
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    if (accountMode === "SELLER") {
+      navigate(`/vendor/store/${store_id}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   console.log("Layout component");
   return (

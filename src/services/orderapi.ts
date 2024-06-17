@@ -4,7 +4,7 @@ import { URL } from "./config";
 
 export const createOrder = async function (order: OrderStateType) {
   console.log(order);
-  const endpoint = `${URL}users/orders/`;
+  const endpoint = `${URL}orders/createorder/`;
   const token = getCookie("jwtToken");
   console.log(order);
   try {
@@ -36,7 +36,7 @@ export const getOrders = async function (
   page = 1,
   limit = 8
 ) {
-  const endpoint = `${URL}users/orders?store_id=${store_id}&page=${page}&limit=${limit}`;
+  const endpoint = `${URL}orders/seller/orders?store_id=${store_id}&page=${page}&limit=${limit}`;
   const token = getCookie("jwtToken");
 
   try {
@@ -64,12 +64,12 @@ export const getOrders = async function (
 
 export type RowEditDataProps = { status?: string; marked?: string };
 
-export const editOrderRow = async function (
+export const editOrder = async function (
   order_id: string,
   patchData: RowEditDataProps
 ) {
   console.log(order_id, patchData);
-  const endpoint = `${URL}users/orders?order_id=${order_id}`;
+  const endpoint = `${URL}orders/seller/orders?order_id=${order_id}`;
   const token = getCookie("jwtToken");
 
   try {
@@ -92,6 +92,54 @@ export const editOrderRow = async function (
     return responseData;
   } catch (error) {
     console.error("Error at createOrder:", error);
+    throw error;
+  }
+};
+
+export const getUserOrders = async function () {
+  const endpoint = `${URL}orders/buyer/orders`;
+  const token = getCookie("jwtToken");
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = await response.json();
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching prodcut page:", error);
+    throw error;
+  }
+};
+
+export const cancelOrder = async function (order_id: string) {
+  const endpoint = `${URL}orders/buyer/orders/cancel?order_id=${order_id}`;
+  const token = getCookie("jwtToken");
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = await response.json();
+    if (!response.ok) {
+      throw new Error(responseData.message);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error("Error fetching prodcut page:", error);
     throw error;
   }
 };

@@ -6,7 +6,7 @@ export function useOrder(store_id: string, page: number) {
 
   const { isLoading, data: orders } = useQuery({
     queryKey: ["orders", page],
-    queryFn: () => getOrders(store_id as string, page)
+    queryFn: () => getOrders(store_id as string, page),
   });
 
   if (page < orders?.lastPage)

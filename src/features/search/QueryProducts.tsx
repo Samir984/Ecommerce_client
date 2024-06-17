@@ -3,20 +3,21 @@
 import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
 import { getProductsAsQuery } from "@/services/productApi";
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 export default function QueryProducts() {
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(1);
+  const page = searchParams.get("page");
 
+  console.log("render");
+  console.log(page);
   function handleNextPage(page: number) {
     const params = new URLSearchParams(searchParams.toString());
+
     params.set("page", `${page}`);
     setSearchParams(params);
-    setPage(page);
   }
 
   const { isLoading, data: products } = useQuery({
@@ -24,6 +25,8 @@ export default function QueryProducts() {
     queryFn: () => getProductsAsQuery(search),
     refetchOnWindowFocus: false,
   });
+
+  console.log(products?.data?.length, products);
 
   return (
     <div className="flex-1">
@@ -55,7 +58,7 @@ export default function QueryProducts() {
       )}
       {products?.data.length > 0 && (
         <Pagination
-          page={page}
+          page={Number(page)}
           handleNextPage={handleNextPage}
           lastPage={products?.lastPage || 0}
         />

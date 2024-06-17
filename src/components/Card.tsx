@@ -36,7 +36,7 @@ export default function Card({
       queryClient.invalidateQueries("products");
     },
   });
-  console.log(stock);
+
   return (
     <div
       className="max-w-xs rounded overflow-hidden shadow-md cursor-pointer flex flex-col hover:shadow-xl max-h-full bg-[#f7f7f7]"

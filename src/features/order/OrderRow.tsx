@@ -6,7 +6,7 @@ import { LiaSaveSolid, LiaEdit } from "react-icons/lia";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { RowEditDataProps, editOrderRow } from "@/services/orderapi";
+import { RowEditDataProps, editOrder } from "@/services/orderapi";
 import toast from "react-hot-toast";
 import OrderAlertDialog from "@/components/OrderAlertDialog";
 
@@ -43,7 +43,7 @@ export default function OrderRow({ row, colWidth }: OrderRowProps) {
     mutationFn: (patchData: {
       order_id: string;
       patchData: RowEditDataProps;
-    }) => editOrderRow(patchData.order_id, patchData.patchData),
+    }) => editOrder(patchData.order_id, patchData.patchData),
     onSuccess: () => {
       toast.success("Order updated successfully");
       queryClient.invalidateQueries("orders");

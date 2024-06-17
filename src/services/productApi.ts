@@ -9,7 +9,7 @@ type HeadersType = {
 
 export const addProduct = async function (productData: ProductFormType) {
   console.log(productData);
-  const endpoint = `${URL}users/products/listproduct`;
+  const endpoint = `${URL}products/listproduct`;
   const token = getCookie("jwtToken");
 
   const formData = convertToFormData(productData); //
@@ -43,7 +43,7 @@ export const getProducts = async function (
   limit: number
 ) {
   console.log("get product runnung");
-  const endpoint = `${URL}users/stores/products?store_id=${store_id}&page=${page}&limit=${limit}`;
+  const endpoint = `${URL}stores/products?store_id=${store_id}&page=${page}&limit=${limit}`;
   const token = getCookie("jwtToken");
   console.log("\n Enter get products \n", page);
   try {
@@ -67,7 +67,7 @@ export const getProducts = async function (
 };
 
 export const getProduct = async function (product_id: string) {
-  const endpoint = `${URL}users/products/${product_id}`;
+  const endpoint = `${URL}products/${product_id}`;
 
   try {
     const response = await fetch(endpoint, {
@@ -90,7 +90,7 @@ export const deleteProductListing = async (product_id: string) => {
   const token = getCookie("jwtToken");
 
   try {
-    const response = await fetch(`${URL}users/products/${product_id}`, {
+    const response = await fetch(`${URL}products/${product_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -155,7 +155,7 @@ export const editListedProduct = async function (
 };
 
 export const getSubCategories = async function () {
-  const endpoint = `${URL}users/products/subcategories/`;
+  const endpoint = `${URL}products/subcategories/`;
   console.log(endpoint);
 
   try {
@@ -170,7 +170,8 @@ export const getSubCategories = async function () {
 };
 
 export const getProductsAsQuery = async function (query: string) {
-  const endpoint = `${URL}users/products${query}`;
+  const endpoint = `${URL}products${query}`;
+  console.log(endpoint);
   console.log(endpoint);
 
   try {

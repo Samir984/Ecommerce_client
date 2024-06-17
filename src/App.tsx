@@ -30,6 +30,7 @@ import ShippingForm from "./features/order/ShippingForm";
 import Success from "./features/order/Success";
 import Payment from "./features/order/Payment";
 import CheckoutProvider from "./context/CheckoutContext";
+import UserOrders from "./features/order/UserOrders";
 
 function App() {
   console.log("App");
@@ -60,6 +61,7 @@ function App() {
                   <Route path="results" element={<ResultsPage />} />
                   <Route path="product/:product_id" element={<Product />} />
                   <Route path="cart" element={<Cart />} />
+                  <Route path="order" element={<UserOrders />} />
 
                   <Route
                     path="checkout"

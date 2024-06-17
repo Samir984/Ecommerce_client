@@ -3,7 +3,7 @@ import { URL } from "./config";
 import { getCookie } from "@/lib/utils";
 
 export const createStore = async function (data: CreateStoreType) {
-  const endpoint = `${URL}users/stores/create`;
+  const endpoint = `${URL}stores/create`;
   console.log(JSON.stringify(data), endpoint);
   const token = getCookie("jwtToken");
 
@@ -33,7 +33,7 @@ export const createStore = async function (data: CreateStoreType) {
 
 export const fetchStoreData = async (store_id:string) => {
   const token = getCookie("jwtToken");
-  const endpoint = `${URL}users/stores/getstore/${store_id}`;
+  const endpoint = `${URL}stores/getstore/${store_id}`;
   try {
     const response = await fetch(endpoint, {
       method: "GET",

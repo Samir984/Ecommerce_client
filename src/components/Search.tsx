@@ -10,7 +10,7 @@ export default function Search() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      navigate(`results?query=${query}`);
+      navigate(`results?query=${query}&page=1`);
     }
   };
 
@@ -26,7 +26,7 @@ export default function Search() {
       />
       <div
         className="absolute inset-y-0 -right-2 flex items-center px-2 text-black rounded-r-lg bg-slate-200 cursor-pointer h-11"
-        onClick={() => navigate(`results?query=${query}`)}
+        onClick={() => navigate(`results?query=${query}&page=1`)}
       >
         <IoSearch size={20} />
       </div>

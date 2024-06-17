@@ -12,6 +12,7 @@ export default function Pagination({
   handleNextPage,
   lastPage,
 }: PaginationPropsType) {
+  console.log("prender")
   return (
     <div className="flex text-white text-lg justify-end mt-16">
       <button

@@ -1,20 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { useCheckOut } from "@/context/CheckoutContext";
+import { getCookie } from "@/lib/utils";
+import { URL } from "@/services/config";
 import { createOrder } from "@/services/orderapi";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
+import { useSearchParams } from "react-router-dom";
 
 export default function Payment() {
   const { onStepChange, handleOrderStateForm, order } = useCheckOut();
   const [paymentMethod, setPaymentMethod] = useState(() => order.paymentMethod);
+  const [searchParams] = useSearchParams();
+  const validationParams = searchParams.get("data");
+  console.log(validationParams);
+
+  useEffect(() => {
+    async function validationCheck() {
+      console.log("run", validationParams);
+      if (validationParams !== null) {
+        const response = await fetch(
+          `${URL}orders/payment/success?data=${validationParams}`
+        );
+        const resondData = await response.json();
+        onStepChange(3);
+        console.log(resondData);
+      }
+    }
+    validationCheck();
+  }, [validationParams, onStepChange]);
 
   const { mutate: makeOrder, isLoading } = useMutation({
     mutationFn: createOrder,
-    onSuccess: (res) => {
-      console.log(res);
+    onSuccess: () => {
       toast.success("Order Placed Successfully");
+      if (paymentMethod === "esewa") {
+        return handelPayment();
+      }
       onStepChange(3);
     },
     onError: (err: Error) => {
@@ -22,15 +45,54 @@ export default function Payment() {
     },
   });
 
-  const handlePayment = function () {
-    console.log("s");
+  const handelPayment = async function () {
+    try {
+      const token = getCookie("jwtToken");
+      const response = await fetch(`${URL}orders/payment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          totalPrice: order.totalPrice,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      if (data.status === "success") {
+        const form = document.createElement("form");
+        form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+        form.method = "POST";
+        console.log(data.data);
+
+        Object.entries(data.data).forEach(([key, value]) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = value as string;
+          form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast.error("error on payment procress");
+    }
+  };
+
+  const handelOrder = function () {
+    console.log(paymentMethod);
     if (paymentMethod === "esewa") {
-      console.log("esewa");
-      // comming soon
+      makeOrder(order);
     } else {
       makeOrder(order);
     }
   };
+
   const handlePaymentMethod = function (method: "esewa" | "cashOnDelivery") {
     console.log(method);
     setPaymentMethod(method);
@@ -98,7 +160,7 @@ export default function Payment() {
           <Button
             variant={"destructive"}
             className="w-32 mt-4"
-            onClick={handlePayment}
+            onClick={handelOrder}
             disabled={isLoading}
           >
             {isLoading ? (

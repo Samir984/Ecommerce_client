@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createContext } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/features/store";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export type OrderStateType = {
   shippingAddress: string;
@@ -40,36 +41,38 @@ export default function CheckoutProvider({
   children: ReactNode;
 }) {
   const { items, totalPrice } = useSelector((state: RootState) => state.cart);
-
-  const [currentStep, setCurrentStep] = useState(1);
-  const [order, setOrder] = useState<OrderStateType>(() => {
-    return {
-      shippingAddress: "",
-      phoneNumber: "",
-      paymentMethod: "cashOnDelivery",
-      totalPrice: totalPrice,
-      orderItems: items.map((item) => ({
-        productName: item.productName,
-        quantity: item.quantity,
-        url: item.url,
-        price: item.price,
-        store_id: item.store_id,
-        product_id: item.product_id,
-      })),
-    };
+  const [storeStep, setStoreStep] = useLocalStorage("step", 1);
+  const [storeOrder, setStoreOrder] = useLocalStorage<OrderStateType>("order", {
+    shippingAddress: "",
+    phoneNumber: "",
+    paymentMethod: "cashOnDelivery",
+    totalPrice: totalPrice,
+    orderItems: items.map((item) => ({
+      productName: item.productName,
+      quantity: item.quantity,
+      url: item.url,
+      price: item.price,
+      store_id: item.store_id,
+      product_id: item.product_id,
+    })),
   });
+
+  const [currentStep, setCurrentStep] = useState(storeStep);
+  const [order, setOrder] = useState<OrderStateType>(storeOrder);
 
   const navigate = useNavigate();
 
   const handleOrderStateForm = (data: Partial<OrderStateType>) => {
     console.log(data);
     setOrder((prev) => {
+      setStoreOrder({ ...prev, ...data });
       return { ...prev, ...data };
     });
   };
   console.log(order);
 
   const onStepChange = function (step: number) {
+    setStoreStep(step);
     setCurrentStep(step);
     navigate(`${steps[step - 1].toLowerCase()}`);
   };

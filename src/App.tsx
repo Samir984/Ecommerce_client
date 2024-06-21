@@ -31,6 +31,7 @@ import Success from "./features/order/Success";
 import Payment from "./features/order/Payment";
 import CheckoutProvider from "./context/CheckoutContext";
 import UserOrders from "./features/order/UserOrders";
+import Failure from "./features/order/Failure";
 
 function App() {
   console.log("App");
@@ -62,6 +63,7 @@ function App() {
                   <Route path="product/:product_id" element={<Product />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="order" element={<UserOrders />} />
+                  <Route path="failure" element={<Failure />} />
 
                   <Route
                     path="checkout"

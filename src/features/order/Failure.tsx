@@ -5,7 +5,7 @@ export default function Failure() {
     <div className="flex flex-col items-center justify-center h-screen text-center bg-red-100 text-red-700">
       <h1 className="text-4xl mb-4">Payment Failed</h1>
       <p className="text-xl mb-4">
-        Unfortunately, your payment could not be processed. Please try again
+        Unfortunately, your payment wasn't successfull .Hence no, order has made. Please try again
         later.
       </p>
       <Link to="/" className="text-xl text-red-700 underline">

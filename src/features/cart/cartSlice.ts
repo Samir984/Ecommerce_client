@@ -21,7 +21,7 @@ const initialState: CartStateType = {
   totalPrice: 0,
 };
 
-const storeCartStateInLocalStorate = (state: CartStateType) => {
+const storeCartStateInLocalStorage = (state: CartStateType) => {
   localStorage.setItem("cartState", JSON.stringify(state));
 };
 
@@ -38,40 +38,45 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action: PayloadAction<CartItemType>) {
       const newItem = action.payload;
-      state.items = [...state.items, newItem];
-      state.totalPrice += state.totalPrice + newItem.price;
-      console.log(action, state);
-      console.log(state);
-      storeCartStateInLocalStorate(state);
+      state.items.push(newItem);
+      state.totalPrice += newItem.price * newItem.quantity;
+      storeCartStateInLocalStorage(state);
     },
     deleteItem(state, action: PayloadAction<string>) {
       const productIdToDelete = action.payload;
-      state.items = state.items.filter(
-        (item) => item.product_id !== productIdToDelete
+      const itemToDelete = state.items.find(
+        (item) => item.product_id === productIdToDelete
       );
-      storeCartStateInLocalStorate(state);
+      if (itemToDelete) {
+        state.totalPrice -= itemToDelete.price * itemToDelete.quantity;
+        state.items = state.items.filter(
+          (item) => item.product_id !== productIdToDelete
+        );
+        storeCartStateInLocalStorage(state);
+      }
     },
     increaseItems(state, action: PayloadAction<string>) {
-      const prodcut_id = action.payload;
-      const item = state.items.find((item) => item.product_id === prodcut_id);
-      if (item) {
+      const product_id = action.payload;
+      const item = state.items.find((item) => item.product_id === product_id);
+      if (item && item.quantity < item.stock) {
         item.quantity++;
         state.totalPrice += item.price;
+        storeCartStateInLocalStorage(state);
       }
-      storeCartStateInLocalStorate(state);
     },
     decreaseItems(state, action: PayloadAction<string>) {
-      const prodcut_id = action.payload;
-      const item = state.items.find((item) => item.product_id === prodcut_id);
+      const product_id = action.payload;
+      const item = state.items.find((item) => item.product_id === product_id);
       if (item && item.quantity > 1) {
         item.quantity--;
         state.totalPrice -= item.price;
+        storeCartStateInLocalStorage(state);
       }
     },
     clearCart(state) {
       state.items = [];
       state.totalPrice = 0;
-      storeCartStateInLocalStorate(state);
+      storeCartStateInLocalStorage(state);
     },
   },
 });

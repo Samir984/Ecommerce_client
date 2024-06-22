@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { OrderStateType } from "@/context/CheckoutContext";
 import { getCookie } from "@/lib/utils";
 import { URL } from "./config";
@@ -141,5 +142,39 @@ export const cancelOrder = async function (order_id: string) {
   } catch (error) {
     console.error("Error fetching prodcut page:", error);
     throw error;
+  }
+};
+
+export const handelPayment_Esewa = async function (payload: any) {
+  try {
+    const token = getCookie("jwtToken");
+    const response = await fetch(`${URL}orders/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    if (data.status === "success") {
+      const form = document.createElement("form");
+      form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+      form.method = "POST";
+
+      Object.entries(data.data).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value as string;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+  } catch (error) {
+    console.error("Payment error:", error);
   }
 };

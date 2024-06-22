@@ -7,6 +7,7 @@ import { clearCart } from "../cart/cartSlice";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 const Success = () => {
   const dispatch = useDispatch();
+
   const [_, __, deleteStoreStep] = useLocalStorage("step", 1);
   const [___, ____, deleteStoreOrder] = useLocalStorage("order", 1);
 

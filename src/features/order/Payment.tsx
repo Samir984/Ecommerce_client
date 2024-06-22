@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useCheckOut } from "@/context/CheckoutContext";
 import { URL } from "@/services/config";
 import { createOrder, handelPayment_Esewa } from "@/services/orderapi";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useSearchParams } from "react-router-dom";
@@ -36,17 +36,6 @@ export default function Payment() {
     },
   });
 
-  const validationCheck = useCallback(async () => {
-    if (validationParams !== null) {
-      const response = await fetch(
-        `${URL}orders/payment/success?data=${validationParams}`
-      );
-      const resondData = await response.json();
-      console.log(resondData);
-
-      makeOrder(order);
-    }
-  }, [validationParams, makeOrder, order]);
 
   useEffect(() => {
     async function validationCheck() {

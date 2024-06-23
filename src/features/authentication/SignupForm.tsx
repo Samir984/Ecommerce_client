@@ -20,13 +20,7 @@ export type UserSignupType = {
 export default function SignupForm() {
   console.log("SignupForm feature");
   const { register, handleSubmit, formState, reset, watch } =
-    useForm<UserSignupType>({
-      defaultValues: {
-        fullName: "buyer_1",
-        email: "buyer_1@gmail.com",
-        password: "buyer__1",
-      },
-    });
+    useForm<UserSignupType>();
   const avatarWatcher = watch("avatar");
   const { errors } = formState;
 

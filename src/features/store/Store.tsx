@@ -20,9 +20,9 @@ export default function Store() {
           <UserAvatar className="tablet:w-24 tablet:h-24 mx-auto w-20 h-20" />
           {!isLoadingStore && (
             <div className="text-center">
-              <h1 className="text-xl font-bold">{store.data.storeName}</h1>
+              <h1 className="text-xl font-bold">{store?.data.storeName}</h1>
               <span className="text-gray-600">
-                Listed Products: {store.data.totalListedProducts}
+                Listed Products: {store?.data.totalListedProducts}
               </span>
             </div>
           )}

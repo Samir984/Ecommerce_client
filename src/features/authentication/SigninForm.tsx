@@ -11,6 +11,7 @@ import { useAccountState } from "@/context/AccountContext";
 export type UserSigninType = {
   email: string;
   password: string;
+  role: "SELLER" | "BUYER" | "ADMIN";
 };
 
 export default function SigninForm() {
@@ -54,6 +55,7 @@ export default function SigninForm() {
 
   function onSubmit(data: UserSigninType) {
     console.log(data);
+    data.role = accountMode;
     signin(data);
   }
 

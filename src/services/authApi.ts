@@ -12,7 +12,7 @@ import {
 export const userSignup = async function (signup: UserSignupType) {
   console.log(signup);
   const endpoint = `${URL}users/signup`;
-  const formData = convertToFormData<UserSigninType>(signup);
+  const formData = convertToFormData<UserSignupType>(signup);
 
   try {
     const response = await fetch(endpoint, {

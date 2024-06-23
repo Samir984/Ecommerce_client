@@ -9,7 +9,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 export default function QueryProducts() {
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = searchParams.get("page");
+  const page = searchParams.get("page") || 1;
 
   console.log("render");
   console.log(page);

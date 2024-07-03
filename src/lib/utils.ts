@@ -111,3 +111,10 @@ export function formatNumberWithCommas(num: number): string {
     return lastThreeDigits;
   }
 }
+
+export function containsJWT(str: string) {
+  console.log(str);
+  if (str.startsWith("jwt") === true) return true;
+
+  return false;
+}

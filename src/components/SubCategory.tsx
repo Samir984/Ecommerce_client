@@ -18,7 +18,7 @@ export default function SubCategory() {
   console.log(subCategories, isLoading);
 
   return (
-    <div className="flex flex-col items-center tablet:px-4 mx-auto py-6 laptop:max-w-[1300px]">
+    <div className="tablet:px-4 mx-auto py-6 laptop:max-w-[1300px]">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Categories</h1>
       <div className="flex overflow-y-scroll hidescroll_bar gap-6 py-4 min-h-32 tablet:min-h-48">
         {isLoading ? (

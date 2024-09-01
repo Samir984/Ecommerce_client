@@ -1,4 +1,4 @@
-import HomeBanner from "@/components/HomeBanner";
+// import HomeBanner from "@/components/HomeBanner";
 import SubCategory from "@/components/SubCategory";
 
 export default function Home() {

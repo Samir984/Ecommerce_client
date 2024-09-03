@@ -13,6 +13,8 @@ export default function SubCategory() {
     queryKey: ["subcategories"],
     queryFn: getSubCategories,
     refetchOnWindowFocus: false,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
   });
 
   console.log(subCategories, isLoading);
@@ -44,9 +46,7 @@ export default function SubCategory() {
                   className="w-16 h-16 tablet:w-24 tablet:h-24 rounded-full"
                 />
               </div>
-              <span className="text-gray-700 font-mono">
-                {subCategory._id}
-              </span>
+              <span className="text-gray-700 font-mono">{subCategory._id}</span>
             </Link>
           ))
         )}

@@ -11,8 +11,6 @@ export default function QueryProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
 
-  console.log("render");
-  console.log(page);
   function handleNextPage(page: number) {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -25,8 +23,6 @@ export default function QueryProducts() {
     queryFn: () => getProductsAsQuery(search),
     refetchOnWindowFocus: false,
   });
-
-  console.log(products?.data?.length, products);
 
   return (
     <div className="flex-1">

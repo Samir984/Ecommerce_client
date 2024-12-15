@@ -10,7 +10,6 @@ import { useAccountState } from "@/context/AccountContext";
 
 export default function AccountMode() {
   const { accountMode, dispatch } = useAccountState();
-  console.log("AccountMode feature");
 
   return (
     <div className="flex flex-col laptop:px-28  px-8 mt-16 ">

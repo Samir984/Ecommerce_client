@@ -16,7 +16,6 @@ export const createStore = async function (data: CreateStoreType) {
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
 
     const responseData = await response.json();
     if (!response.ok) {
@@ -31,7 +30,7 @@ export const createStore = async function (data: CreateStoreType) {
   }
 };
 
-export const fetchStoreData = async (store_id:string) => {
+export const fetchStoreData = async (store_id: string) => {
   const token = getCookie("jwtToken");
   const endpoint = `${URL}stores/getstore/${store_id}`;
   try {

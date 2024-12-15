@@ -6,14 +6,13 @@ type FileSelectViewPropsType = {
 };
 
 export default function FileSelectView({
-  selectedImg,className
+  selectedImg,
+  className,
 }: FileSelectViewPropsType) {
-  console.log("FileSelectedView");
   const [selectedFile, setSelectedFile] = useState<string | ArrayBuffer | null>(
     null
   );
 
-  console.log(selectedFile, selectedImg);
   useEffect(() => {
     const handleFileChange = () => {
       if (typeof selectedImg === "string") {

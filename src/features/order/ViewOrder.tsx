@@ -4,7 +4,6 @@ import { useAccountState } from "@/context/AccountContext";
 import OrderTable from "./OrderTable";
 
 export default function ViewOrder() {
-  console.log("ListProduct Feature");
   const { store_id } = useAccountState();
 
   return (

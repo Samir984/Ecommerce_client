@@ -14,7 +14,6 @@ export default function UpdateItemsQuantity({
 }: updateItemQuantityPropsType) {
   const dispatch = useDispatch();
 
-  console.log(count, maxCount);
   return (
     <div className="flex gap-8">
       <div className="flex gap-3 items-center">

@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createContext } from "react";
 import { useSelector } from "react-redux";
@@ -41,8 +41,8 @@ export default function CheckoutProvider({
   children: ReactNode;
 }) {
   const { items, totalPrice } = useSelector((state: RootState) => state.cart);
-  const [storeStep, setStoreStep] = useLocalStorage("step", 1);
-  const [storeOrder, setStoreOrder] = useLocalStorage<OrderStateType>("order", {
+  const [currentStep, setCurrentStep] = useLocalStorage("step", 1);
+  const [order, setOrder] = useLocalStorage<OrderStateType>("order", {
     shippingAddress: "",
     phoneNumber: "",
     paymentMethod: "cashOnDelivery",
@@ -57,25 +57,35 @@ export default function CheckoutProvider({
     })),
   });
 
-  const [currentStep, setCurrentStep] = useState(storeStep);
-  const [order, setOrder] = useState<OrderStateType>(storeOrder);
-
   const navigate = useNavigate();
 
   const handleOrderStateForm = (data: Partial<OrderStateType>) => {
     console.log(data);
     setOrder((prev) => {
-      setStoreOrder({ ...prev, ...data });
       return { ...prev, ...data };
     });
   };
   console.log(order);
 
   const onStepChange = function (step: number) {
-    setStoreStep(step);
     setCurrentStep(step);
     navigate(`${steps[step - 1].toLowerCase()}`);
   };
+
+  useEffect(() => {
+    setOrder((prev) => ({
+      ...prev,
+      totalPrice,
+      orderItems: items.map((item) => ({
+        productName: item.productName,
+        quantity: item.quantity,
+        url: item.url,
+        price: item.price,
+        store_id: item.store_id,
+        product_id: item.product_id,
+      })),
+    }));
+  }, [items, totalPrice, setOrder]);
 
   return (
     <CheckoutContext.Provider

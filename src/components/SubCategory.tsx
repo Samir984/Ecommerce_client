@@ -17,8 +17,6 @@ export default function SubCategory() {
     cacheTime: 10 * 60 * 1000,
   });
 
-  console.log(subCategories, isLoading);
-
   return (
     <div className="tablet:px-4 mx-auto py-6 laptop:max-w-[1300px]">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Categories</h1>

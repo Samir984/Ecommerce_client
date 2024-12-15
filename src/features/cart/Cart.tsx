@@ -13,8 +13,6 @@ export default function Cart() {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const dispatch = useDispatch();
 
-  console.log(totalItems);
-  console.log(items);
   return (
     <div className="px-2 py-4">
       {items?.length === 0 ? (
@@ -42,7 +40,12 @@ export default function Cart() {
                 </Link>
                 <div className="flex-1 flex justify-start items-center">
                   <div className="">
-                    <Link  to={`/product/${item.product_id}`} className="line-clamp-2 hover:text-blue-500">{item.productName}</Link>
+                    <Link
+                      to={`/product/${item.product_id}`}
+                      className="line-clamp-2 hover:text-blue-500"
+                    >
+                      {item.productName}
+                    </Link>
                     <p className="text-orange-600">
                       Rs {item.price * item.quantity}
                     </p>

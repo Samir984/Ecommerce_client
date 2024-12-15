@@ -59,7 +59,6 @@ export default function Product() {
     _id: "",
   };
 
-
   return (
     <div className="p-4">
       {isLoading ? (

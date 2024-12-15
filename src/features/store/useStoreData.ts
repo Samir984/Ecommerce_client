@@ -12,7 +12,7 @@ export function useStoreData(store_id: string) {
     queryFn: () => fetchStoreData(store_id),
     onError: (err: Error) => {
       toast.error(err?.message);
-      console.log(containsJWT(err?.message), err.message,"\n\n\n\n");
+      console.log(containsJWT(err?.message), err.message, "\n\n\n\n");
       if (containsJWT(err?.message)) {
         dispatch({ type: "signout" });
       }

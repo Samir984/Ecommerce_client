@@ -18,7 +18,6 @@ export type UserSignupType = {
 };
 
 export default function SignupForm() {
-  console.log("SignupForm feature");
   const { register, handleSubmit, formState, reset, watch } =
     useForm<UserSignupType>();
   const avatarWatcher = watch("avatar");
@@ -30,7 +29,6 @@ export default function SignupForm() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: userSignup,
     onSuccess: (res) => {
-      console.log(res);
       dispatch({ type: "signup", payload: res.data });
       toast.success("Customer account created successfully");
       setTimeout(() => {
@@ -45,7 +43,6 @@ export default function SignupForm() {
 
   function onSubmit(data: UserSignupType) {
     data.role = accountMode;
-    console.log(data);
     signup(data);
   }
 

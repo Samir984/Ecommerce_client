@@ -2,7 +2,6 @@ import { useAccountState } from "@/context/AccountContext";
 
 export default function Heading() {
   const { accountMode } = useAccountState();
-  console.log("Heading Componenet");
 
   return (
     <div className="">

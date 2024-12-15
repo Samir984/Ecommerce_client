@@ -5,14 +5,12 @@ import { useQuery } from "react-query";
 import { getProduct } from "@/services/productApi";
 
 export default function EditProduct() {
-  console.log("Edit Product");
   const { product_id } = useParams();
 
   const { isLoading, data: product } = useQuery({
     queryKey: ["product", product_id],
     queryFn: () => getProduct(product_id as string),
     select: (data) => {
-      console.log(data);
       const {
         productName,
         productDescription,

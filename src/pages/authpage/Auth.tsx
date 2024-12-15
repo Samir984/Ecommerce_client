@@ -4,7 +4,7 @@ import SwitchAuthForm from "@/components/SwitchAuthForm";
 import { Outlet } from "react-router-dom";
 
 export default function Auth() {
-  console.log("Auth page")
+  console.log("Auth page");
   return (
     <div className=" bg-slate-100 min-h-[100vh]">
       <div className="flex justify-center items-center flex-col gap-8   ">

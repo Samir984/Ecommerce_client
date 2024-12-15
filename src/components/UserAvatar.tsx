@@ -10,7 +10,6 @@ export default function UserAvatar({ className }: UserAvatarType) {
     avatar: { url },
     fullName,
   } = useAccountState();
-  console.log("UserAvatar Component ");
 
   return (
     <div

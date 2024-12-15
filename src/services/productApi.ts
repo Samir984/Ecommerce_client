@@ -125,6 +125,7 @@ export const editListedProduct = async function (
 
   if (contentFileList) {
     dataFormat = convertToFormData(EditedProductListing);
+    console.log(dataFormat.get("oldImg"));
   } else {
     dataFormat = JSON.stringify(EditedProductListing);
     headers = {

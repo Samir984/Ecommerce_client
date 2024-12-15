@@ -34,8 +34,6 @@ export default function ListProductForm({
   mode,
   defaultData,
 }: ListProductFormPropsType) {
-  console.log("ListProduct Feature");
-
   const { product_id } = useParams();
   const navigate = useNavigate();
   const { store_id } = useAccountState();
@@ -57,13 +55,13 @@ export default function ListProductForm({
   const onSubmit = (data: ProductFormType) => {
     data.category = data.category.toLowerCase();
     data.subCategory = data.subCategory.toLowerCase();
-    console.log(data, "\n\n\n");
 
     if (mode === "List") return listProduct(data);
     if (data.productImg.length === 0 && data.oldImg) {
       data.productImg = data.oldImg;
       delete data.oldImg;
     }
+
     return editProduct({ product_id: product_id as string, newData: data });
   };
 

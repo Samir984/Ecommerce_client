@@ -34,7 +34,6 @@ import UserOrders from "./features/order/UserOrders";
 import Failure from "./features/order/Failure";
 
 function App() {
-  console.log("App");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

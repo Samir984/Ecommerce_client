@@ -16,25 +16,21 @@ export default function Profile() {
   const { fullName, dispatch } = useAccountState();
   const [isLoading, setLoading] = useState(false);
 
-  async function handelFileInput(e:React.ChangeEvent<HTMLInputElement> ) {
-    console.log("click", e.target.files);
+  async function handelFileInput(e: React.ChangeEvent<HTMLInputElement>) {
     try {
       if (e.target.files && e.target.files.length) {
         setLoading(true);
         const data = await updateAvatar({ avatar: e.target.files });
-        console.log(data);
         dispatch({ type: "signin", payload: data.data });
         toast.success("Profile update successfully");
       }
     } catch (err) {
       const error = err as Error;
       toast.error(error.message);
-      console.log(error);
     } finally {
       setLoading(false);
     }
   }
-  console.log(isLoading);
 
   return (
     <div className="flex flex-col px-2 py-4 items-center">

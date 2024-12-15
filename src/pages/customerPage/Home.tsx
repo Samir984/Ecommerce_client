@@ -2,10 +2,10 @@
 import SubCategory from "@/components/SubCategory";
 
 export default function Home() {
-  console.log("home")
+  console.log("home");
   return (
     <div className="">
-{/*       <HomeBanner/> */}
+      {/*       <HomeBanner/> */}
       <SubCategory />
     </div>
   );

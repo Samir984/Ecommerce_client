@@ -7,7 +7,6 @@ import DropDownBox from "./DropDownBox";
 export default function Account() {
   const { loggedIn } = useAccountState();
 
-  console.log("Account component");
   return (
     <>
       {loggedIn ? (

@@ -36,7 +36,6 @@ export default function Payment() {
     },
   });
 
-
   useEffect(() => {
     async function validationCheck() {
       if (validationParams !== null) {
@@ -44,7 +43,7 @@ export default function Payment() {
           `${URL}orders/payment/success?data=${validationParams}`
         );
         const resondData = await response.json();
-        console.log(resondData);
+
         makeOrder(order);
       }
     }

@@ -19,7 +19,6 @@ export default function ShippingForm() {
     handleOrderStateForm(data);
     onStepChange(2);
   };
-  console.log(order);
 
   return (
     <div className="px-12 pt-6 pb-16">

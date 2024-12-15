@@ -4,7 +4,6 @@ import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 export default function Search() {
-  console.log("Search component");
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 

@@ -15,10 +15,8 @@ export type UserSigninType = {
 };
 
 export default function SigninForm() {
-  console.log("SigninForm feature");
   const naviagate = useNavigate();
   const { dispatch, email, accountMode, store_id } = useAccountState();
-  console.log("SigninForm->   sellerState:", store_id);
 
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
@@ -32,11 +30,7 @@ export default function SigninForm() {
     onSuccess: (res) => {
       toast.success("Customer account created successfully");
       reset();
-      console.log(
-        "------------------------\n\n\n\n",
-        typeof res.data.store_id,
-        "\n\n\n\n------------------"
-      );
+
       dispatch({ type: "signin", payload: res.data });
       const nextRoute =
         accountMode === "BUYER"
@@ -45,7 +39,6 @@ export default function SigninForm() {
           ? "/vendor/create-store"
           : `/vendor/store/${res.data.store_id}`;
 
-      console.log(nextRoute, accountMode);
       naviagate(nextRoute);
     },
     onError: (err: Error) => {
@@ -54,7 +47,6 @@ export default function SigninForm() {
   });
 
   function onSubmit(data: UserSigninType) {
-    console.log(data);
     data.role = accountMode;
     signin(data);
   }

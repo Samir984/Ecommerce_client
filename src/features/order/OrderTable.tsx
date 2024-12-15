@@ -23,7 +23,6 @@ export default function OrderTable({ store_id }: { store_id: string }) {
     ));
   };
 
-  console.log(orders);
   return (
     <div className="">
       <Table

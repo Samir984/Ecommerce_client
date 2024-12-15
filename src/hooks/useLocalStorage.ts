@@ -5,21 +5,26 @@ export const useLocalStorage = <T>(
   initialState: T
 ): [T, React.Dispatch<React.SetStateAction<T>>, () => void] => {
   const [value, setValue] = useState<T>(() => {
-    const storedValue = localStorage.getItem(key);
-    console.log(storedValue);
-    return storedValue ? JSON.parse(storedValue) : initialState;
+    try {
+      const storedValue = localStorage.getItem(key);
+      return storedValue !== null ? JSON.parse(storedValue) : initialState;
+    } catch (error) {
+      console.error(`Error parsing localStorage key "${key}":`, error);
+      return initialState;
+    }
   });
 
-  console.log("use local storage");
   const deleteLocalStorage = () => {
-    console.log("key", key);
     localStorage.removeItem(key);
   };
 
   useEffect(() => {
-    console.log("localstorage effect");
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [value, key]);
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error(`Error saving to localStorage key "${key}":`, error);
+    }
+  }, [key, value]);
 
   return [value, setValue, deleteLocalStorage];
 };

@@ -75,7 +75,7 @@ export default function Product() {
             <h2 className="text-2xl font-bold mb-4">{productName}</h2>
             <p className="text-lg mb-4">{product?.data?.productDescription}</p>
             <div className="flex justify-between items-center">
-              <p className="text-xl font-bold">${product?.data?.price}</p>
+              <p className="text-xl font-bold">Rs {product?.data?.price}</p>
               {quantity === 0 ? (
                 <Button
                   onClick={() => {

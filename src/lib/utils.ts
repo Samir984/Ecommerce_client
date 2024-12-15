@@ -53,6 +53,12 @@ export function convertToFormData<T extends { [s: string]: string | FileList }>(
       // If the key is 'avatar' and the value is a FileList (for file input), append each file
 
       formData.append(key, value[0]);
+    } else if (typeof value === "object" && value !== null) {
+      // Serialize objects to JSON strings
+      Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+        formData.append(`${key}[${nestedKey}]`, nestedValue);
+      });
+      // formData.append(key, JSON.stringify(value));
     } else {
       // Otherwise, append regular key-value pair
       formData.append(key, value as string);

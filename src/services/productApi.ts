@@ -114,7 +114,7 @@ export const editListedProduct = async function (
   EditedProductListing: ProductFormType
 ) {
   console.log(EditedProductListing);
-  const endpoint = `${URL}users/products/${product_id}`;
+  const endpoint = `${URL}products/${product_id}`;
   const token = getCookie("jwtToken");
   const contentFileList = EditedProductListing.oldImg ? true : false;
 

@@ -42,7 +42,7 @@ export default function Payment() {
         const response = await fetch(
           `${URL}orders/payment/success?data=${validationParams}`
         );
-        const resondData = await response.json();
+        await response.json();
 
         makeOrder(order);
       }

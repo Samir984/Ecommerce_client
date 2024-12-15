@@ -16,7 +16,7 @@ export type UserSigninType = {
 
 export default function SigninForm() {
   const naviagate = useNavigate();
-  const { dispatch, email, accountMode, store_id } = useAccountState();
+  const { dispatch, email, accountMode } = useAccountState();
 
   const { register, handleSubmit, formState, reset } = useForm<UserSigninType>({
     defaultValues: {
